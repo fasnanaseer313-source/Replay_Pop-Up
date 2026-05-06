@@ -8,13 +8,19 @@
   --bg3: #fffbf5;     /* Light Cream */
   --text: #1a1208;    /* Deep Brown Text */
   --amber: #ff6b35;   /* Vibrant Orange */
-  --amber2: #ff8c5a;
+  --amber-glow: rgba(255, 107, 53, 0.4);
+  --amber-soft: rgba(255, 107, 53, 0.1);
   --cream: #ede6d9;
-  --muted: #7c7c7c;
+  --muted: #8a8a8a;
   --white: #ffffff;
   --pure-white: #ffffff; 
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(196, 136, 74, 0.15);
   --r: 'Outfit', sans-serif;
   --b: 'Inter', sans-serif;
+  --shadow-sm: 0 4px 20px rgba(26, 18, 8, 0.03);
+  --shadow-md: 0 20px 40px rgba(26, 18, 8, 0.06);
+  --shadow-lg: 0 30px 60px rgba(26, 18, 8, 0.1);
 }
 
 html { scroll-behavior: smooth; }
@@ -213,33 +219,34 @@ body.no-scroll { overflow: hidden; }
 .btn-wa:hover { background: #e85a2a; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(255,107,53,.35); }
 .btn-ghost {
   display: inline-flex; align-items: center; gap: .6rem;
-  background: transparent; color: #ffffff; font-family: var(--r);
+  background: rgba(255, 255, 255, 0.05); color: #ffffff; font-family: var(--r);
   font-weight: 600; font-size: 1rem; padding: .9rem 2rem;
-  border-radius: 50px; border: 1px solid rgba(255,255,255,0.4);
-  text-decoration: none; transition: all .3s;
-  backdrop-filter: blur(5px);
+  border-radius: 50px; border: 1px solid rgba(255,255,255,0.3);
+  text-decoration: none; transition: all .4s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
-.btn-ghost:hover { border-color: var(--amber); color: var(--amber); }
+.btn-ghost:hover { border-color: var(--amber); color: #fff; background: var(--amber); transform: translateY(-2px); }
 .hero-scroll { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 1; text-align: center; }
 .hero-scroll span { display: block; width: 1px; height: 60px; background: linear-gradient(to bottom, var(--amber), transparent); margin: .5rem auto 0; animation: scrollline 2s ease-in-out infinite; }
 @keyframes scrollline { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} 51%{transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
 
 /* SECTION UTILS */
-section { padding: 6rem 2.5rem; }
-.container { max-width: 1200px; margin: 0 auto; }
+section { padding: 10rem 2.5rem; }
+.container { max-width: 1240px; margin: 0 auto; }
 .section-tag {
-  font-family: var(--r); font-size: .75rem; font-weight: 700; letter-spacing: .18em;
-  text-transform: uppercase; color: var(--amber); margin-bottom: 1rem;
-  display: flex; align-items: center; gap: .75rem;
+  font-family: var(--r); font-size: .8rem; font-weight: 800; letter-spacing: .25em;
+  text-transform: uppercase; color: var(--amber); margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 1rem;
 }
-.section-tag::before { content: ''; flex: 0 0 24px; height: 2px; background: var(--amber); }
+.section-tag::before { content: ''; flex: 0 0 32px; height: 2px; background: var(--amber); }
 .section-h2 {
-  font-family: var(--r); font-size: clamp(2rem, 4vw, 3.2rem);
-  font-weight: 800; line-height: 1.1; letter-spacing: -.03em; color: var(--text);
-  margin-bottom: 1rem;
+  font-family: var(--r); font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 900; line-height: 1.05; letter-spacing: -.04em; color: var(--text);
+  margin-bottom: 1.5rem;
 }
 .section-h2 em { color: var(--amber); font-style: normal; }
-.section-lead { font-size: 1.1rem; color: var(--text); opacity: 1; max-width: 560px; line-height: 1.65; font-weight: 400; }
+.section-lead { font-size: 1.2rem; color: var(--text); opacity: 0.7; max-width: 600px; line-height: 1.6; font-weight: 400; }
 
 /* PHILOSOPHY (About / Brand) */
 #philosophy {
@@ -254,12 +261,14 @@ section { padding: 6rem 2.5rem; }
   gap: 2.5rem;
 }
 .phi-card {
-  background: var(--bg2);
-  border-radius: 20px;
-  padding: 2.5rem 2rem;
-  border: 1px solid rgba(196, 136, 74, 0.15);
-  box-shadow: 0 4px 30px rgba(26,18,8,0.02);
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 28px;
+  padding: 3.5rem 2.5rem;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -312,17 +321,17 @@ section { padding: 6rem 2.5rem; }
 
 .phi-card-body h3 {
   font-family: var(--r);
-  font-size: 1.25rem;
-  font-weight: 800;
+  font-size: 1.4rem;
+  font-weight: 900;
   color: var(--text);
-  margin-bottom: 0.75rem;
-  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
 }
 .phi-card-body p {
-  font-size: 0.92rem;
+  font-size: 1rem;
   color: var(--text);
-  opacity: 0.65;
-  line-height: 1.6;
+  opacity: 0.7;
+  line-height: 1.7;
 }
 
 /* SEAMLESS (Antigravity Benefits) */
@@ -369,52 +378,54 @@ section { padding: 6rem 2.5rem; }
 }
 
 .sea-card {
-  background: var(--bg2);
-  border-radius: 20px;
-  padding: 2.5rem;
-  border: 1px solid rgba(196, 136, 74, 0.12);
-  box-shadow: 0 4px 20px rgba(26,18,8,0.02);
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  animation: hover-float 4s infinite ease-in-out;
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 28px;
+  padding: 3rem;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: hover-float 5s infinite ease-in-out;
   animation-delay: var(--d, 0s);
 }
 @keyframes hover-float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
+  50% { transform: translateY(-15px); }
 }
 
 .sea-card:hover {
-  transform: translateY(-15px) scale(1.02) !important;
-  border-color: rgba(196, 136, 74, 0.2);
-  box-shadow: 0 30px 60px rgba(26,18,8,0.06);
+  transform: translateY(-20px) scale(1.03) !important;
+  border-color: var(--amber);
+  box-shadow: var(--shadow-lg);
 }
 
 .sea-icon-wrap {
-  width: 44px;
-  height: 44px;
-  background: rgba(196, 136, 74, 0.08);
-  border-radius: 12px;
+  width: 52px;
+  height: 52px;
+  background: var(--amber-soft);
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--amber);
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
-.sea-icon-wrap svg { width: 22px; height: 22px; }
+.sea-icon-wrap svg { width: 26px; height: 26px; }
 
 .sea-card h3 {
   font-family: var(--r);
-  font-size: 1.15rem;
-  font-weight: 800;
+  font-size: 1.3rem;
+  font-weight: 900;
   color: var(--text);
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.01em;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
 }
 .sea-card p {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--text);
-  opacity: 0.6;
-  line-height: 1.5;
+  opacity: 0.7;
+  line-height: 1.6;
 }
 
 .testimonial-card {

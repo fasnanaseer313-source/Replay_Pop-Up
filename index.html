@@ -1,547 +1,372 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="RePlay brings portable RC crawling and obstacle-play experiences to your event, mall, college or festival. Play is back and it's coming to you.">
-    <title>RePlay — Play Is Back.</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RePlay brings portable RC crawling and obstacle-play experiences to your event, office, school, resort or home. Set up in 30 minutes. All included. Based in Bangalore.">
+  <title>RePlay — Continuous Cinematic Journey</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="nav">
-  <a href="#" class="nav-logo">
-    <img src="assets/replay_logo.png" alt="RePlay Logo" class="nav-logo-img">
-  </a>
-  <div class="nav-links">
-    <a href="#philosophy">Idea</a>
-    <a href="#fits">Where</a>
-    <a href="#experiences">Exp</a>
-    <a href="#occasions">Events</a>
-    <a href="#packages">Packages</a>
-    <a href="#gallery">Glimpses</a>
+  <!-- ════════ FIXED BACKGROUND SYSTEM ════════ -->
+  <div id="cinematic-bg">
+    <div class="env-layer active" id="env-hero" style="background-image: url('assets/intro_bg.png');"></div>
+    <div class="env-layer" id="env-corridor" style="background-image: url('assets/intro_living.png');"></div>
+    <div class="env-layer" id="env-office" style="background-image: url('assets/intro_office.png');"></div>
+    <div class="env-layer" id="env-school" style="background-image: url('assets/intro_school.png');"></div>
+    <div class="env-layer" id="env-college" style="background-image: url('assets/intro_college.png');"></div>
+    <div class="env-layer" id="env-party" style="background-image: url('assets/intro_living.png');"></div>
+    <div class="env-layer" id="env-resort" style="background-image: url('assets/intro_resort.png');"></div>
+    <div class="bg-vignette"></div>
+    <div class="bg-noise"></div>
   </div>
-  
-  <div class="nav-actions">
-    <a href="https://wa.me/919999999999?text=Hi%20RePlay!%20I'd%20like%20to%20enquire%20about%20bringing%20the%20experience%20here." class="nav-wa" id="nav-wa-btn" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      <span>WhatsApp Us</span>
-    </a>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle Menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </div>
-</nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <div class="hero-badge"><span></span> Portable RC Crawling Experiences</div>
-    <h1 class="hero-h1">Play Is Back.<br>And It's <em>Coming To You.</em></h1>
-    <p class="hero-sub">The ultimate RC crawling and obstacle-play experience. We bring the terrain, the trucks, and the fun directly to your space.</p>
-    <div class="hero-ctas">
-      <a href="https://wa.me/919999999999?text=Hi%20RePlay!%20I'd%20like%20to%20book%20an%20experience." class="btn-wa" id="hero-wa-btn" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Book RePlay
-      </a>
-      <a href="#fits" class="btn-ghost">Plan an Event</a>
-    </div>
-  </div>
-  <div class="hero-scroll"><span></span></div>
-</section>
+  <!-- ════════ MAIN WRAPPER ════════ -->
+  <div id="main-wrapper">
 
-<!-- PHILOSOPHY -->
-<section id="philosophy">
-  <div class="container">
-    <div class="philosophy-header">
-      <div class="section-tag reveal">The RePlay Idea</div>
-      <h2 class="section-h2 reveal">Not a toy. Not a game.<br>An <span class="gradient-text">experience.</span></h2>
-      <p class="section-lead reveal">We believe play isn't just for kids. It's what makes moments memorable — for teams, families, students, and guests alike.</p>
-    </div>
-
-    <div class="philosophy-grid">
-      <!-- CARD 1 -->
-      <div class="phi-card reveal" style="transition-delay: 0.1s">
-        <div class="phi-icon-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h.01"/><path d="M9 12h.01"/><path d="M15 12h.01"/><path d="M18 12h.01"/></svg>
-        </div>
-        <div class="phi-card-body">
-          <h3>Bringing Play Back</h3>
-          <p>Remember the thrill of racing? That rush of steering through a tight corner? We recreate that feeling — raw, real, and impossible to ignore.</p>
-        </div>
-      </div>
-
-      <!-- CARD 2 -->
-      <div class="phi-card reveal" style="transition-delay: 0.2s">
-        <div class="phi-icon-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 6.1H3"/><path d="M21 12.1H3"/><path d="M15.1 18.1H3"/></svg>
-        </div>
-        <div class="phi-card-body">
-          <h3>Built for Interaction</h3>
-          <p>RC racing isn’t passive. People crowd around, cheer, compete, and connect. It creates real energy that typical activities can’t fake.</p>
-        </div>
-      </div>
-
-      <!-- CARD 3 -->
-      <div class="phi-card reveal" style="transition-delay: 0.3s">
-        <div class="phi-icon-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <div class="phi-card-body">
-          <h3>For Every Age</h3>
-          <p>From kids to professionals, everyone picks up the controller and instantly joins the excitement. That’s the magic of RePlay.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-<!-- WHERE WE GO -->
-<section id="fits">
-  <div class="container">
-    <div class="section-tag reveal">Where We Go</div>
-    <h2 class="section-h2 reveal">We fit right in — <em>everywhere.</em></h2>
-    <p class="section-lead reveal">Whether it's a corporate floor, a school auditorium, or a resort lawn — we adapt to your space.</p>
+    <!-- ════════ GLOBAL SVG TRACK ════════ -->
+    <svg id="master-track-svg" viewBox="0 0 100 1000" preserveAspectRatio="none">
+    <defs>
+      <filter id="track-glow" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="3" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+      <!-- Gradient for the track -->
+      <linearGradient id="track-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="rgba(255, 107, 26, 0)" />
+        <stop offset="5%" stop-color="#ff6b1a" />
+        <stop offset="95%" stop-color="#ff6b1a" />
+        <stop offset="100%" stop-color="rgba(255, 107, 26, 0)" />
+      </linearGradient>
+    </defs>
+    <!-- Base faint track -->
+    <path id="master-track-base" d="M 50 1 
+             C 80 5, 90 10, 70 15 
+             C 30 20, 10 25, 30 35 
+             C 60 45, 80 50, 50 60 
+             C 20 70, 10 80, 40 90 
+             C 70 100, 90 110, 60 120 
+             C 20 130, 10 140, 50 150 
+             C 80 160, 90 170, 50 180 
+             C 10 190, 20 200, 50 210
+             C 80 220, 90 230, 50 240
+             C 10 250, 20 260, 50 270
+             C 80 280, 90 290, 50 300
+             C 20 310, 10 320, 50 330
+             C 80 340, 90 350, 50 360
+             C 20 370, 10 380, 50 390
+             C 80 400, 90 410, 50 420
+             C 20 430, 10 440, 50 450
+             C 80 460, 90 470, 50 480
+             C 20 490, 10 500, 50 510
+             C 80 520, 90 530, 50 540
+             C 20 550, 10 560, 50 570
+             C 80 580, 90 590, 50 600
+             C 20 610, 10 620, 50 630
+             C 80 640, 90 650, 50 660
+             C 20 670, 10 680, 50 690
+             C 80 700, 90 710, 50 720
+             C 20 730, 10 740, 50 750
+             C 80 760, 90 770, 50 780
+             C 20 790, 10 800, 50 810
+             C 80 820, 90 830, 50 840
+             C 20 850, 10 860, 50 870
+             C 80 880, 90 890, 50 900
+             C 20 910, 10 920, 50 930
+             C 80 940, 90 950, 50 960
+             C 20 970, 10 980, 50 999" 
+          fill="none" stroke="rgba(255,107,26,0.15)" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
     
-    <div class="fits-grid">
-      <!-- CORPORATE -->
-      <div class="fit-card reveal">
-        <div class="fit-img-wrap">
-          <img src="assets/fit_corporate_color.png" alt="Corporate Antigravity" class="fit-img-main">
-          <div class="fit-img-overlay"></div>
-          <div class="fit-icon-tag">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22V12h6v10"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M8 10h.01"/><path d="M16 10h.01"/><path d="M8 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M16 18h.01"/></svg>
-          </div>
-        </div>
-        <div class="fit-content">
-          <h3>Corporate</h3>
-          <p>Take a break that actually feels like one.</p>
-        </div>
-      </div>
+    <!-- Active drawn track (revealed on scroll) -->
+    <path id="master-track-active" d="M 50 1 
+             C 80 5, 90 10, 70 15 
+             C 30 20, 10 25, 30 35 
+             C 60 45, 80 50, 50 60 
+             C 20 70, 10 80, 40 90 
+             C 70 100, 90 110, 60 120 
+             C 20 130, 10 140, 50 150 
+             C 80 160, 90 170, 50 180 
+             C 10 190, 20 200, 50 210
+             C 80 220, 90 230, 50 240
+             C 10 250, 20 260, 50 270
+             C 80 280, 90 290, 50 300
+             C 20 310, 10 320, 50 330
+             C 80 340, 90 350, 50 360
+             C 20 370, 10 380, 50 390
+             C 80 400, 90 410, 50 420
+             C 20 430, 10 440, 50 450
+             C 80 460, 90 470, 50 480
+             C 20 490, 10 500, 50 510
+             C 80 520, 90 530, 50 540
+             C 20 550, 10 560, 50 570
+             C 80 580, 90 590, 50 600
+             C 20 610, 10 620, 50 630
+             C 80 640, 90 650, 50 660
+             C 20 670, 10 680, 50 690
+             C 80 700, 90 710, 50 720
+             C 20 730, 10 740, 50 750
+             C 80 760, 90 770, 50 780
+             C 20 790, 10 800, 50 810
+             C 80 820, 90 830, 50 840
+             C 20 850, 10 860, 50 870
+             C 80 880, 90 890, 50 900
+             C 20 910, 10 920, 50 930
+             C 80 940, 90 950, 50 960
+             C 20 970, 10 980, 50 999" 
+          fill="none" stroke="url(#track-grad)" stroke-width="4" vector-effect="non-scaling-stroke" filter="url(#track-glow)"/>
+  </svg>
 
-      <!-- SCHOOLS -->
-      <div class="fit-card reveal">
-        <div class="fit-img-wrap">
-          <img src="assets/fit_schools_color.png" alt="Schools Antigravity" class="fit-img-main">
-          <div class="fit-img-overlay"></div>
-          <div class="fit-icon-tag">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>
-          </div>
-        </div>
-        <div class="fit-content">
-          <h3>Schools & Colleges</h3>
-          <p>Learning that feels nothing like learning.</p>
-        </div>
-      </div>
-
-      <!-- RESORTS -->
-      <div class="fit-card reveal">
-        <div class="fit-img-wrap">
-          <img src="assets/fit_resorts_color.png" alt="Resorts Antigravity" class="fit-img-main">
-          <div class="fit-img-overlay"></div>
-          <div class="fit-icon-tag">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
-          </div>
-        </div>
-        <div class="fit-content">
-          <h3>Resorts & Communities</h3>
-          <p>An activity your guests will actually talk about.</p>
-        </div>
-      </div>
-
-      <!-- PRIVATE -->
-      <div class="fit-card reveal">
-        <div class="fit-img-wrap">
-          <img src="assets/fit_private_color.png" alt="Private Events Antigravity" class="fit-img-main">
-          <div class="fit-img-overlay"></div>
-          <div class="fit-icon-tag">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-        </div>
-        <div class="fit-content">
-          <h3>Private Events</h3>
-          <p>The activity everyone's still talking about after.</p>
-        </div>
-      </div>
+  <!-- ════════ THE CRAWLER ════════ -->
+  <!-- We wrap it in a container so MotionPathPlugin handles position and we handle scale/rotation offsets -->
+  <div id="crawler-wrap">
+    <div id="crawler-car">
+      <div id="car-headlight"></div>
+      <div id="car-shadow"></div>
+      <img src="assets/car_intro.png" alt="RePlay RC Crawler">
     </div>
   </div>
-</section>
 
-<!-- EXPERIENCE -->
-<section id="experiences">
-  <div class="container">
-    <div class="section-tag reveal">The Setup</div>
-    <h2 class="section-h2 reveal">Built for <em>fun crowds.</em></h2>
-    <p class="section-lead reveal">We don't just bring cars. We bring the whole terrain. Each setup is adaptable, portable, and ready for action.</p>
-    <div class="exp-grid">
-      <div class="exp-card exp-crawl reveal">
-        <div class="exp-visual">
-          <div class="exp-glow"></div>
-          <img src="assets/cat_treadmill.png" alt="Technical Crawling" class="exp-visual-inner">
-        </div>
-        <div class="exp-card-body">
-          <h3>Technical Crawling</h3>
-          <p>Slow-paced, technical mastery. Navigate miniature rocks, steep inclines, and loose gravel. It's satisfyingly difficult.</p>
-        </div>
-      </div>
-      <div class="exp-card exp-obstacle reveal">
-        <div class="exp-visual">
-          <div class="exp-glow"></div>
-          <img src="assets/house_party_poster.png" alt="Obstacle Challenges" class="exp-visual-inner">
-        </div>
-        <div class="exp-card-body">
-          <h3>Obstacle Challenges</h3>
-          <p>Suspension bridges, see-saws, and narrow planks. One wrong move and you're back to the start. High stakes, tiny cars.</p>
-        </div>
-      </div>
-      <div class="exp-card exp-challenge reveal">
-        <div class="exp-visual">
-          <div class="exp-glow"></div>
-          <img src="assets/slide4-energy.png" alt="Crowd Interaction" class="exp-visual-inner">
-        </div>
-        <div class="exp-card-body">
-          <h3>Crowd Interaction</h3>
-          <p>We create formats that engage the whole crowd. Time trials, obstacle king, or just casual play — the energy stays high.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-
-<!-- OCCASIONS -->
-<section id="occasions">
-  <div class="occasions-bg-fx"></div>
-  <div class="container">
-    <div class="occasions-header">
-      <div class="section-tag reveal">Occasions</div>
-      <h2 class="section-h2 reveal">Every occasion is a<br><span class="gradient-text">RePlay occasion.</span></h2>
-    </div>
-
-    <div class="occasions-grid">
-      <!-- BIRTHDAYS -->
-      <div class="occ-card reveal">
-        <h3>Birthdays & Parties</h3>
-      </div>
-      <!-- OFFICE -->
-      <div class="occ-card reveal">
-        <h3>Office Events</h3>
-      </div>
-      <!-- WEEKEND -->
-      <div class="occ-card reveal">
-        <h3>Weekend Fun</h3>
-      </div>
-      <!-- FESTIVALS -->
-      <div class="occ-card reveal">
-        <h3>Festivals & Fairs</h3>
-      </div>
-      <!-- HOUSE -->
-      <div class="occ-card reveal">
-        <h3>House Parties</h3>
-      </div>
-      <!-- JUST PLAY -->
-      <div class="occ-card reveal">
-        <h3>No plans. Just play.</h3>
-      </div>
-    </div>
-
-    <p class="occ-footer-text reveal">No occasion or every occasion — RePlay fits right in.</p>
-  </div>
-</section>
-
-<!-- PACKAGES -->
-<section id="packages">
-  <div class="container">
-    <div class="packages-header">
-      <div class="section-tag reveal">Packages</div>
-      <h2 class="section-h2 reveal">Pick a starting point.<br>We'll <span class="gradient-text">customise the rest.</span></h2>
-      <p class="section-lead reveal">No fixed pricing — every experience is tailored. These are just starting points. Tell us your space, your crowd, your vibe.</p>
-    </div>
-
-    <div class="packages-grid">
-      <!-- STARTER -->
-      <div class="package-card reveal">
-        <div class="package-content">
-          <div class="package-icon">🚙</div>
-          <h3 class="package-title">Starter Experience</h3>
-          <p class="package-subtitle">Perfect for small groups & drop-ins</p>
-          <ul class="package-features">
-            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> 1 RC track setup</li>
-            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Up to 20 participants</li>
-            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> 2–3 hour experience</li>
-            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Operator included</li>
-            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> All equipment provided</li>
-          </ul>
-          <a href="https://wa.me/919999999999?text=Hi!%20I'm%20interested%20in%20the%20Starter%20Experience." class="btn-package" target="_blank" rel="noopener">Customise on WhatsApp</a>
-        </div>
-      </div>
-
-      <!-- EVENT (MOST POPULAR) -->
-      <div class="package-card featured reveal">
-        <div class="popular-badge">MOST POPULAR</div>
-        <div class="package-content">
-          <div class="package-icon">🏁</div>
-          <h3 class="package-title">Event Package</h3>
-          <p class="package-subtitle">For corporate & college events</p>
-          <ul class="package-features">
-            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> 2 RC setups (race + crawl)</li>
-            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Up to 100 participants</li>
-            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Half or full day</li>
-            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> 2 operators + MC if needed</li>
-            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Custom branding on track</li>
-            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Competition format available</li>
-          </ul>
-          <a href="https://wa.me/919999999999?text=Hi!%20I'm%20interested%20in%20the%20Event%20Package." class="btn-package" target="_blank" rel="noopener">Customise on WhatsApp</a>
-        </div>
-      </div>
-
-      <!-- FULL -->
-      <div class="package-card reveal">
-        <div class="package-content">
-          <div class="package-icon">🎪</div>
-          <h3 class="package-title">Full Experience</h3>
-          <p class="package-subtitle">For large events & exhibitions</p>
-          <ul class="package-features">
-            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> 3+ RC setups</li>
-            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Unlimited participants</li>
-            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Multi-day available</li>
-            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Full crew on-site</li>
-            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Fully themed setup</li>
-            <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Leaderboard & prizes</li>
-          </ul>
-          <a href="https://wa.me/919999999999?text=Hi!%20I'm%20interested%20in%20the%20Full%20Experience." class="btn-package" target="_blank" rel="noopener">Customise on WhatsApp</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section id="process">
-  <div class="process-bg-fx">
-    <div class="glow-orb orb-1"></div>
-    <div class="glow-orb orb-2"></div>
-  </div>
-  <div class="container">
-    <div class="process-header">
-      <div class="process-tag reveal">Process</div>
-      <h2 class="section-h2 reveal">From '<span class="glow-text">Hello</span>' to '<span class="glow-text">Play</span>' in four simple steps.</h2>
-      <p class="process-lead reveal">We make planning your RC experience simple, smooth, and stress-free.</p>
-    </div>
-
-    <div class="process-timeline">
-      <div class="timeline-line"></div>
-      
-      <!-- STEP 1 -->
-      <div class="process-step reveal">
-        <div class="step-card">
-          <div class="step-badge">1</div>
-          <div class="step-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-          </div>
-          <div class="step-body">
-            <h3>Message Us</h3>
-            <div class="step-subtitle">Start the conversation</div>
-            <p>Reach out through WhatsApp or call us to discuss your event idea.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- STEP 2 -->
-      <div class="process-step reveal">
-        <div class="step-card">
-          <div class="step-badge">2</div>
-          <div class="step-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-          </div>
-          <div class="step-body">
-            <h3>Share Details</h3>
-            <div class="step-subtitle">Tell us about your event</div>
-            <p>Share your crowd size, venue, timing, and experience expectations.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- STEP 3 -->
-      <div class="process-step reveal">
-        <div class="step-card">
-          <div class="step-badge">3</div>
-          <div class="step-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
-          </div>
-          <div class="step-body">
-            <h3>We Suggest</h3>
-            <div class="step-subtitle">Format & setup ideas</div>
-            <p>We recommend the best RC setups, track formats, and event flow.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- STEP 4 -->
-      <div class="process-step reveal">
-        <div class="step-card">
-          <div class="step-badge">4</div>
-          <div class="step-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-          </div>
-          <div class="step-body">
-            <h3>Go Play</h3>
-            <div class="step-subtitle">We handle everything</div>
-            <p>Our team sets up, manages the experience, and keeps the energy alive.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- SEAMLESS (Antigravity Benefits) -->
-<section id="seamless">
-  <div class="seamless-bg-fx">
-    <div class="float-particle p1"></div>
-    <div class="float-particle p2"></div>
-    <div class="float-particle p3"></div>
-  </div>
-  <div class="container seamless-container">
-    <div class="seamless-left">
-      <div class="section-tag reveal">Seamless</div>
-      <h2 class="section-h2 reveal">We handle everything.<br>You just <em>enjoy.</em></h2>
-      
-      <div class="seamless-grid">
-        <!-- SETUP -->
-        <div class="sea-card reveal" style="--d: 0.1s">
-          <div class="sea-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-          </div>
-          <h3>Setup in under 30 mins</h3>
-          <p>Quick and efficient deployment.</p>
-        </div>
-        <!-- INCLUDED -->
-        <div class="sea-card reveal" style="--d: 0.2s">
-          <div class="sea-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
-          </div>
-          <h3>Everything included</h3>
-          <p>Obstacles, cars, power — all us.</p>
-        </div>
-        <!-- WRAP UP -->
-        <div class="sea-card reveal" style="--d: 0.3s">
-          <div class="sea-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.4 5.4c1 1 1 2.5 0 3.4l-9.6 9.6c-1 1-2.5 1-3.4 0Z"/><path d="m11 21 4-4"/><path d="m5 11 9 9"/></svg>
-          </div>
-          <h3>Clean wrap-up</h3>
-          <p>No trace left behind, except memories.</p>
-        </div>
-        <!-- ZERO EFFORT -->
-        <div class="sea-card reveal" style="--d: 0.4s">
-          <div class="sea-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-          </div>
-          <h3>Zero effort</h3>
-          <p>You bring people, we do the rest.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="seamless-right reveal">
-      <div class="testimonial-card">
-        <div class="galaxy-bg"></div>
-        <div class="testi-content">
-          <p class="quote">"The smoothest vendor experience we've ever had."</p>
-          <div class="testi-user">
-            <div class="user-avatar">
-              <img src="https://i.pravatar.cc/100?u=techlead" alt="Team Lead">
-            </div>
-            <div class="user-info">
-              <span class="user-name">Team Lead</span>
-              <span class="user-title">Global Tech Corp</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- GALLERY -->
-<section id="gallery">
-  <div class="container">
-    <div class="section-tag reveal">Glimpses</div>
-    <h2 class="section-h2 reveal">Real action.<br><em>Real fun.</em></h2>
-    <div class="gallery-grid">
-      <div class="gallery-item reveal">
-        <img src="assets/rc_interaction.png" alt="RC Interaction" class="gallery-img">
-        <div class="gallery-overlay"><span>🔍</span></div>
-      </div>
-      <div class="gallery-item reveal">
-        <img src="assets/group_interaction_gallery.png" alt="Group Fun" class="gallery-img">
-        <div class="gallery-overlay"><span>🔍</span></div>
-      </div>
-      <div class="gallery-item reveal">
-        <img src="assets/poster_corporate.png" alt="Corporate Event" class="gallery-img">
-        <div class="gallery-overlay"><span>🔍</span></div>
-      </div>
-      <div class="gallery-item reveal">
-        <img src="assets/poster_generic3.png" alt="Event Poster" class="gallery-img">
-        <div class="gallery-overlay"><span>🔍</span></div>
-      </div>
-      <div class="gallery-item reveal">
-        <img src="assets/house_party_poster.png" alt="House Party" class="gallery-img">
-        <div class="gallery-overlay"><span>🔍</span></div>
-      </div>
-      <div class="gallery-item reveal">
-        <img src="assets/technical_crawl_v2.png" alt="Technical Detail" class="gallery-img">
-        <div class="gallery-overlay"><span>🔍</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section id="finalcta">
-  <div class="finalcta-content container">
-    <div class="finalcta-kicker reveal">You bring the people</div>
-    <h2 class="finalcta-h2 reveal">We'll bring the <em>experience.</em></h2>
-    <div class="cta-btn-wrap reveal">
-      <a href="https://wa.me/919999999999?text=Hi%20RePlay!%20Let's%20talk%20about%20an%20experience." class="finalcta-btn" id="finalcta-wa-btn" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 2.17.7 4.19 1.9 5.83L2.6 21.4c-.1.32.19.64.51.54l3.57-1.3C8.31 21.3 10.08 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.74 0-3.35-.61-4.58-1.63-.12-.1-.28-.14-.44-.09l-2.12.77.83-2.28c.06-.17.03-.35-.08-.49C4.61 15.35 4 13.74 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
-        Let's RePlay
+  <!-- ════════ TOP NAVIGATION ════════ -->
+  <nav id="top-nav">
+    <div class="nav-left">
+      <a href="https://wa.me/919987412025" class="nav-whatsapp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+        </svg>
+        WhatsApp Us
       </a>
-      <div class="cta-wa-tag">TAP TO WHATSAPP</div>
+      <a href="#" class="nav-logo-link">
+        <img src="assets/logo.png" alt="RePlay Logo" class="nav-logo-img">
+      </a>
     </div>
-  </div>
-</section>
+    <div class="nav-right">
+      <a href="#s-idea">Idea</a>
+      <a href="#s-where">Where</a>
+      <a href="#s-packages">Exp</a>
+      <a href="#s-wall">Events</a>
+      <a href="#s-packages">Packages</a>
+      <a href="#s-ways">Glimpses</a>
+    </div>
+  </nav>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">Re<em>Play</em></div>
-  <div class="footer-tag">We bring the obstacles to you.</div>
-  <div class="footer-links">
-    <a href="#hero">Home</a>
-    <a href="#essence">Vibe</a>
-    <a href="#fits">Where</a>
-    <a href="#experiences">Setup</a>
-    <a href="#packages">Packages</a>
-    <a href="#process">Process</a>
-    <a href="https://wa.me/919999999999" target="_blank" rel="noopener">WhatsApp</a>
-  </div>
-  <div class="footer-copy">© 2026 RePlay. All rights reserved. Portable RC Obstacle Experiences.</div>
-</footer>
+  <!-- ════════ MAIN SCROLL CONTENT ════════ -->
+  <main id="scroll-content">
+    
+    <!-- 1. HERO -->
+    <section id="s-hero" class="cinematic-section" data-bg="env-hero">
+      <div class="content-left">
+        <h1 class="hero-title gs-reveal" style="margin-bottom: 5px;">
+          We bring the <span class="orange">RC Experience</span> to you.
+        </h1>
+        <h2 class="hero-secondary gs-reveal" style="font-size: 2rem; font-weight: 600; margin-bottom: 20px; color: #ddd; font-family: var(--f-heading);">
+          A course that fits your space.
+        </h2>
+        <p class="hero-sub gs-reveal" style="max-width: 600px; font-size: 1.1rem; color: #bbb; margin-top: 0;">
+          The kind of fun nobody wants to stop.<br>
+          Set up in 30 minutes. All included.
+        </p>
+        <div class="btn-group gs-reveal">
+          <a href="#" class="btn-primary">Book on WhatsApp</a>
+          <a href="#s-idea" class="btn-secondary">See how it works</a>
+        </div>
+      </div>
+      <!-- Right side is left empty for the crawler to weave through initially -->
+    </section>
 
-<!-- FLOATING WA BUTTON -->
-<a href="https://wa.me/919999999999?text=Hi%20RePlay!%20I'd%20like%20to%20enquire." class="wa-float" id="wa-float-btn" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
-  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
+    <!-- 2. MARQUEE (Top) -->
+    <div class="marquee-wrap">
+      <div class="marquee-track mq-right">
+        <span><span class="orange">◆</span> Even the CEO grabbed the controller</span>
+        <span><span class="orange">◆</span> Our terrace turned into a stadium</span>
+        <span><span class="orange">◆</span> Kids didn't leave. Adults refused to.</span>
+        <span><span class="orange">◆</span> Didn't expect adults to get this competitive</span>
+        <span><span class="orange">◆</span> Even the CEO grabbed the controller</span>
+        <span><span class="orange">◆</span> Our terrace turned into a stadium</span>
+      </div>
+      <div class="marquee-track mq-left">
+        <span><span class="orange">◆</span> We literally rearranged the living room for this</span>
+        <span><span class="orange">◆</span> The one thing everyone did at the reunion</span>
+        <span><span class="orange">◆</span> Best Sunday in months, honestly</span>
+        <span><span class="orange">◆</span> One more round became six more rounds</span>
+        <span><span class="orange">◆</span> We literally rearranged the living room for this</span>
+        <span><span class="orange">◆</span> The one thing everyone did at the reunion</span>
+      </div>
+    </div>
 
-<script src="script.js"></script>
+    <!-- 3. THE REPLAY IDEA -->
+    <section id="s-idea" class="cinematic-section" data-bg="env-corridor">
+      <div class="content-center">
+        <h2 class="section-title gs-reveal">Remember when something actually<br><span class="orange">pulled the whole room in?</span></h2>
+        <div class="idea-text-block gs-reveal">
+          <p>That moment when people stopped scrolling.</p>
+          <p>Everyone gathered around.</p>
+          <p>Strangers started competing.</p>
+          <p>'One more round' just kept happening.</p>
+        </div>
+        <p class="bridge-text gs-reveal">That's the energy RePlay brings — to your space, your crowd, your occasion.</p>
+      </div>
+    </section>
+
+    <!-- 4. WHERE WE SHOW UP -->
+    <section id="s-where" class="cinematic-section" data-bg="env-office">
+      <div class="content-left">
+        <h2 class="section-title gs-reveal">Different spaces.<br>One consistent answer:<br><span class="orange">yes, we can.</span></h2>
+        <p class="section-lead gs-reveal">Just a break or a full celebration — RePlay fits right in.</p>
+        <ul class="where-list gs-reveal">
+          <li><strong>Offices</strong> The break that actually feels like one.</li>
+          <li><strong>Schools &amp; Campuses</strong> Learning that feels nothing like learning.</li>
+          <li><strong>Apartments &amp; Societies</strong> The activity the whole building talks about.</li>
+          <li><strong>Resorts &amp; Hotels</strong> An activity your guests will actually talk about.</li>
+          <li><strong>Homes &amp; Terraces</strong> The activity everyone's still talking about after.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 5. PACKAGES -->
+    <section id="s-packages" class="cinematic-section" data-bg="env-school">
+      <div class="content-center">
+        <h2 class="section-title gs-reveal">Pick your RePlay.<br><span class="orange">We'll handle the rest.</span></h2>
+        
+        <div class="pkg-grid">
+          <div class="pkg-card gs-reveal">
+            <h3>RePlay Mini</h3>
+            <p class="pkg-sub">For small gatherings &amp; home setups</p>
+            <ul>
+              <li>1 RC crawler + mini course</li>
+              <li>Up to 20 participants</li>
+              <li>2-hour experience</li>
+              <li>1 host operator included</li>
+            </ul>
+          </div>
+          
+          <div class="pkg-card featured gs-reveal">
+            <div class="badge">MOST LOVED · MOST BOOKED</div>
+            <h3>RePlay Classic</h3>
+            <p class="pkg-sub">For offices, colleges &amp; societies</p>
+            <ul>
+              <li>2 RC crawlers + full course</li>
+              <li>Up to 60 participants</li>
+              <li>3–4 hour experience</li>
+              <li>2 host operators included</li>
+              <li>Competition format + crowd MC</li>
+            </ul>
+          </div>
+          
+          <div class="pkg-card gs-reveal">
+            <h3>RePlay Max</h3>
+            <p class="pkg-sub">For large events &amp; activations</p>
+            <ul>
+              <li>4+ RC crawlers + expanded terrain</li>
+              <li>Unlimited participants (rotating)</li>
+              <li>Half or full day</li>
+              <li>Custom branding on track</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. WAYS TO REPLAY -->
+    <section id="s-ways" class="cinematic-section" data-bg="env-college">
+      <div class="content-right">
+        <h2 class="section-title gs-reveal">Pick your format.<br><span class="orange">Or let us suggest one.</span></h2>
+        <div class="ways-list">
+          <div class="way-item gs-reveal">
+            <h4>Crawling &amp; Obstacle Challenges</h4>
+            <p>Slow-burn. Maximum satisfaction. Navigate rocky terrain, steep inclines, and precision obstacles.</p>
+          </div>
+          <div class="way-item gs-reveal">
+            <h4>Head-to-Head Challenges</h4>
+            <p>Two controllers. One winner. Side-by-side time trials and elimination rounds.</p>
+          </div>
+          <div class="way-item gs-reveal">
+            <h4>Drift Challenges</h4>
+            <p>Style points. Real stakes. Controlled slides, precision drifts, and style-based scoring.</p>
+          </div>
+          <div class="way-item gs-reveal">
+            <h4>Free Drive Sessions</h4>
+            <p>No rules. Full chaos. Open track, open play. Everyone loves it.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. EXPERIENCE WALL (Testimonials) -->
+    <section id="s-wall" class="cinematic-section" data-bg="env-party">
+      <div class="content-center">
+        <h2 class="section-title gs-reveal">Don't take our word for it.<br><span class="orange">See what happens when RePlay shows up.</span></h2>
+        <div class="testi-stat gs-reveal">4.9 rating · 200+ events across Bangalore · Every age, every space ★</div>
+        
+        <div class="wall-grid">
+          <div class="wall-card gs-reveal">
+            <p>"We booked RePlay for our team outing and honestly didn't expect much. By lap two, even our most serious manager had his sleeves rolled up."</p>
+            <span>- Sneha R., HR Manager</span>
+          </div>
+          <div class="wall-card gs-reveal">
+            <p>"Our terrace has never seen anything like it. We set up for 20 people and ended up with 40 neighbours joining."</p>
+            <span>- Arjun M., Society Event</span>
+          </div>
+          <div class="wall-card gs-reveal">
+            <p>"I'm 68 and I beat my grandson twice. RePlay somehow made everyone feel like a kid again."</p>
+            <span>- Gopalan S., Family Reunion</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. HOW IT WORKS & FAQ -->
+    <section id="s-how" class="cinematic-section" data-bg="env-resort">
+      <div class="content-left">
+        <h2 class="section-title gs-reveal">From 'hello' to 'let's go'<br><span class="orange">in four simple steps.</span></h2>
+        
+        <div class="steps-list">
+          <div class="step gs-reveal"><strong>01 Ping us</strong> Start the conversation</div>
+          <div class="step gs-reveal"><strong>02 Lock the format</strong> We suggest the best fit</div>
+          <div class="step gs-reveal"><strong>03 We pop up</strong> Setup in under 30 minutes</div>
+          <div class="step gs-reveal"><strong>04 You hit play</strong> We run the whole thing</div>
+          <div class="step gs-reveal"><strong>05 We pack down</strong> Clean. Quick. Complete.</div>
+        </div>
+        
+        <div class="faq-accordion mt-5 gs-reveal">
+          <h3 class="mb-3">Questions we get a lot</h3>
+          <details class="faq-det"><summary>How much space do you actually need?</summary><p>Our Mini setup works in around 15×15 feet. Classic needs about 20×20 feet. We adapt to terraces, lawns, and office corners.</p></details>
+          <details class="faq-det"><summary>Is it suitable for all age groups?</summary><p>Yes. 5-year-olds and 75-year-olds compete at the same event, both loving every second.</p></details>
+          <details class="faq-det"><summary>What's included?</summary><p>Everything. RC crawlers, full obstacle course, trained host operators, setup, and pack-down.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. CONTACT / FINAL CTA -->
+    <section id="s-contact" class="cinematic-section" data-bg="env-hero">
+      <div class="content-center final-block">
+        <!-- The R Logo that the crawler drives into -->
+        <div class="final-logo gs-reveal">Re<span class="orange">Play</span></div>
+        <h2 class="section-title gs-reveal mt-4">Let's RePlay.</h2>
+        <p class="final-sub gs-reveal">You bring the people, we'll bring the experience.</p>
+        <a href="https://wa.me/919987412025" class="btn-primary final-btn gs-reveal">Message on WhatsApp</a>
+        
+        <footer class="final-footer gs-reveal mt-5">
+          <p>Based in Bangalore · Available across the city</p>
+          <p>hello@replaypopup.in · +91 9987412025</p>
+        </footer>
+      </div>
+    </section>
+    
+  </main>
+  </div> <!-- /main-wrapper -->
+
+  <!-- GSAP Core, ScrollTrigger & Lenis -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

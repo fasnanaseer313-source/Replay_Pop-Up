@@ -38,22 +38,18 @@ function initCinematic() {
     
     console.log("GSAP Plugins registered & Lenis activated on main-wrapper");
 
-    // 1. Reveal animations for content
-    const revealElements = gsap.utils.toArray('.gs-reveal');
-    revealElements.forEach(elem => {
-      ScrollTrigger.create({
-        trigger: elem,
-        start: "top 85%",
-        onEnter: () => {
-          gsap.to(elem, {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power3.out"
-          });
-        },
-        once: true
-      });
+    // 1. Smooth Reveal animations for all text and content
+    ScrollTrigger.batch(".gs-reveal", {
+      start: "top 88%",
+      onEnter: batch => gsap.to(batch, {
+        opacity: 1,
+        y: 0,
+        duration: 1.4,
+        stagger: 0.15,
+        ease: "expo.out",
+        overwrite: true
+      }),
+      once: true
     });
 
     // 2. Background Environment Crossfades
@@ -175,9 +171,215 @@ function initCinematic() {
       }
     });
 
+    // 6. Venue Carousel
+    const vTrack = document.getElementById('vTrack');
+    if (vTrack) {
+      const cards = Array.from(vTrack.children);
+      const N = cards.length;
+      
+      const state = { progress: 0 };
+      let isHovered = false;
+      let isDragging = false;
+      let startX = 0;
+      let dragStartProgress = 0;
+
+      const stopAuto = () => { isHovered = true; };
+      const startAuto = () => { 
+        isHovered = false; 
+        isDragging = false;
+        // Snap to the closest card on release with smooth deceleration
+        gsap.to(state, {
+          progress: Math.round(state.progress),
+          duration: 0.8,
+          ease: "power2.out",
+          overwrite: true
+        });
+      };
+
+      // Auto-step one by one every 3 seconds using smooth easing
+      setInterval(() => {
+        if (!isHovered && !isDragging) {
+          gsap.to(state, {
+            progress: Math.round(state.progress) + 1,
+            duration: 1.2,
+            ease: "power2.inOut",
+            overwrite: true
+          });
+        }
+      }, 3000);
+
+      vTrack.addEventListener('mouseenter', stopAuto);
+      vTrack.addEventListener('mouseleave', startAuto);
+      
+      vTrack.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        gsap.killTweensOf(state); // Stop any ongoing auto-animation
+        startX = e.clientX;
+        dragStartProgress = state.progress;
+      });
+      vTrack.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const dx = e.clientX - startX;
+        state.progress = dragStartProgress - (dx / 300);
+      });
+      window.addEventListener('mouseup', () => { if (isDragging) startAuto(); });
+
+      // Touch events
+      vTrack.addEventListener('touchstart', (e) => {
+        stopAuto();
+        isDragging = true;
+        gsap.killTweensOf(state);
+        startX = e.touches[0].clientX;
+        dragStartProgress = state.progress;
+      }, {passive: true});
+      
+      vTrack.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        const dx = e.touches[0].clientX - startX;
+        state.progress = dragStartProgress - (dx / 300);
+      }, {passive: true});
+
+      window.addEventListener('touchend', () => { if (isDragging) startAuto(); });
+
+      function animateCarousel() {
+        let currentProgress = state.progress;
+
+        cards.forEach((card, i) => {
+          // delta is the distance from the center card in index units
+          let delta = ((i - currentProgress) % N + N + N/2) % N - N/2;
+          
+          card.hoverState = card.hoverState || 0;
+          if (card.matches(':hover')) {
+            card.hoverState += (1 - card.hoverState) * 0.15;
+          } else {
+            card.hoverState += (0 - card.hoverState) * 0.15;
+          }
+
+          const absDelta = Math.abs(delta);
+          
+          if (absDelta > 3.5) {
+             card.style.opacity = 0;
+             card.style.pointerEvents = 'none';
+             return;
+          }
+          card.style.pointerEvents = 'auto';
+
+          let baseScale = 1.2 - (absDelta * 0.35);
+          if (baseScale < 0.6) baseScale = 0.6;
+          const finalScale = baseScale + (card.hoverState * 0.05);
+          
+          // Gap between cards in 3D space. Dynamic for mobile so they don't spread off-screen.
+          const gapSize = window.innerWidth < 768 ? 160 : 240;
+          const xOffset = delta * gapSize; 
+          
+          const zOffset = 200 - (absDelta * 150);
+          
+          // Fade out faster so the card is invisible when it teleports to the other side
+          let opacity = Math.max(0, 1 - (absDelta * 0.45));
+          if (absDelta > 2.2) opacity = 0;
+          
+          const blur = absDelta * 3; 
+          const brightness = 1 - (absDelta * 0.2);
+          
+          const zIndex = Math.round(100 - absDelta * 10) + Math.round(card.hoverState * 50);
+          
+          card.style.transform = `translate(-50%, -50%) translateX(${xOffset}px) translateZ(${zOffset}px) scale(${finalScale})`;
+          card.style.opacity = opacity;
+          card.style.filter = `blur(${blur}px) brightness(${brightness})`;
+          card.style.zIndex = zIndex;
+          
+          if (absDelta < 0.5) {
+            card.classList.add('active');
+            if (card.hoverState > 0.1) {
+              card.classList.add('hover-glow');
+            } else {
+              card.classList.remove('hover-glow');
+            }
+          } else {
+            card.classList.remove('active');
+            card.classList.remove('hover-glow');
+          }
+        });
+
+        requestAnimationFrame(animateCarousel);
+      }
+      
+      // Start the animation loop immediately to set initial positions and avoid jump glitch
+      animateCarousel();
+    }
+
     console.log("Crawler animation setup complete. Path Length:", pathLength);
 
   } catch (error) {
     console.error("GSAP Initialization Error:", error);
   }
+}
+
+// ════════ R-TRACK HERO CARD ANIMATION ════════
+function initRTrackCard() {
+  const bgLayers = document.querySelectorAll('.rtc-bg-layer');
+  const dynamicText = document.getElementById('rtc-dynamic-text');
+  
+  if (!bgLayers.length || !dynamicText) return;
+  
+  let currentIndex = 0;
+  const intervalTime = 3000; // 3 seconds per slide
+
+  setInterval(() => {
+    // Remove active from current
+    bgLayers[currentIndex].classList.remove('active');
+    
+    // Move to next
+    currentIndex = (currentIndex + 1) % bgLayers.length;
+    const nextLayer = bgLayers[currentIndex];
+    
+    // Add active
+    nextLayer.classList.add('active');
+    
+    // Update text
+    dynamicText.textContent = nextLayer.getAttribute('data-label');
+  }, intervalTime);
+}
+
+// Ensure it runs after DOM load
+document.addEventListener("DOMContentLoaded", () => {
+  initRTrackCard();
+  initStepsHighlight();
+});
+
+// ════════ STEPS AUTO-HIGHLIGHT ════════
+function initStepsHighlight() {
+  const steps = document.querySelectorAll('.steps-list .step');
+  if (!steps.length) return;
+  
+  let currentStep = 0;
+  let interval;
+  
+  const startLoop = () => {
+    interval = setInterval(() => {
+      steps.forEach(s => s.classList.remove('active'));
+      steps[currentStep].classList.add('active');
+      currentStep = (currentStep + 1) % steps.length;
+    }, 2500); // 2.5 seconds per step
+  };
+  
+  const stopLoop = () => clearInterval(interval);
+  
+  // Pause on hover
+  const stepsList = document.querySelector('.steps-list');
+  if (stepsList) {
+    stepsList.addEventListener('mouseenter', () => {
+      stopLoop();
+      steps.forEach(s => s.classList.remove('active')); // let CSS hover take over
+    });
+    stepsList.addEventListener('mouseleave', () => {
+      // Re-highlight the current step before starting the loop so it doesn't wait 2.5s empty
+      steps[currentStep].classList.add('active');
+      startLoop();
+    });
+  }
+  
+  // Start initially
+  steps[currentStep].classList.add('active');
+  startLoop();
 }

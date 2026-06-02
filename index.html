@@ -127,11 +127,7 @@
   <!-- ════════ THE CRAWLER ════════ -->
   <!-- We wrap it in a container so MotionPathPlugin handles position and we handle scale/rotation offsets -->
   <div id="crawler-wrap">
-    <div id="crawler-car">
-      <div id="car-headlight"></div>
-      <div id="car-shadow"></div>
-      <img src="assets/car_intro.png" alt="RePlay RC Crawler">
-    </div>
+    <!-- Image and effects removed as requested, leaving only the glowing track -->
   </div>
 
   <!-- ════════ TOP NAVIGATION ════════ -->
@@ -141,7 +137,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
           <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
         </svg>
-        WhatsApp Us
+        <span class="wa-text">WhatsApp Us</span>
       </a>
       <a href="#" class="nav-logo-link">
         <img src="assets/logo.png" alt="RePlay Logo" class="nav-logo-img">
@@ -178,7 +174,38 @@
           <a href="#s-idea" class="btn-secondary">See how it works</a>
         </div>
       </div>
-      <!-- Right side is left empty for the crawler to weave through initially -->
+      <div class="content-right">
+        <div class="r-track-card">
+          <!-- Background Images for Crossfading -->
+          <div class="rtc-bg-layer active" style="background-image: url('assets/intro_living.png');" data-label="APARTMENTS"></div>
+          <div class="rtc-bg-layer" style="background-image: url('assets/intro_office.png');" data-label="OFFICES"></div>
+          <div class="rtc-bg-layer" style="background-image: url('assets/intro_school.png');" data-label="SCHOOLS"></div>
+          <div class="rtc-bg-layer" style="background-image: url('assets/house_party_poster.png');" data-label="HOUSE PARTIES"></div>
+          <div class="rtc-bg-layer" style="background-image: url('assets/hero.png');" data-label="LIVING ROOMS"></div>
+          <div class="rtc-bg-layer" style="background-image: url('assets/intro_resort.png');" data-label="OPEN SPACES"></div>
+
+          <!-- Top Right Badge -->
+          <div class="rtc-badge badge-tr">
+            <span class="rtc-badge-label">AGES</span>
+            <span class="rtc-badge-value">7 → 70</span>
+          </div>
+
+          <!-- The glowing R-Track overlay -->
+          <img src="assets/r_track.png" alt="R Track Path" class="rtc-track-img">
+
+          <!-- Bottom setup badge -->
+          <div class="rtc-badge-setup">
+            <span class="rtc-setup-label">SETUP</span>
+            <span class="rtc-setup-val">30 MIN</span>
+          </div>
+
+          <!-- Bottom live text bar -->
+          <div class="rtc-bottom-bar">
+            <span>LIVE: <span id="rtc-dynamic-text">APARTMENTS</span></span>
+            <span class="rtc-track-id">R · TRACK 01</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- 2. MARQUEE (Top) -->
@@ -217,16 +244,97 @@
 
     <!-- 4. WHERE WE SHOW UP -->
     <section id="s-where" class="cinematic-section" data-bg="env-office">
-      <div class="content-left">
-        <h2 class="section-title gs-reveal">Different spaces.<br>One consistent answer:<br><span class="orange">yes, we can.</span></h2>
-        <p class="section-lead gs-reveal">Just a break or a full celebration — RePlay fits right in.</p>
-        <ul class="where-list gs-reveal">
-          <li><strong>Offices</strong> The break that actually feels like one.</li>
-          <li><strong>Schools &amp; Campuses</strong> Learning that feels nothing like learning.</li>
-          <li><strong>Apartments &amp; Societies</strong> The activity the whole building talks about.</li>
-          <li><strong>Resorts &amp; Hotels</strong> An activity your guests will actually talk about.</li>
-          <li><strong>Homes &amp; Terraces</strong> The activity everyone's still talking about after.</li>
-        </ul>
+      <div class="content-center text-center">
+        <h2 class="section-title gs-reveal">Where <span class="orange">RePlay</span> Goes</h2>
+        <p class="section-lead gs-reveal mx-auto" style="max-width: 700px; margin: 0 auto 50px;">From cafés to campuses, parties to festivals — RePlay transforms any space into a racing experience.</p>
+      </div>
+
+      <div class="venue-carousel-wrap gs-reveal">
+        <div class="venue-track-glow"></div>
+        <div class="venue-carousel">
+          <div class="venue-track" id="vTrack">
+            <!-- 1. Cafés & Restaurants -->
+            <div class="venue-card">
+              <img src="assets/rc_interaction.png" alt="Cafés & Restaurants">
+              <div class="venue-overlay">
+                <h3 class="venue-title">Cafés &amp; Restaurants</h3>
+                <p class="venue-desc">Add a unique interactive edge to your café that keeps customers staying longer.</p>
+              </div>
+            </div>
+            <!-- 2. Brand Activations -->
+            <div class="venue-card">
+              <img src="assets/fit_corporate.png" alt="Brand Activations">
+              <div class="venue-overlay">
+                <h3 class="venue-title">Brand Activations</h3>
+                <p class="venue-desc">Draw massive crowds and create unforgettable brand moments with our RC setups.</p>
+              </div>
+            </div>
+            <!-- 3. Weekend Markets -->
+            <div class="venue-card">
+              <img src="assets/group_interaction.png" alt="Weekend Markets">
+              <div class="venue-overlay">
+                <h3 class="venue-title">Weekend Markets</h3>
+                <p class="venue-desc">The perfect high-energy attraction to make your weekend market stand out.</p>
+              </div>
+            </div>
+            <!-- 4. Offices -->
+            <div class="venue-card">
+              <img src="assets/intro_office.png" alt="Offices">
+              <div class="venue-overlay">
+                <h3 class="venue-title">Offices</h3>
+                <p class="venue-desc">The break that actually feels like one.</p>
+              </div>
+            </div>
+            <!-- 5. Schools & Campuses -->
+            <div class="venue-card">
+              <img src="assets/intro_school.png" alt="Schools & Campuses">
+              <div class="venue-overlay">
+                <h3 class="venue-title">Schools &amp; Campuses</h3>
+                <p class="venue-desc">Learning that feels nothing like learning.</p>
+              </div>
+            </div>
+            <!-- 6. Apartments & Societies -->
+            <div class="venue-card">
+              <img src="assets/intro_living.png" alt="Apartments & Societies">
+              <div class="venue-overlay">
+                <h3 class="venue-title">Apartments &amp; Societies</h3>
+                <p class="venue-desc">The activity the whole building talks about.</p>
+              </div>
+            </div>
+            <!-- 7. Resorts & Hotels -->
+            <div class="venue-card">
+              <img src="assets/intro_resort.png" alt="Resorts & Hotels">
+              <div class="venue-overlay">
+                <h3 class="venue-title">Resorts &amp; Hotels</h3>
+                <p class="venue-desc">An activity your guests will actually talk about.</p>
+              </div>
+            </div>
+            <!-- 8. Private Venues -->
+            <div class="venue-card">
+              <img src="assets/fit_private.png" alt="Private Venues">
+              <div class="venue-overlay">
+                <h3 class="venue-title">Private Venues</h3>
+                <p class="venue-desc">Transform your private gathering into an adrenaline-fueled experience.</p>
+              </div>
+            </div>
+            <!-- 9. Homes & Terraces -->
+            <div class="venue-card">
+              <img src="assets/intro_living.png" alt="Homes & Terraces">
+              <div class="venue-overlay">
+                <h3 class="venue-title">Homes &amp; Terraces</h3>
+                <p class="venue-desc">The activity everyone's still talking about after.</p>
+              </div>
+            </div>
+            <!-- 10. Sangeets, Mehendis & Festivals -->
+            <div class="venue-card">
+              <img src="assets/house_party_poster.png" alt="Sangeets, Mehendis & Festivals">
+              <div class="venue-overlay">
+                <h3 class="venue-title">Sangeets, Mehendis &amp; Festivals</h3>
+                <p class="venue-desc">Add a totally unexpected, wildly fun element to your celebrations.</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -236,39 +344,75 @@
         <h2 class="section-title gs-reveal">Pick your RePlay.<br><span class="orange">We'll handle the rest.</span></h2>
         
         <div class="pkg-grid">
+          <!-- REPLAY MINI -->
           <div class="pkg-card gs-reveal">
             <h3>RePlay Mini</h3>
             <p class="pkg-sub">For small gatherings &amp; home setups</p>
-            <ul>
-              <li>1 RC crawler + mini course</li>
-              <li>Up to 20 participants</li>
-              <li>2-hour experience</li>
-              <li>1 host operator included</li>
-            </ul>
+            
+            <div class="pkg-section">
+              <div class="pkg-section-title">What's Included</div>
+              <ul class="pkg-features">
+                <li><span class="f-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></span> 1 RC crawler + mini course</li>
+                <li><span class="f-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Up to 20 participants</li>
+                <li><span class="f-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span> 2-hour experience</li>
+                <li><span class="f-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg></span> 1 host operator included</li>
+              </ul>
+            </div>
+            
+            <div class="pkg-section mt-3">
+              <div class="pkg-section-title">Formats</div>
+              <p class="pkg-formats">Indoor <span>|</span> Outdoor</p>
+            </div>
+            
+            <a href="#s-contact" class="btn-pkg btn-pkg-solid mt-4">Choose Lite &rarr;</a>
           </div>
           
+          <!-- REPLAY CLASSIC -->
           <div class="pkg-card featured gs-reveal">
             <div class="badge">MOST LOVED · MOST BOOKED</div>
             <h3>RePlay Classic</h3>
             <p class="pkg-sub">For offices, colleges &amp; societies</p>
-            <ul>
-              <li>2 RC crawlers + full course</li>
-              <li>Up to 60 participants</li>
-              <li>3–4 hour experience</li>
-              <li>2 host operators included</li>
-              <li>Competition format + crowd MC</li>
-            </ul>
+            
+            <div class="pkg-section">
+              <div class="pkg-section-title">What's Included</div>
+              <ul class="pkg-features">
+                <li><span class="f-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg></span> 2 RC crawlers + full course</li>
+                <li><span class="f-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Up to 60 participants</li>
+                <li><span class="f-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span> 3–4 hour experience</li>
+                <li><span class="f-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg></span> 2 host operators included</li>
+                <li><span class="f-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></span> Competition format + crowd MC</li>
+              </ul>
+            </div>
+            
+            <div class="pkg-section mt-3">
+              <div class="pkg-section-title">Formats</div>
+              <p class="pkg-formats">Indoor <span>|</span> Outdoor</p>
+            </div>
+            
+            <a href="#s-contact" class="btn-pkg btn-pkg-solid mt-4">Choose Classic &rarr;</a>
           </div>
           
+          <!-- REPLAY MAX -->
           <div class="pkg-card gs-reveal">
             <h3>RePlay Max</h3>
             <p class="pkg-sub">For large events &amp; activations</p>
-            <ul>
-              <li>4+ RC crawlers + expanded terrain</li>
-              <li>Unlimited participants (rotating)</li>
-              <li>Half or full day</li>
-              <li>Custom branding on track</li>
-            </ul>
+            
+            <div class="pkg-section">
+              <div class="pkg-section-title">What's Included</div>
+              <ul class="pkg-features">
+                <li><span class="f-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span> 4+ RC crawlers + expanded terrain</li>
+                <li><span class="f-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Unlimited participants (rotating)</li>
+                <li><span class="f-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span> Half or full day</li>
+                <li><span class="f-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span> Custom branding on track</li>
+              </ul>
+            </div>
+            
+            <div class="pkg-section mt-3">
+              <div class="pkg-section-title">Formats</div>
+              <p class="pkg-formats">Indoor <span>|</span> Outdoor</p>
+            </div>
+            
+            <a href="#s-contact" class="btn-pkg btn-pkg-solid mt-4">Choose Pro &rarr;</a>
           </div>
         </div>
       </div>
@@ -295,6 +439,59 @@
             <h4>Free Drive Sessions</h4>
             <p>No rules. Full chaos. Open track, open play. Everyone loves it.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6.5 OCCASIONS -->
+    <section id="s-occasions" class="cinematic-section" data-bg="env-office">
+      <div class="content-left">
+        <div class="occasions-showcase gs-reveal">
+          <h2 class="section-title">Every occasion is a<br><span class="orange">RePlay</span> occasion.</h2>
+          <ul class="occasions-list">
+            <li class="occ-item gs-reveal">
+              <div class="occ-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2 1 2 1"/><path d="M2 21h20"/><path d="M7 8v3"/><path d="M12 8v3"/><path d="M17 8v3"/><path d="M7 4h.01"/><path d="M12 4h.01"/><path d="M17 4h.01"/></svg>
+              </div>
+              <span class="occ-text">Birthdays &amp; Parties</span>
+            </li>
+            <li class="occ-item gs-reveal">
+              <div class="occ-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              </div>
+              <span class="occ-text">Office Events</span>
+            </li>
+            <li class="occ-item gs-reveal">
+              <div class="occ-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.8 11.3 2 22l10.7-3.79"/><path d="M4 3h.01"/><path d="M22 8h.01"/><path d="M15 2h.01"/><path d="M22 20h.01"/><path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12v0c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10"/><path d="m22 13-.82-.33c-.86-.34-1.82.2-1.98 1.11v0c-.11.7-.72 1.22-1.43 1.22H17"/><path d="m11 2 .33.82c.34.86-.2 1.82-1.11 1.98v0C9.52 4.9 9 5.52 9 6.23V7"/><path d="M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2Z"/></svg>
+              </div>
+              <span class="occ-text">Weekend Fun</span>
+            </li>
+            <li class="occ-item gs-reveal">
+              <div class="occ-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/><path d="M12 12l-3 6"/><path d="M12 12l3 6"/><circle cx="12" cy="12" r="8"/></svg>
+              </div>
+              <span class="occ-text">Festivals &amp; Fairs</span>
+            </li>
+            <li class="occ-item gs-reveal">
+              <div class="occ-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              </div>
+              <span class="occ-text">House Parties</span>
+            </li>
+            <li class="occ-item gs-reveal">
+              <div class="occ-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><line x1="15" y1="13" x2="15.01" y2="13"/><line x1="18" y1="11" x2="18.01" y2="11"/><rect x="2" y="6" width="20" height="12" rx="2"/></svg>
+              </div>
+              <span class="occ-text">No plans. Just play.</span>
+            </li>
+          </ul>
+          
+          <a href="https://wa.me/919987412025" class="btn-cta gs-reveal">
+            <svg class="cta-icon-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+            CHECK AVAILABILITY
+            <svg class="cta-icon-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
     </section>
@@ -343,6 +540,36 @@
         </div>
       </div>
     </section>
+    <!-- 8.5 GLIMPSES SECTION -->
+    <section id="s-glimpses" class="glimpses-section" data-bg="env-hero">
+      <div class="content-container">
+        <div class="glimpses-header gs-reveal">
+          <div class="subtitle-line"><span class="line"></span> GLIMPSES</div>
+          <h2 class="glimpses-title">Real action.<br><span class="orange">Real fun.</span></h2>
+        </div>
+        
+        <div class="glimpses-grid gs-reveal">
+          <div class="g-item g-tall">
+            <img src="assets/intro_resort.png" alt="Glimpse 1" class="g-img">
+          </div>
+          <div class="g-item g-wide">
+            <img src="assets/intro_office.png" alt="Glimpse 2" class="g-img">
+          </div>
+          <div class="g-item">
+            <img src="assets/intro_college.png" alt="Glimpse 3" class="g-img">
+          </div>
+          <div class="g-item">
+            <img src="assets/intro_living.png" alt="Glimpse 4" class="g-img">
+          </div>
+          <div class="g-item g-wide">
+            <img src="assets/group_interaction.png" alt="Glimpse 5" class="g-img">
+          </div>
+          <div class="g-item">
+            <img src="assets/rc_interaction.png" alt="Glimpse 6" class="g-img">
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- 9. CONTACT / FINAL CTA -->
     <section id="s-contact" class="cinematic-section" data-bg="env-hero">
@@ -362,6 +589,13 @@
     
   </main>
   </div> <!-- /main-wrapper -->
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/919987412025" class="floating-wa" target="_blank" rel="noopener noreferrer">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+      <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+    </svg>
+  </a>
 
   <!-- GSAP Core, ScrollTrigger & Lenis -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>

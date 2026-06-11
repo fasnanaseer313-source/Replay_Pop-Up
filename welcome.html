@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RePlay — Enter The Experience</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist:wght@300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="welcome.css">
+</head>
+<body>
+
+  <div class="welcome-container" id="welcome-container">
+    
+    <!-- LEFT PANEL: Text Content -->
+    <div class="panel-left">
+      <div class="welcome-subheading">Enter The Experience</div>
+      <h1 class="welcome-heading">Not a toy.<br>Not a game.<br>An RC experience — right where you are.</h1>
+      <p class="welcome-intro">
+        RePlay brings portable RC crawling and obstacle-play experiences directly to your space. It's the kind of fun nobody wants to stop.
+      </p>
+    </div>
+
+    <!-- RIGHT PANEL: Cinematic Video -->
+    <div class="panel-right">
+      <!-- Fallback poster image from existing assets while video is missing -->
+      <video class="cinematic-video" autoplay loop muted playsinline poster="assets/intro_bg.png">
+        <source src="assets/intro_video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <!-- CTA BUTTON -->
+    <div class="cta-container">
+      <button class="btn-explore" id="explore-btn">
+        Explore The Experience
+        <svg class="arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const exploreBtn = document.getElementById("explore-btn");
+      const container = document.getElementById("welcome-container");
+
+      exploreBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        
+        // Add the exiting class to trigger the CSS transition
+        container.classList.add("is-exiting");
+        
+        // Wait for the transition to finish (1s) before navigating
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 1000);
+      });
+    });
+  </script>
+
+</body>
+</html>

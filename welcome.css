@@ -1,0 +1,254 @@
+/* ═══════════════════════════════════════════════════════════════
+   GLOBAL RESET & VARIABLES
+═══════════════════════════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --c-black:   #000000;
+  --c-deep:    #04040a;
+  --c-orange:  #e8621a;
+  --c-orange2: #ff8040;
+  --c-glow:    rgba(232,98,26,0.55);
+  --c-silver:  #a8aab8;
+  --c-white:   #ffffff;
+  --f-display: 'Bricolage Grotesque', sans-serif;
+  --f-body:    'Geist', sans-serif;
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-cin:  cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--c-black);
+  font-family: var(--f-body);
+  -webkit-font-smoothing: antialiased;
+  color: var(--c-white);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SPLIT SCREEN LAYOUT
+═══════════════════════════════════════════════════════════════ */
+.welcome-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  animation: fadeIn 1.2s var(--ease-out) forwards;
+  transition: transform 1s var(--ease-cin), opacity 1s var(--ease-cin);
+}
+
+/* Exiting state */
+.welcome-container.is-exiting {
+  opacity: 0;
+  transform: scale(1.05);
+}
+
+/* Left side (Text) */
+.panel-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6vw;
+  background: var(--c-deep);
+  position: relative;
+  z-index: 10;
+}
+
+.welcome-subheading {
+  font-family: var(--f-body);
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+  color: var(--c-orange);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: textReveal 1s var(--ease-out) 0.5s forwards;
+}
+
+.welcome-heading {
+  font-family: var(--f-display);
+  font-size: clamp(3rem, 5vw, 6rem);
+  line-height: 1.1;
+  margin-bottom: 30px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: textReveal 1s var(--ease-out) 0.7s forwards;
+}
+
+.welcome-intro {
+  font-family: var(--f-body);
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--c-silver);
+  max-width: 80%;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: textReveal 1s var(--ease-out) 0.9s forwards;
+}
+
+/* Right side (Video) */
+.panel-right {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  animation: videoMask 1.5s var(--ease-cin) 0.3s forwards;
+}
+
+.panel-right::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--c-deep) 0%, transparent 20%);
+  pointer-events: none;
+}
+
+.cinematic-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7) contrast(1.1);
+  transform: scale(1.05);
+  animation: videoScale 10s linear infinite alternate;
+}
+
+/* CTA Button */
+.cta-container {
+  position: absolute;
+  bottom: 6vw;
+  right: 6vw;
+  z-index: 20;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: textReveal 1s var(--ease-out) 1.2s forwards;
+}
+
+.btn-explore {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 40px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(232,98,26,0.3);
+  color: var(--c-white);
+  font-family: var(--f-body);
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 4px;
+  backdrop-filter: blur(10px);
+  transition: all 0.4s var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle pulse */
+.btn-explore::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 4px;
+  padding: 1px;
+  background: linear-gradient(45deg, transparent, var(--c-orange), transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.5;
+  animation: pulseGlow 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.btn-explore:hover {
+  background: rgba(232,98,26,0.1);
+  border-color: var(--c-orange);
+  box-shadow: 0 0 30px rgba(232,98,26,0.3);
+  transform: translateY(-2px);
+}
+
+.btn-explore .arrow {
+  transition: transform 0.4s var(--ease-out);
+}
+
+.btn-explore:hover .arrow {
+  transform: translateX(8px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes textReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes videoMask {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes videoScale {
+  from { transform: scale(1.05); }
+  to { transform: scale(1.1); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .welcome-container {
+    flex-direction: column;
+  }
+  .panel-left, .panel-right {
+    width: 100%;
+    flex: none;
+  }
+  .panel-left {
+    height: 55vh;
+    padding: 8vw 6vw;
+  }
+  .panel-right {
+    height: 45vh;
+  }
+  .panel-right::after {
+    background: linear-gradient(to bottom, var(--c-deep) 0%, transparent 30%);
+  }
+  .welcome-intro {
+    max-width: 100%;
+  }
+  .cta-container {
+    bottom: 4vw;
+    right: 4vw;
+  }
+  .btn-explore {
+    padding: 15px 30px;
+    font-size: 1rem;
+  }
+}

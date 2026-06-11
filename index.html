@@ -10,8 +10,32 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist:wght@300..800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  
+  <!-- 3D Model Viewer Component -->
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 </head>
 <body>
+
+  <!-- ════════ INTRODUCTION OVERLAY ════════ -->
+  <div id="intro-overlay">
+    <div class="intro-left">
+      <div class="intro-text-wrap gs-intro-reveal">
+        <h1 class="intro-heading">Not a <span class="orange">toy</span><br>Not a <span class="orange">game</span></h1>
+        <p class="intro-subheading">An <span class="orange">RC experience</span> — right where you are.</p>
+      </div>
+    </div>
+    <div class="intro-right" style="display: flex; justify-content: center; align-items: center;">
+      <img src="assets/replay_logo.png" alt="RePlay Logo" class="gs-intro-reveal" style="max-width: 60%; height: auto; opacity: 0.8; filter: drop-shadow(0 0 20px rgba(232,98,26,0.15));">
+    </div>
+
+    <!-- CTA Button positioned at the bottom right of the screen -->
+    <button id="btn-explore" class="intro-cta gs-intro-reveal">
+      Explore the Experience
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="intro-cta-icon">
+        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+      </svg>
+    </button>
+  </div>
 
   <!-- ════════ FIXED BACKGROUND SYSTEM ════════ -->
   <div id="cinematic-bg">
@@ -19,7 +43,7 @@
   </div>
 
   <!-- ════════ MAIN WRAPPER ════════ -->
-  <div id="main-wrapper">
+  <div id="main-wrapper" style="opacity: 0; pointer-events: none; height: 100vh; overflow: hidden;">
 
     <!-- ════════ GLOBAL SVG TRACK ════════ -->
     <svg id="master-track-svg" viewBox="0 0 100 1000" preserveAspectRatio="none">
@@ -93,8 +117,8 @@
 
   <!-- ════════ THE CRAWLER ════════ -->
   <!-- We wrap it in a container so MotionPathPlugin handles position and we handle scale/rotation offsets -->
-  <div id="crawler-wrap">
-    <!-- Image and effects removed as requested, leaving only the glowing track -->
+  <div id="crawler-wrap" style="width: 120px; height: auto; display: flex; justify-content: center; align-items: center;">
+    <img id="crawler-car" src="assets/rc_crawler_isolated.png" alt="RC Crawler" style="width: 100%; height: auto;" />
   </div>
 
   <!-- ════════ TOP NAVIGATION ════════ -->
@@ -434,22 +458,83 @@
       </div>
     </section>
 
-    <!-- 8. HOW IT WORKS & FAQ -->
-    <section id="s-how" class="cinematic-section" data-bg="env-resort">
-      <div class="content-left">
-        <h2 class="section-title gs-reveal">From 'hello' to 'let's go'<br><span class="orange">in four simple steps.</span></h2>
-        
-        <div class="steps-list">
-          <div class="step gs-reveal"><strong>01 Ping us</strong> Start the conversation</div>
-          <div class="step gs-reveal"><strong>02 Lock the format</strong> We suggest the best fit</div>
-          <div class="step gs-reveal"><strong>03 We pop up</strong> Setup in under 30 minutes</div>
-          <div class="step gs-reveal"><strong>04 You hit play</strong> We run the whole thing</div>
-          <div class="step gs-reveal"><strong>05 We pack down</strong> Clean. Quick. Complete.</div>
+    <!-- 8. HOW IT WORKS (PINNED PROCESS) -->
+    <section id="s-process-pinned" class="cinematic-section" data-bg="env-resort" style="position: relative; z-index: 100;">
+      <div class="process-pin-wrap">
+        <div class="process-content">
+          <div class="process-header gs-reveal">
+            <h2 class="section-title text-white">How it works</h2>
+            <div class="process-accent-line"></div>
+          </div>
+          
+          <div class="process-cards-container">
+            <!-- Orange progress line -->
+            <div class="process-progress-track">
+              <div class="process-progress-fill"></div>
+            </div>
+
+            <!-- Cards -->
+            <div class="process-card" data-step="1">
+              <div class="card-indicator"></div>
+              <div class="card-glow"></div>
+              <div class="card-inner">
+                <div class="step-num">01</div>
+                <h3 class="step-title">Ping us</h3>
+                <p class="step-desc">Start the conversation</p>
+              </div>
+            </div>
+
+            <div class="process-card" data-step="2">
+              <div class="card-indicator"></div>
+              <div class="card-glow"></div>
+              <div class="card-inner">
+                <div class="step-num">02</div>
+                <h3 class="step-title">Lock the format</h3>
+                <p class="step-desc">We suggest the best fit</p>
+              </div>
+            </div>
+
+            <div class="process-card" data-step="3">
+              <div class="card-indicator"></div>
+              <div class="card-glow"></div>
+              <div class="card-inner">
+                <div class="step-num">03</div>
+                <h3 class="step-title">We pop up</h3>
+                <p class="step-desc">Setup in under 30 minutes</p>
+              </div>
+            </div>
+
+            <div class="process-card" data-step="4">
+              <div class="card-indicator"></div>
+              <div class="card-glow"></div>
+              <div class="card-inner">
+                <div class="step-num">04</div>
+                <h3 class="step-title">You hit play</h3>
+                <p class="step-desc">We run the whole thing</p>
+              </div>
+            </div>
+
+            <div class="process-card" data-step="5">
+              <div class="card-indicator"></div>
+              <div class="card-glow"></div>
+              <div class="card-inner">
+                <div class="step-num">05</div>
+                <h3 class="step-title">We pack down</h3>
+                <p class="step-desc">Clean. Quick. Complete.</p>
+              </div>
+            </div>
+
+          </div>
         </div>
-        
+      </div>
+    </section>
+
+    <!-- 8.5 FAQ SECTION -->
+    <section id="s-faq" class="cinematic-section" data-bg="env-resort">
+      <div class="content-left">
         <div class="faq-accordion mt-5 gs-reveal">
           <h5 class="orange" style="text-transform: uppercase; letter-spacing: 2px; font-weight: bold; margin-bottom: 5px;">FAQ</h5>
-          <h3 class="mb-3 orange">Questions we get a lot</h3>
+          <h3 class="mb-3 text-white">Questions we get a lot</h3>
           <details class="faq-det"><summary>How much space do you need?</summary><p>RePlay setups work in compact spaces too — terraces, living rooms, office corners, lawns, clubhouses, and more. Share your space with us and we'll suggest what fits best.</p></details>
           <details class="faq-det"><summary>How long does setup take?</summary><p>Most RePlay setups are ready in around 30 minutes.</p></details>
           <details class="faq-det"><summary>Is this only for kids?</summary><p>Not even close. Kids start fast, but adults usually end up staying longer.</p></details>
@@ -499,6 +584,7 @@
   <!-- GSAP Core, ScrollTrigger & Lenis -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
   <script src="script.js"></script>
 </body>

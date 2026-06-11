@@ -1,8 +1,45 @@
 window.addEventListener("load", () => {
   console.log("RePlay Cinematic script initialized");
   
-  // Give the browser a moment to render the DOM and calculate heights
-  setTimeout(initCinematic, 150);
+  // 1. Initial Intro Animation
+  const introOverlay = document.getElementById("intro-overlay");
+  const mainWrapper = document.getElementById("main-wrapper");
+  const btnExplore = document.getElementById("btn-explore");
+
+  if (introOverlay && mainWrapper && btnExplore) {
+    // Fade in intro text
+    gsap.to(".gs-intro-reveal", {
+      opacity: 1,
+      y: 0,
+      duration: 1.2,
+      stagger: 0.2,
+      ease: "power3.out",
+      delay: 0.2
+    });
+
+    // Handle CTA Click
+    btnExplore.addEventListener("click", () => {
+      // Create transition timeline
+      const tl = gsap.timeline({
+        onComplete: () => {
+          introOverlay.style.display = "none";
+          // Reveal main wrapper and enable interactions
+          gsap.set(mainWrapper, { clearProps: "pointerEvents,height,overflow" });
+          gsap.to(mainWrapper, { opacity: 1, duration: 0.8, ease: "power2.inOut" });
+          
+          // Now that main wrapper is visible and height is auto, initialize the cinematic experience
+          setTimeout(initCinematic, 50);
+        }
+      });
+
+      // Fade out intro elements
+      tl.to(".gs-intro-reveal", { opacity: 0, y: -20, duration: 0.6, stagger: 0.1, ease: "power2.in" })
+        .to(introOverlay, { opacity: 0, duration: 0.8, ease: "power2.inOut" }, "-=0.2");
+    });
+  } else {
+    // Fallback if intro elements are missing
+    setTimeout(initCinematic, 150);
+  }
 });
 
 function initCinematic() {
@@ -35,6 +72,9 @@ function initCinematic() {
     
     // Set default scroller for all ScrollTriggers
     ScrollTrigger.defaults({ scroller: "#main-wrapper" });
+    
+    // Initialize pinned process section
+    initStepsHighlight();
     
     console.log("GSAP Plugins registered & Lenis activated on main-wrapper");
 
@@ -140,16 +180,21 @@ function initCinematic() {
 
     // Set initial crawler position
     const initPoint = baseTrack.getPointAtLength(0);
-    gsap.set("#crawler-wrap", { x: initPoint.x, y: initPoint.y, rotation: 90 });
+    gsap.set("#crawler-wrap", { 
+      x: initPoint.x, 
+      y: initPoint.y, 
+      xPercent: -50, 
+      yPercent: -50, 
+      rotation: 90,
+      transformOrigin: "center center"
+    });
 
     // 5. Crawler Motion (Native SVG getPointAtLength for guaranteed movement)
-    // Using ScrollTrigger.create instead of empty gsap.to to ensure continuous progress updates
     ScrollTrigger.create({
       trigger: "#scroll-content",
       start: "top top",
       end: "bottom bottom",
       onUpdate: (self) => {
-        // self.progress is between 0 and 1
         const progress = self.progress;
         
         // Get the current point on the SVG path
@@ -157,7 +202,7 @@ function initCinematic() {
         const point = baseTrack.getPointAtLength(currentLength);
         
         // Get a point slightly ahead to calculate rotation
-        let nextLength = currentLength + 2;
+        let nextLength = currentLength + 5; // Look ahead 5 pixels for stable orientation
         if (nextLength > pathLength) nextLength = pathLength;
         const nextPoint = baseTrack.getPointAtLength(nextLength);
         
@@ -166,11 +211,13 @@ function initCinematic() {
         const dy = nextPoint.y - point.y;
         const angle = Math.atan2(dy, dx) * (180 / Math.PI);
         
-        // Apply position and rotation to crawler wrap
+        // Apply strict centering, position, and rotation
         gsap.set("#crawler-wrap", {
           x: point.x,
           y: point.y,
-          rotation: angle + 90 // +90 because the car image faces up by default
+          xPercent: -50,
+          yPercent: -50,
+          rotation: angle + 90 // Face forward correctly
         });
       }
     });
@@ -348,45 +395,61 @@ function initRTrackCard() {
 // Ensure it runs after DOM load
 document.addEventListener("DOMContentLoaded", () => {
   initRTrackCard();
-  initStepsHighlight();
   initFaqToggle();
 });
 
-// ════════ STEPS AUTO-HIGHLIGHT ════════
+// ════════ PINNED SCROLL 5-STEP PROCESS ════════
 function initStepsHighlight() {
-  const steps = document.querySelectorAll('.steps-list .step');
-  if (!steps.length) return;
+  const processWrap = document.querySelector('.process-pin-wrap');
+  const cards = gsap.utils.toArray('.process-card');
+  const progressFill = document.querySelector('.process-progress-fill');
   
-  let currentStep = 0;
-  let interval;
-  
-  const startLoop = () => {
-    interval = setInterval(() => {
-      steps.forEach(s => s.classList.remove('active'));
-      steps[currentStep].classList.add('active');
-      currentStep = (currentStep + 1) % steps.length;
-    }, 2500); // 2.5 seconds per step
-  };
-  
-  const stopLoop = () => clearInterval(interval);
-  
-  // Pause on hover
-  const stepsList = document.querySelector('.steps-list');
-  if (stepsList) {
-    stepsList.addEventListener('mouseenter', () => {
-      stopLoop();
-      steps.forEach(s => s.classList.remove('active')); // let CSS hover take over
-    });
-    stepsList.addEventListener('mouseleave', () => {
-      // Re-highlight the current step before starting the loop so it doesn't wait 2.5s empty
-      steps[currentStep].classList.add('active');
-      startLoop();
-    });
-  }
-  
-  // Start initially
-  steps[currentStep].classList.add('active');
-  startLoop();
+  if (!processWrap || cards.length === 0) return;
+
+  ScrollTrigger.create({
+    trigger: processWrap,
+    scroller: "#main-wrapper",
+    start: "top top",
+    end: "+=250%", // Pin for 2.5x viewport height to scrub through 5 cards
+    pin: true,
+    pinType: "transform",
+    scrub: 1,
+    onUpdate: (self) => {
+      const progress = self.progress;
+      const numCards = cards.length;
+      
+      // Update progress bar line
+      if (progressFill) {
+        gsap.set(progressFill, { height: `${progress * 100}%` });
+      }
+
+      // Determine which card is active based on progress (0 to 1)
+      const step = 1 / numCards;
+      
+      cards.forEach((card, index) => {
+        const cardStart = index * step;
+        const cardEnd = (index + 1) * step;
+        
+        if (progress >= cardStart && progress < cardEnd) {
+          card.classList.add('active');
+          card.classList.remove('passed');
+        } else if (progress >= cardEnd) {
+          card.classList.remove('active');
+          card.classList.add('passed');
+        } else {
+          card.classList.remove('active');
+          card.classList.remove('passed');
+        }
+      });
+      
+      // Ensure the last card stays active at the very end
+      if (progress === 1) {
+        cards.forEach(c => { c.classList.remove('active'); c.classList.add('passed'); });
+        cards[cards.length - 1].classList.remove('passed');
+        cards[cards.length - 1].classList.add('active');
+      }
+    }
+  });
 }
 
 // ════════ FAQ TOGGLE ════════

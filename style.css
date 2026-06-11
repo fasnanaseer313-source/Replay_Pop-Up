@@ -363,13 +363,13 @@ p.hero-sub, p.section-lead, p.bridge-text {
   white-space: nowrap;
   font-family: var(--f-heading);
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   color: #ffffff;
-  text-transform: uppercase;
+  text-transform: none;
   margin: 10px 0;
 }
-.mq-right { animation: mqR 25s linear infinite; }
-.mq-left  { animation: mqL 25s linear infinite; }
+.mq-right { animation: mqR 10s linear infinite; }
+.mq-left  { animation: mqL 10s linear infinite; }
 @keyframes mqR { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
 @keyframes mqL { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 .marquee-track span { padding: 0 30px; }
@@ -716,6 +716,8 @@ p.hero-sub, p.section-lead, p.bridge-text {
 /* FAQ */
 .faq-accordion details { background: rgba(20,20,20,0.8); border: 1px solid rgba(255,255,255,0.1); margin-bottom: 10px; border-radius: 4px; }
 .faq-accordion summary { padding: 20px; font-family: var(--f-heading); font-weight: 600; cursor: pointer; outline: none; }
+.faq-accordion summary::marker { color: var(--orange); }
+.faq-accordion summary::-webkit-details-marker { color: var(--orange); }
 .faq-accordion p { padding: 0 20px 20px; color: var(--text-dim); line-height: 1.6; }
 
 /* Venue Carousel Showcase */
@@ -1134,8 +1136,19 @@ p.hero-sub, p.section-lead, p.bridge-text {
   .glimpses-section { padding: 60px 5%; }
   .pkg-card { padding: 25px 20px; }
   
+  /* Venue Card Mobile */
+  .venue-card {
+    min-width: 240px;
+    width: 70vw;
+    height: 300px;
+  }
+  
   /* Navigation scaling */
   .nav-logo-img { height: 35px; }
+  
+  /* Faster Marquee on Mobile */
+  .mq-right { animation-duration: 5s; }
+  .mq-left  { animation-duration: 5s; }
 }
 
 /* ════════ FLOATING WHATSAPP BUTTON ════════ */

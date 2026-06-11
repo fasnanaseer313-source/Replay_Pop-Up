@@ -114,22 +114,26 @@ function initCinematic() {
     
     const baseTrack = document.getElementById("master-track-base");
     const activeTrack = document.getElementById("master-track-active");
+    const dashTrack = document.getElementById("master-track-dash");
+    const maskPath = document.getElementById("master-track-mask-path");
     
     baseTrack.setAttribute("d", d);
     activeTrack.setAttribute("d", d);
+    dashTrack.setAttribute("d", d);
+    maskPath.setAttribute("d", d);
 
     // 4. Track Draw Animation
-    const pathLength = activeTrack.getTotalLength();
-    activeTrack.style.strokeDasharray = pathLength;
-    activeTrack.style.strokeDashoffset = pathLength;
+    const pathLength = maskPath.getTotalLength();
+    maskPath.style.strokeDasharray = pathLength;
+    maskPath.style.strokeDashoffset = pathLength;
 
-    gsap.to(activeTrack, {
+    gsap.to(maskPath, {
       strokeDashoffset: 0,
       scrollTrigger: {
         trigger: "#scroll-content",
         start: "top top",
         end: "bottom bottom",
-        scrub: 1
+        scrub: true
       },
       ease: "none"
     });
@@ -190,23 +194,23 @@ function initCinematic() {
         // Snap to the closest card on release with smooth deceleration
         gsap.to(state, {
           progress: Math.round(state.progress),
-          duration: 0.8,
+          duration: 0.3,
           ease: "power2.out",
           overwrite: true
         });
       };
 
-      // Auto-step one by one every 3 seconds using smooth easing
+      // Auto-step one by one every 1.5 seconds using smooth easing
       setInterval(() => {
         if (!isHovered && !isDragging) {
           gsap.to(state, {
             progress: Math.round(state.progress) + 1,
-            duration: 1.2,
+            duration: 0.4,
             ease: "power2.inOut",
             overwrite: true
           });
         }
-      }, 3000);
+      }, 1500);
 
       vTrack.addEventListener('mouseenter', stopAuto);
       vTrack.addEventListener('mouseleave', startAuto);
@@ -220,7 +224,7 @@ function initCinematic() {
       vTrack.addEventListener('mousemove', (e) => {
         if (!isDragging) return;
         const dx = e.clientX - startX;
-        state.progress = dragStartProgress - (dx / 300);
+        state.progress = dragStartProgress - (dx / 100);
       });
       window.addEventListener('mouseup', () => { if (isDragging) startAuto(); });
 
@@ -236,7 +240,7 @@ function initCinematic() {
       vTrack.addEventListener('touchmove', (e) => {
         if (!isDragging) return;
         const dx = e.touches[0].clientX - startX;
-        state.progress = dragStartProgress - (dx / 300);
+        state.progress = dragStartProgress - (dx / 100);
       }, {passive: true});
 
       window.addEventListener('touchend', () => { if (isDragging) startAuto(); });
@@ -345,6 +349,7 @@ function initRTrackCard() {
 document.addEventListener("DOMContentLoaded", () => {
   initRTrackCard();
   initStepsHighlight();
+  initFaqToggle();
 });
 
 // ════════ STEPS AUTO-HIGHLIGHT ════════
@@ -382,4 +387,25 @@ function initStepsHighlight() {
   // Start initially
   steps[currentStep].classList.add('active');
   startLoop();
+}
+
+// ════════ FAQ TOGGLE ════════
+function initFaqToggle() {
+  const faqBtn = document.getElementById('faq-toggle-btn');
+  const faqContainer = document.getElementById('faq-list-container');
+  if (faqBtn && faqContainer) {
+    faqBtn.addEventListener('click', () => {
+      if (faqContainer.style.display === 'none') {
+        faqContainer.style.display = 'block';
+        faqBtn.textContent = 'Show Less';
+      } else {
+        faqContainer.style.display = 'none';
+        faqBtn.textContent = 'Learn More';
+      }
+      // Refresh ScrollTrigger so layout heights are recalculated
+      if (typeof ScrollTrigger !== 'undefined') {
+        setTimeout(() => ScrollTrigger.refresh(), 100);
+      }
+    });
+  }
 }

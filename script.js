@@ -80,6 +80,7 @@ function initCinematic() {
 
     // 1. Smooth Reveal animations for all text and content
     ScrollTrigger.batch(".gs-reveal", {
+      scroller: "#main-wrapper",
       start: "top 88%",
       onEnter: batch => gsap.to(batch, {
         opacity: 1,
@@ -99,6 +100,7 @@ function initCinematic() {
       if (bgId) {
         ScrollTrigger.create({
           trigger: section,
+          scroller: "#main-wrapper",
           start: "top 50%",
           end: "bottom 50%",
           onEnter: () => switchBackground(bgId),
@@ -366,7 +368,7 @@ function initCinematic() {
   }
 }
 
-// ════════ R-TRACK HERO CARD ANIMATION ════════
+// â•â•â•â•â•â•â•â• R-TRACK HERO CARD ANIMATION â•â•â•â•â•â•â•â•
 function initRTrackCard() {
   const bgLayers = document.querySelectorAll('.rtc-bg-layer');
   const dynamicText = document.getElementById('rtc-dynamic-text');
@@ -398,7 +400,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initFaqToggle();
 });
 
-// ════════ PINNED SCROLL 5-STEP PROCESS ════════
+// â•â•â•â•â•â•â•â• PINNED SCROLL 5-STEP PROCESS â•â•â•â•â•â•â•â•
 function initStepsHighlight() {
   const processWrap = document.querySelector('.process-pin-wrap');
   const cards = gsap.utils.toArray('.process-card');
@@ -452,7 +454,7 @@ function initStepsHighlight() {
   });
 }
 
-// ════════ FAQ TOGGLE ════════
+// â•â•â•â•â•â•â•â• FAQ TOGGLE â•â•â•â•â•â•â•â•
 function initFaqToggle() {
   const faqBtn = document.getElementById('faq-toggle-btn');
   const faqContainer = document.getElementById('faq-list-container');
@@ -472,3 +474,116 @@ function initFaqToggle() {
     });
   }
 }
+
+// ════════ HERO VIDEO INTERACTION ════════
+function initHeroVideo() {
+    const card = document.getElementById('heroVideoCard');
+    const video = document.getElementById('heroVideo');
+    const backdrop = document.getElementById('video-backdrop');
+    const closeBtn = document.getElementById('heroVideoCloseBtn');
+    
+    if (!card || !video || !backdrop) return;
+
+    let isExpanded = false;
+
+    card.addEventListener('click', () => {
+        if (isExpanded) return;
+        
+        // Expand
+        isExpanded = true;
+        
+        // FLIP Animation: Get current position
+        const rect = card.getBoundingClientRect();
+        
+        // Create a spacer so the layout doesn't collapse
+        const spacer = document.createElement('div');
+        spacer.id = 'heroVideoSpacer';
+        spacer.style.width = rect.width + 'px';
+        spacer.style.height = rect.height + 'px';
+        card.parentNode.insertBefore(spacer, card);
+        
+        // Set card to fixed at exactly its current layout position
+        gsap.set(card, {
+            position: 'fixed',
+            top: rect.top,
+            left: rect.left,
+            width: rect.width,
+            height: rect.height,
+            margin: 0,
+            zIndex: 1000
+        });
+        
+        // Animate to expanded state
+        gsap.to(card, {
+            top: "50%",
+            left: "50%",
+            xPercent: -50,
+            yPercent: -50,
+            width: "80vw",
+            height: "80vh",
+            duration: 0.6,
+            ease: "power3.inOut"
+        });
+
+        // Add classes for expanded state
+        card.classList.add('is-expanded');
+        backdrop.classList.add('active');
+        
+        // Reset and play video
+        video.currentTime = 0;
+        video.play().catch(e => console.log("Video play error:", e));
+    });
+
+    // Close Button
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (isExpanded) shrinkVideo();
+        });
+    }
+
+    // Shrink when video ends
+    video.addEventListener('ended', () => {
+        if (!isExpanded) return;
+        shrinkVideo();
+    });
+
+    // Also shrink if backdrop is clicked
+    backdrop.addEventListener('click', () => {
+        if (isExpanded) shrinkVideo();
+    });
+
+    function shrinkVideo() {
+        if (!isExpanded) return;
+        isExpanded = false;
+        
+        const spacer = document.getElementById('heroVideoSpacer');
+        const rect = spacer ? spacer.getBoundingClientRect() : { top: 0, left: 0, width: 300, height: 200 };
+        
+        card.classList.remove('is-expanded');
+        backdrop.classList.remove('active');
+        
+        // Animate back to original position
+        gsap.to(card, {
+            top: rect.top,
+            left: rect.left,
+            xPercent: 0,
+            yPercent: 0,
+            width: rect.width,
+            height: rect.height,
+            duration: 0.6,
+            ease: "power3.inOut",
+            onComplete: () => {
+                gsap.set(card, { clearProps: "position,top,left,width,height,margin,zIndex,transform" });
+                if (spacer) spacer.remove();
+            }
+        });
+        
+        video.pause();
+    }
+}
+
+// Attach to DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    initHeroVideo();
+});

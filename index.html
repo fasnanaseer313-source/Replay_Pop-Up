@@ -43,6 +43,7 @@
   </div>
 
   <!-- ════════ MAIN WRAPPER ════════ -->
+  <div id="video-backdrop"></div>
   <div id="main-wrapper" style="opacity: 0; pointer-events: none; height: 100vh; overflow: hidden;">
 
     <!-- ════════ GLOBAL SVG TRACK ════════ -->
@@ -164,35 +165,31 @@
           <a href="#s-idea" class="btn-secondary">See how it works</a>
         </div>
       </div>
-      <div class="content-right">
-        <div class="r-track-card">
-          <!-- Background Images for Crossfading -->
-          <div class="rtc-bg-layer active" style="background-image: url('assets/intro_living.png');" data-label="APARTMENTS"></div>
-          <div class="rtc-bg-layer" style="background-image: url('assets/intro_office.png');" data-label="OFFICES"></div>
-          <div class="rtc-bg-layer" style="background-image: url('assets/intro_school.png');" data-label="SCHOOLS"></div>
-          <div class="rtc-bg-layer" style="background-image: url('assets/house_party_poster.png');" data-label="HOUSE PARTIES"></div>
-          <div class="rtc-bg-layer" style="background-image: url('assets/hero.png');" data-label="LIVING ROOMS"></div>
-          <div class="rtc-bg-layer" style="background-image: url('assets/intro_resort.png');" data-label="OPEN SPACES"></div>
-
-          <!-- Top Right Badge -->
-          <div class="rtc-badge badge-tr">
-            <span class="rtc-badge-label">AGES</span>
-            <span class="rtc-badge-value">7 → 70</span>
+      <div class="content-right" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+        <div id="heroVideoCard" class="hero-video-card gs-reveal">
+          <!-- Preview Image -->
+          <img src="assets/intro_bg.png" alt="RC Experience Preview" class="hvc-preview-img">
+          
+          <!-- Play Indicator -->
+          <div class="hvc-play-indicator">
+            <svg viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </div>
+          
+          <!-- Hidden Video Container -->
+          <div class="hvc-video-wrap">
+            <video id="heroVideo" muted playsinline>
+              <source src="assets/intro_video.mp4" type="video/mp4">
+            </video>
           </div>
 
-          <!-- The glowing R-Track overlay -->
-          <img src="assets/r_track.png" alt="R Track Path" class="rtc-track-img">
-
-          <!-- Bottom setup badge -->
-          <div class="rtc-badge-setup">
-            <span class="rtc-setup-label">SETUP</span>
-            <span class="rtc-setup-val">30 MIN</span>
-          </div>
-
-          <!-- Bottom live text bar -->
-          <div class="rtc-bottom-bar">
-            <span>LIVE: <span id="rtc-dynamic-text">APARTMENTS</span></span>
-            <span class="rtc-track-id">R · TRACK 01</span>
+          <!-- Close Button for expanded state -->
+          <div class="hvc-close-btn" id="heroVideoCloseBtn">
+            <svg viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
           </div>
         </div>
       </div>
@@ -229,6 +226,37 @@
           <p>'One more round' just kept happening.</p>
         </div>
         <p class="bridge-text gs-reveal">That's the energy RePlay brings — to your space, your crowd, your occasion.</p>
+        
+        <div class="r-track-card gs-reveal" style="margin: 60px auto 0;">
+          <!-- Background Images for Crossfading -->
+          <div class="rtc-bg-layer active" style="background-image: url('assets/intro_living.png');" data-label="APARTMENTS"></div>
+          <div class="rtc-bg-layer" style="background-image: url('assets/intro_office.png');" data-label="OFFICES"></div>
+          <div class="rtc-bg-layer" style="background-image: url('assets/intro_school.png');" data-label="SCHOOLS"></div>
+          <div class="rtc-bg-layer" style="background-image: url('assets/house_party_poster.png');" data-label="HOUSE PARTIES"></div>
+          <div class="rtc-bg-layer" style="background-image: url('assets/hero.png');" data-label="LIVING ROOMS"></div>
+          <div class="rtc-bg-layer" style="background-image: url('assets/intro_resort.png');" data-label="OPEN SPACES"></div>
+
+          <!-- Top Right Badge -->
+          <div class="rtc-badge badge-tr">
+            <span class="rtc-badge-label">AGES</span>
+            <span class="rtc-badge-value">7 → 70</span>
+          </div>
+
+          <!-- The glowing R-Track overlay -->
+          <img src="assets/r_track.png" alt="R Track Path" class="rtc-track-img">
+
+          <!-- Bottom setup badge -->
+          <div class="rtc-badge-setup">
+            <span class="rtc-setup-label">SETUP</span>
+            <span class="rtc-setup-val">30 MIN</span>
+          </div>
+
+          <!-- Bottom live text bar -->
+          <div class="rtc-bottom-bar">
+            <span>LIVE: <span id="rtc-dynamic-text">APARTMENTS</span></span>
+            <span class="rtc-track-id">R · TRACK 01</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -530,9 +558,9 @@
     </section>
 
     <!-- 8.5 FAQ SECTION -->
-    <section id="s-faq" class="cinematic-section" data-bg="env-resort">
+    <section id="s-faq" class="cinematic-section" data-bg="env-resort" style="min-height: auto; padding-top: 60px; padding-bottom: 60px;">
       <div class="content-left">
-        <div class="faq-accordion mt-5 gs-reveal">
+        <div class="faq-accordion mt-5">
           <h5 class="orange" style="text-transform: uppercase; letter-spacing: 2px; font-weight: bold; margin-bottom: 5px;">FAQ</h5>
           <h3 class="mb-3 text-white">Questions we get a lot</h3>
           <details class="faq-det"><summary>How much space do you need?</summary><p>RePlay setups work in compact spaces too — terraces, living rooms, office corners, lawns, clubhouses, and more. Share your space with us and we'll suggest what fits best.</p></details>
@@ -556,15 +584,15 @@
 
 
     <!-- 9. CONTACT / FINAL CTA -->
-    <section id="s-contact" class="cinematic-section" data-bg="env-hero">
+    <section id="s-contact" class="cinematic-section" data-bg="env-hero" style="min-height: auto; padding-top: 60px; padding-bottom: 120px;">
       <div class="content-center final-block">
         <!-- The R Logo that the crawler drives into -->
-        <div class="final-logo gs-reveal">Re<span class="orange">Play</span></div>
-        <h2 class="section-title gs-reveal mt-4">Let's RePlay.</h2>
-        <p class="final-sub gs-reveal">You bring the people, we'll bring the experience.</p>
-        <a href="https://wa.me/919987412025" class="btn-primary final-btn gs-reveal">Message on WhatsApp</a>
+        <div class="final-logo">Re<span class="orange">Play</span></div>
+        <h2 class="section-title mt-4">Let's RePlay.</h2>
+        <p class="final-sub">You bring the people, we'll bring the experience.</p>
+        <a href="https://wa.me/919987412025" class="btn-primary final-btn">Message on WhatsApp</a>
         
-        <footer class="final-footer gs-reveal mt-5">
+        <footer class="final-footer mt-5">
           <p>Based in Bangalore · Available across the city</p>
           <p>hello@replaypopup.in · +91 9987412025</p>
         </footer>

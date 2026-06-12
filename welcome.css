@@ -61,37 +61,41 @@ html, body {
   z-index: 10;
 }
 
-.welcome-subheading {
-  font-family: var(--f-body);
-  font-size: 1rem;
-  letter-spacing: 0.3em;
-  color: var(--c-orange);
-  text-transform: uppercase;
-  margin-bottom: 24px;
+.welcome-heading {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(4rem, 8vw, 8rem);
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 30px;
+  letter-spacing: -0.02em;
   opacity: 0;
   transform: translateY(20px);
   animation: textReveal 1s var(--ease-out) 0.5s forwards;
 }
 
-.welcome-heading {
+.welcome-heading .orange {
   font-family: var(--f-display);
-  font-size: clamp(3rem, 5vw, 6rem);
-  line-height: 1.1;
-  margin-bottom: 30px;
+  font-style: normal;
+  font-weight: 800;
+  color: var(--c-orange);
+}
+
+.welcome-subheading2 {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  color: var(--c-silver);
+  letter-spacing: 0.02em;
   opacity: 0;
   transform: translateY(20px);
   animation: textReveal 1s var(--ease-out) 0.7s forwards;
 }
 
-.welcome-intro {
-  font-family: var(--f-body);
-  font-size: 1.2rem;
-  line-height: 1.6;
-  color: var(--c-silver);
-  max-width: 80%;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: textReveal 1s var(--ease-out) 0.9s forwards;
+.welcome-subheading2 .orange-italic {
+  color: var(--c-orange);
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
 }
 
 /* Right side (Video) */

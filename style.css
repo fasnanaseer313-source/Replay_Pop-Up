@@ -1476,7 +1476,7 @@ p.hero-sub, p.section-lead, p.bridge-text {
     height: 40%;
   }
   .intro-cta {
-    bottom: -60px; /* Move into right pane on mobile */
+    bottom: 40px;
     right: 10%;
   }
 }

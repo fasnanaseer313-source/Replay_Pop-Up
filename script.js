@@ -317,7 +317,7 @@ function initCinematic() {
   }
 }
 
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â R-TRACK HERO CARD ANIMATION Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+// Ã¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•Â R-TRACK HERO CARD ANIMATION Ã¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•Â
 function initRTrackCard() {
   const bgLayers = document.querySelectorAll('.rtc-bg-layer');
   const dynamicText = document.getElementById('rtc-dynamic-text');
@@ -349,7 +349,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initFaqToggle();
 });
 
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â PINNED SCROLL 5-STEP PROCESS Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+// Ã¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•Â PINNED SCROLL 5-STEP PROCESS Ã¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•Â
 function initStepsHighlight() {
   const processWrap = document.querySelector('.process-pin-wrap');
   const cards = gsap.utils.toArray('.process-card');
@@ -403,7 +403,7 @@ function initStepsHighlight() {
   });
 }
 
-// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â FAQ TOGGLE Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+// Ã¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•Â FAQ TOGGLE Ã¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•ÂÃ¢•Â
 function initFaqToggle() {
   const faqBtn = document.getElementById('faq-toggle-btn');
   const faqContainer = document.getElementById('faq-list-container');
@@ -678,10 +678,13 @@ function initHowItWorks() {
   if (title) {
     const text = title.innerText;
     title.innerHTML = '';
-    text.split('').forEach(char => {
+    text.split('').forEach((char, i) => {
       const span = document.createElement('span');
       span.innerText = char;
       span.style.opacity = '0';
+      if ((i >= 5 && i <= 11) || (i >= 16 && i <= 21)) {
+        span.classList.add('orange');
+      }
       title.appendChild(span);
     });
 
@@ -759,11 +762,7 @@ function initHowItWorks() {
     }
   });
 
-  // Trust cards stagger
-  gsap.fromTo('.trust-card', 
-    { opacity: 0, y: 40 },
-    { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "power3.out", scrollTrigger: { trigger: '.how-trust-row', scroller: "#main-wrapper", start: "top 85%" }}
-  );
+
 
   // Gentle Parallax effect
   gsap.fromTo(howWrap.querySelector('.how-steps-list'),

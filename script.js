@@ -74,10 +74,12 @@ function initCinematic() {
     ScrollTrigger.defaults({ scroller: "#main-wrapper" });
     
     // Initialize pinned process section
-    // initStepsHighlight();
-    initEditorialProcess();
+    initHowItWorks();
     initCardStack();
     initEditorialTestimonials();
+    initEventGalleries();
+    initBookingSection();
+    initFooterSection();
     
     console.log("GSAP Plugins registered & Lenis activated on main-wrapper");
 
@@ -124,66 +126,10 @@ function initCinematic() {
     }
 
     // 3. GENERATE DYNAMIC SVG PATH
-    // This solves all scaling and alignment issues by creating a 1:1 pixel coordinate path
-    const scrollEl = document.getElementById("scroll-content");
-    const h = scrollEl.offsetHeight || 5000;
-    const w = window.innerWidth;
-    
-    const svg = document.getElementById("master-track-svg");
-    // Set SVG to exact pixel dimensions and explicitly style the height
-    svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
-    svg.style.width = w + "px";
-    svg.style.height = h + "px";
-    svg.removeAttribute("preserveAspectRatio"); // We don't need this anymore
-    
-    // Create a smooth weaving path from top to bottom, starting from the RIGHT side
-    let d = `M ${w * 0.85} 0 `;
-    
-    const segments = 8;
-    const stepY = h / segments;
-    
-    for(let i=1; i<=segments; i++) {
-      let curY = i * stepY;
-      let prevY = (i - 1) * stepY;
-      
-      // Since we start on the right (0.85), segment 1 (odd) goes left (0.15), segment 2 (even) goes right (0.85).
-      let targetX = (i % 2 === 1) ? w * 0.15 : w * 0.85;
-      if (i === segments) targetX = w / 2; // final segment goes back to center
-      
-      // Control points for smooth S-curve
-      // cp1X continues from the previous X position
-      let cp1X = (i % 2 === 1) ? w * 0.85 : w * 0.15;
-      
-      d += `C ${cp1X} ${prevY + stepY*0.3}, ${targetX} ${curY - stepY*0.3}, ${targetX} ${curY} `;
-    }
-    
-    const baseTrack = document.getElementById("master-track-base");
-    const activeTrack = document.getElementById("master-track-active");
-    const dashTrack = document.getElementById("master-track-dash");
-    const maskPath = document.getElementById("master-track-mask-path");
-    
-    baseTrack.setAttribute("d", d);
-    activeTrack.setAttribute("d", d);
-    dashTrack.setAttribute("d", d);
-    maskPath.setAttribute("d", d);
-
-    // 4. Track Draw Animation
-    const pathLength = maskPath.getTotalLength();
-    maskPath.style.strokeDasharray = pathLength;
-    maskPath.style.strokeDashoffset = pathLength;
-
-    gsap.to(maskPath, {
-      strokeDashoffset: 0,
-      scrollTrigger: {
-        trigger: "#scroll-content",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: true
-      },
-      ease: "none"
-    });
+    generateMasterTrack();
 
     // Set initial crawler position
+    const baseTrack = document.getElementById("master-track-base");
     const initPoint = baseTrack.getPointAtLength(0);
     gsap.set("#crawler-wrap", { 
       x: initPoint.x, 
@@ -203,12 +149,12 @@ function initCinematic() {
         const progress = self.progress;
         
         // Get the current point on the SVG path
-        const currentLength = progress * pathLength;
+        const currentLength = progress * globalPathLength;
         const point = baseTrack.getPointAtLength(currentLength);
         
         // Get a point slightly ahead to calculate rotation
         let nextLength = currentLength + 5; // Look ahead 5 pixels for stable orientation
-        if (nextLength > pathLength) nextLength = pathLength;
+        if (nextLength > globalPathLength) nextLength = globalPathLength;
         const nextPoint = baseTrack.getPointAtLength(nextLength);
         
         // Calculate angle in degrees
@@ -371,7 +317,7 @@ function initCinematic() {
   }
 }
 
-// â•â•â•â•â•â•â•â• R-TRACK HERO CARD ANIMATION â•â•â•â•â•â•â•â•
+// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â R-TRACK HERO CARD ANIMATION Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
 function initRTrackCard() {
   const bgLayers = document.querySelectorAll('.rtc-bg-layer');
   const dynamicText = document.getElementById('rtc-dynamic-text');
@@ -403,7 +349,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initFaqToggle();
 });
 
-// â•â•â•â•â•â•â•â• PINNED SCROLL 5-STEP PROCESS â•â•â•â•â•â•â•â•
+// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â PINNED SCROLL 5-STEP PROCESS Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
 function initStepsHighlight() {
   const processWrap = document.querySelector('.process-pin-wrap');
   const cards = gsap.utils.toArray('.process-card');
@@ -457,7 +403,7 @@ function initStepsHighlight() {
   });
 }
 
-// â•â•â•â•â•â•â•â• FAQ TOGGLE â•â•â•â•â•â•â•â•
+// Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â FAQ TOGGLE Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
 function initFaqToggle() {
   const faqBtn = document.getElementById('faq-toggle-btn');
   const faqContainer = document.getElementById('faq-list-container');
@@ -478,7 +424,7 @@ function initFaqToggle() {
   }
 }
 
-// ════════ HERO VIDEO INTERACTION ════════
+// â•â•â•â•â•â•â•â• HERO VIDEO INTERACTION â•â•â•â•â•â•â•â•
 function initHeroVideo() {
     const card = document.getElementById('heroVideoCard');
     const video = document.getElementById('heroVideo');
@@ -659,7 +605,7 @@ function initEditorialTestimonials() {
 }
 
 
-// ════════ HOW IT WORKS: EDITORIAL ════════
+// â•â•â•â•â•â•â•â• HOW IT WORKS: EDITORIAL â•â•â•â•â•â•â•â•
 function initEditorialProcess() {
   // Staggered fade up for process steps
   gsap.utils.toArray('.gs-process-step').forEach(step => {
@@ -722,3 +668,395 @@ function initEditorialProcess() {
     }
   );
 }
+
+function initHowItWorks() {
+  const howWrap = document.querySelector('.editorial-how');
+  if (!howWrap) return;
+
+  // Title reveal animation
+  const title = howWrap.querySelector('.how-title');
+  if (title) {
+    const text = title.innerText;
+    title.innerHTML = '';
+    text.split('').forEach(char => {
+      const span = document.createElement('span');
+      span.innerText = char;
+      span.style.opacity = '0';
+      title.appendChild(span);
+    });
+
+    gsap.to(title.querySelectorAll('span'), {
+      scrollTrigger: {
+        trigger: title,
+        scroller: "#main-wrapper",
+        start: "top 85%"
+      },
+      opacity: 1,
+      duration: 0.05,
+      stagger: 0.03,
+      ease: "none"
+    });
+  }
+
+  // Fade in elements
+  gsap.utils.toArray('.gs-how-reveal').forEach(el => {
+    gsap.fromTo(el, 
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, scroller: "#main-wrapper", start: "top 85%" }}
+    );
+  });
+
+  // Steps staggering and highlight animation
+  const steps = gsap.utils.toArray('.gs-how-step');
+  steps.forEach((step, index) => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: step,
+        scroller: "#main-wrapper",
+        start: "top 85%"
+      }
+    });
+
+    // Fade and slide step
+    tl.fromTo(step, 
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
+    );
+
+    // Draw line
+    const line = step.querySelector('.how-step-line');
+    if (line) {
+      tl.fromTo(line, 
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.8, ease: "expo.out" },
+        "-=0.4"
+      );
+    }
+
+    // Number counter animation
+    const numEl = step.querySelector('.how-step-num');
+    if (numEl) {
+      const finalNum = parseInt(numEl.innerText, 10);
+      const counter = { val: 0 };
+      tl.to(counter, {
+        val: finalNum,
+        duration: 1,
+        ease: "power2.out",
+        onUpdate: () => {
+          numEl.innerText = counter.val < 10 ? '0' + Math.round(counter.val) : Math.round(counter.val);
+        }
+      }, "-=0.6");
+    }
+
+    // Highlight bar expansion
+    const highlight = step.querySelector('.how-highlight-bg');
+    if (highlight) {
+      tl.fromTo(highlight,
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.8, ease: "expo.out" },
+        "-=0.6"
+      );
+    }
+  });
+
+  // Trust cards stagger
+  gsap.fromTo('.trust-card', 
+    { opacity: 0, y: 40 },
+    { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "power3.out", scrollTrigger: { trigger: '.how-trust-row', scroller: "#main-wrapper", start: "top 85%" }}
+  );
+
+  // Gentle Parallax effect
+  gsap.fromTo(howWrap.querySelector('.how-steps-list'),
+    { y: 50 },
+    { y: -50, ease: "none", scrollTrigger: { trigger: howWrap, scroller: "#main-wrapper", scrub: true, start: "top bottom", end: "bottom top" }}
+  );
+}
+
+function initBookingSection() {
+  const bookingWrap = document.querySelector('.editorial-booking');
+  if (!bookingWrap) return;
+
+  // Form submission logic
+  const form = document.getElementById('whatsapp-booking-form');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('b-name').value;
+      const phone = document.getElementById('b-phone').value;
+      const email = document.getElementById('b-email').value;
+      const occasion = document.getElementById('b-occasion').value;
+      const venue = document.getElementById('b-venue').value;
+      const date = document.getElementById('b-date').value;
+      const crowd = document.getElementById('b-crowd').value;
+
+      const message = `Hello RePlay Team,\n\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nOccasion: ${occasion}\nVenue: ${venue}\nPreferred Date: ${date}\nCrowd Size: ${crowd}\n\nPlease suggest the best setup for my event.`;
+      
+      const encodedMessage = encodeURIComponent(message);
+      window.open(`https://wa.me/919987412025?text=${encodedMessage}`, '_blank');
+    });
+  }
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: bookingWrap,
+      scroller: "#main-wrapper",
+      start: "top 75%"
+    }
+  });
+
+  // Section label text reveal
+  const title = bookingWrap.querySelector('.booking-title');
+  if (title) {
+    tl.fromTo(title, 
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
+    );
+  }
+
+  // Divider draw
+  const divider = bookingWrap.querySelector('.booking-divider');
+  if (divider) {
+    tl.fromTo(divider,
+      { scaleX: 0 },
+      { scaleX: 1, duration: 1, ease: "expo.out" },
+      "-=0.6"
+    );
+  }
+
+  // Left column slide
+  const leftCol = bookingWrap.querySelector('.gs-booking-slide-left');
+  if (leftCol) {
+    tl.fromTo(leftCol,
+      { opacity: 0, x: -50 },
+      { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" },
+      "-=0.6"
+    );
+  }
+
+  // Right column slide
+  const rightCol = bookingWrap.querySelector('.gs-booking-slide-right');
+  if (rightCol) {
+    tl.fromTo(rightCol,
+      { opacity: 0, x: 50 },
+      { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" },
+      "-=0.8"
+    );
+  }
+
+  // Stagger inputs
+  const inputs = bookingWrap.querySelectorAll('.gs-form-input');
+  if (inputs.length) {
+    tl.fromTo(inputs,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: "power2.out" },
+      "-=0.4"
+    );
+  }
+}
+
+function initFooterSection() {
+  const footerWrap = document.querySelector('.editorial-footer');
+  if (!footerWrap) return;
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: footerWrap,
+      scroller: "#main-wrapper",
+      start: "top 85%"
+    }
+  });
+
+  // Section label text reveal
+  const title = footerWrap.querySelector('.footer-title');
+  if (title) {
+    tl.fromTo(title, 
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
+    );
+  }
+
+  // Divider draw
+  const divider = footerWrap.querySelector('.footer-divider');
+  if (divider) {
+    tl.fromTo(divider,
+      { scaleX: 0 },
+      { scaleX: 1, duration: 1, ease: "expo.out" },
+      "-=0.6"
+    );
+  }
+
+  // Columns stagger
+  const cols = footerWrap.querySelectorAll('.gs-footer-col');
+  if (cols.length) {
+    tl.fromTo(cols,
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: "power3.out" },
+      "-=0.4"
+    );
+  }
+
+  // Bottom CTA and bar fade up
+  const bottoms = footerWrap.querySelectorAll('.gs-footer-bottom');
+  if (bottoms.length) {
+    tl.fromTo(bottoms,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: "power2.out" },
+      "-=0.2"
+    );
+  }
+}
+
+function initEventGalleries() {
+  const galleries = document.querySelectorAll('.event-gallery');
+  if (!galleries.length) return;
+
+  // Setup gallery parallax and card stagger
+  galleries.forEach((gallery) => {
+    const cards = gallery.querySelectorAll('.gs-gallery-card');
+    
+    // Staggered reveal for cards inside the gallery
+    gsap.fromTo(cards, 
+      { opacity: 0, y: 50, scale: 0.95 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        scale: 1, 
+        duration: 0.8, 
+        stagger: 0.1, 
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: gallery,
+          scroller: "#main-wrapper",
+          start: "top 85%"
+        }
+      }
+    );
+
+    // Soft Parallax movement for the whole gallery
+    gsap.to(gallery, {
+      y: -40,
+      ease: "none",
+      scrollTrigger: {
+        trigger: gallery,
+        scroller: "#main-wrapper",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1
+      }
+    });
+  });
+
+  // Storytelling Active States
+  // When a testimonial hits the center of the screen, highlight it and its subsequent gallery
+  const testimonials = document.querySelectorAll('.ed-testimonial');
+  testimonials.forEach((testimonial) => {
+    // Find the very next element sibling, which is the gallery
+    const nextGallery = testimonial.nextElementSibling;
+    
+    ScrollTrigger.create({
+      trigger: testimonial,
+      scroller: "#main-wrapper",
+      start: "top center+=100",
+      end: "bottom center-=100",
+      onEnter: () => {
+        testimonial.classList.add('is-active');
+        if (nextGallery && nextGallery.classList.contains('event-gallery')) {
+          nextGallery.classList.add('is-active');
+        }
+      },
+      onLeave: () => {
+        testimonial.classList.remove('is-active');
+        if (nextGallery && nextGallery.classList.contains('event-gallery')) {
+          nextGallery.classList.remove('is-active');
+        }
+      },
+      onEnterBack: () => {
+        testimonial.classList.add('is-active');
+        if (nextGallery && nextGallery.classList.contains('event-gallery')) {
+          nextGallery.classList.add('is-active');
+        }
+      },
+      onLeaveBack: () => {
+        testimonial.classList.remove('is-active');
+        if (nextGallery && nextGallery.classList.contains('event-gallery')) {
+          nextGallery.classList.remove('is-active');
+        }
+      }
+    });
+  });
+}
+
+let globalPathLength = 0;
+let masterTrackScrollTrigger = null;
+
+function generateMasterTrack() {
+  const scrollEl = document.getElementById("scroll-content");
+  if (!scrollEl) return;
+  const h = scrollEl.offsetHeight || 5000;
+  const w = window.innerWidth;
+  
+  const svg = document.getElementById("master-track-svg");
+  if (!svg) return;
+  svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+  svg.style.width = w + "px";
+  svg.style.height = h + "px";
+  svg.removeAttribute("preserveAspectRatio");
+  
+  let d = "M " + (w * 0.85) + " 0 ";
+  const segments = 8;
+  const stepY = h / segments;
+  
+  for(let i=1; i<=segments; i++) {
+    let curY = i * stepY;
+    let prevY = (i - 1) * stepY;
+    let targetX = (i % 2 === 1) ? w * 0.15 : w * 0.85;
+    if (i === segments) targetX = w / 2;
+    let cp1X = (i % 2 === 1) ? w * 0.85 : w * 0.15;
+    d += "C " + cp1X + " " + (prevY + stepY*0.3) + ", " + targetX + " " + (curY - stepY*0.3) + ", " + targetX + " " + curY + " ";
+  }
+  
+  const baseTrack = document.getElementById("master-track-base");
+  const activeTrack = document.getElementById("master-track-active");
+  const dashTrack = document.getElementById("master-track-dash");
+  const maskPath = document.getElementById("master-track-mask-path");
+  
+  if(baseTrack) baseTrack.setAttribute("d", d);
+  if(activeTrack) activeTrack.setAttribute("d", d);
+  if(dashTrack) dashTrack.setAttribute("d", d);
+  if(maskPath) {
+    maskPath.setAttribute("d", d);
+    globalPathLength = maskPath.getTotalLength();
+    maskPath.style.strokeDasharray = globalPathLength;
+    maskPath.style.strokeDashoffset = globalPathLength;
+
+    if (masterTrackScrollTrigger) {
+      masterTrackScrollTrigger.kill();
+    }
+
+    const animation = gsap.to(maskPath, {
+      strokeDashoffset: 0,
+      scrollTrigger: {
+        trigger: "#scroll-content",
+        scroller: "#main-wrapper",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+        id: "master-track-draw"
+      },
+      ease: "none"
+    });
+    
+    masterTrackScrollTrigger = ScrollTrigger.getById("master-track-draw");
+  }
+
+  ScrollTrigger.refresh();
+}
+
+window.addEventListener('load', generateMasterTrack);
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(generateMasterTrack, 200);
+});
+

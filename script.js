@@ -74,7 +74,10 @@ function initCinematic() {
     ScrollTrigger.defaults({ scroller: "#main-wrapper" });
     
     // Initialize pinned process section
-    initStepsHighlight();
+    // initStepsHighlight();
+    initEditorialProcess();
+    initCardStack();
+    initEditorialTestimonials();
     
     console.log("GSAP Plugins registered & Lenis activated on main-wrapper");
 
@@ -587,3 +590,135 @@ function initHeroVideo() {
 document.addEventListener('DOMContentLoaded', () => {
     initHeroVideo();
 });
+
+// -------- WAYS TO REPLAY: CARD STACK --------
+function initCardStack() {
+  const cards = gsap.utils.toArray('.challenge-card');
+  if (cards.length === 0) return;
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".stack-section",
+      scroller: "#main-wrapper",
+      start: "top top",
+      end: "+=3000",
+      pin: true,
+      scrub: 1,
+      anticipatePin: 1
+    }
+  });
+
+  // Initial state: first card visible, others offset and hidden
+  gsap.set(cards, { 
+    transformOrigin: "bottom center",
+    zIndex: (i) => i
+  });
+  
+  gsap.set(cards.slice(1), { 
+    yPercent: 100, 
+    scale: 0.92, 
+    opacity: 0 
+  });
+
+  // Animate each card in
+  cards.forEach((card, index) => {
+    if (index === 0) return; // First card is already visible
+    
+    tl.to(card, {
+      yPercent: 0,
+      scale: 1,
+      opacity: 1,
+      duration: 1,
+      ease: "power2.out"
+    }, index - 0.5); // Stagger timing slightly
+    
+    // Slight zoom out of the previous card to create depth
+    tl.to(cards[index - 1], {
+      scale: 0.92,
+      opacity: 1 - ((cards.length - index) * 0.3),
+      duration: 1,
+      ease: "power2.out"
+    }, index - 0.5);
+  });
+}
+
+function initEditorialTestimonials() {
+  gsap.utils.toArray('.ed-divider').forEach(divider => {
+    gsap.fromTo(divider, 
+      { scaleX: 0 }, 
+      { scaleX: 1, duration: 1.5, ease: "expo.out", scrollTrigger: { trigger: divider, scroller: "#main-wrapper", start: "top 85%" } }
+    );
+  });
+
+  gsap.utils.toArray('.ed-quote-line').forEach(line => {
+    gsap.fromTo(line, 
+      { scaleY: 0 }, 
+      { scaleY: 1, duration: 1, ease: "expo.out", scrollTrigger: { trigger: line, scroller: "#main-wrapper", start: "top 85%" } }
+    );
+  });
+}
+
+
+// ════════ HOW IT WORKS: EDITORIAL ════════
+function initEditorialProcess() {
+  // Staggered fade up for process steps
+  gsap.utils.toArray('.gs-process-step').forEach(step => {
+    gsap.to(step, {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: step,
+        scroller: "#main-wrapper",
+        start: "top 85%"
+      }
+    });
+
+    // Expand highlight bar
+    const bar = step.querySelector('.ed-highlight-bar');
+    if (bar) {
+      gsap.to(bar, {
+        width: 4,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: step,
+          scroller: "#main-wrapper",
+          start: "top 80%"
+        }
+      });
+    }
+
+    // Counter animation for step numbers
+    const num = step.querySelector('.num-counter');
+    if (num) {
+      const targetVal = parseInt(step.getAttribute('data-step') || 0);
+      gsap.to({ val: 0 }, {
+        val: targetVal,
+        duration: 1.5,
+        ease: "power2.out",
+        onUpdate: function() {
+          num.innerText = Math.round(this.targets()[0].val);
+        },
+        scrollTrigger: {
+          trigger: step,
+          scroller: "#main-wrapper",
+          start: "top 80%"
+        }
+      });
+    }
+  });
+
+  // Stagger trust row cards
+  gsap.fromTo('.ed-trust-card', 
+    { opacity: 0, y: 30 },
+    { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: "power2.out", 
+      scrollTrigger: {
+        trigger: ".ed-trust-row",
+        scroller: "#main-wrapper",
+        start: "top 85%"
+      }
+    }
+  );
+}

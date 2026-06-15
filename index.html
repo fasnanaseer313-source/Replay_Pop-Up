@@ -31,7 +31,7 @@
     <!-- CTA Button positioned at the bottom right of the screen -->
     <button id="btn-explore" class="intro-cta gs-intro-reveal">
       Explore the Experience
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="intro-cta-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" class="intro-cta-icon orange">
         <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
       </svg>
     </button>
@@ -180,7 +180,7 @@
         </p>
         <div class="btn-group gs-reveal">
           <a href="#" class="btn-primary">Book on WhatsApp</a>
-          <a href="#s-idea" class="btn-secondary">See how it works</a>
+          <a href="#s-how-it-works" class="btn-secondary">See how it works</a>
         </div>
       </div>
       <div class="content-right" style="display: flex; justify-content: center; align-items: center; height: 100%;">
@@ -240,11 +240,20 @@
       </div>
       <div class="content-left">
         <h2 class="section-title gs-reveal">Remember when something actually<br><span class="orange">pulled the whole room in?</span></h2>
+        <style>
+          .idea-point-list { list-style: none; padding: 0; margin: 0 auto; max-width: 550px; text-align: left; }
+          .idea-point-list li { position: relative; padding: 15px 0 15px 30px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 1.1rem; font-weight: 400; color: #bbb; }
+          .idea-point-list li:first-child { border-top: 1px solid rgba(255,255,255,0.1); }
+          .idea-point-list li::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background-color: var(--orange, #e8621a); border-radius: 50%; }
+        </style>
         <div class="idea-text-block gs-reveal">
-          <p>That moment when people stopped scrolling.</p>
-          <p>Everyone gathered around.</p>
-          <p>Strangers started competing.</p>
-          <p>'One more round' just kept happening.</p>
+          <p style="text-align: center; margin-bottom: 20px; font-size: 1.1rem; color: #aaa;">That moment when &mdash;</p>
+          <ul class="idea-point-list">
+            <li>People stopped scrolling.</li>
+            <li>Everyone gathered around.</li>
+            <li>Strangers started competing.</li>
+            <li>"One more round" kept happening.</li>
+          </ul>
         </div>
         <p class="bridge-text gs-reveal">That's the energy <span class="orange">RePlay</span> brings — to your space, your crowd, your occasion.</p>
         
@@ -281,14 +290,63 @@
       </div>
     </section>
 
+    <!-- 3.5 THE FUN PART -->
+    <section id="s-fun-part" class="fun-part-section cinematic-section" data-bg="env-hero">
+      <div class="fun-part-container">
+        <h5 class="orange gs-reveal" style="text-transform: uppercase; letter-spacing: 6px; font-weight: bold; margin-bottom: 25px; text-align: left;">&mdash;&nbsp;&nbsp;THE FUN PART?</h5>
+        
+        <h2 class="section-title gs-reveal" style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 20px; line-height: 1.1;">
+          It gets <span class="orange" style="font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic; font-weight: normal; text-transform: lowercase;">everyone</span> involved.
+        </h2>
+        
+        <p class="bridge-text gs-reveal" style="max-width: 800px; font-size: 1.15rem; color: #ddd; margin-bottom: 0;">
+          From the youngest player to the oldest, RePlay brings every generation together. The controller changes hands, the competition begins, and everyone wants just one more turn.
+        </p>
+
+        <div class="fun-cards-wrapper gs-reveal">
+          
+          <div class="fun-card">
+            <div class="fun-card-label">7-YEAR-OLD</div>
+            <div class="fun-card-title">First on the course</div>
+            <div class="fun-card-desc">Already halfway through the obstacle course before anyone else even figures out the controller.</div>
+          </div>
+          
+          <div class="fun-card">
+            <div class="fun-card-label">TEENAGER</div>
+            <div class="fun-card-title">Suddenly off the phone</div>
+            <div class="fun-card-desc">The room changes instantly. The game starts, the phone goes down, and the competition takes over.</div>
+          </div>
+          
+          <div class="fun-card">
+            <div class="fun-card-label">CORPORATE FLOOR</div>
+            <div class="fun-card-title">Competitive by lap two</div>
+            <div class="fun-card-desc">Colleagues who barely speak start cheering, coaching, and competing like lifelong rivals.</div>
+          </div>
+          
+          <div class="fun-card">
+            <div class="fun-card-label">PARENTS</div>
+            <div class="fun-card-title">Laughing louder than the kids</div>
+            <div class="fun-card-desc">By the second round, the parents are enjoying the challenge even more than the children.</div>
+          </div>
+          
+          <div class="fun-card">
+            <div class="fun-card-label">70-YEAR-OLD</div>
+            <div class="fun-card-title">One more turn</div>
+            <div class="fun-card-desc">The greatest sign of fun: still asking for another round and refusing to give up the controller.</div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
     <!-- 4. WHERE WE SHOW UP -->
     <section id="s-where" class="cinematic-section" data-bg="env-office" style="position: relative;">
       <div class="section-label-top-left gs-reveal" style="position: absolute; top: 80px; left: 5%; font-size: 0.85rem; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; color: var(--orange); z-index: 10;">
         — WHERE WE SHOW UP
       </div>
-      <div class="content-center text-center">
-        <h2 class="section-title gs-reveal" style="font-size: clamp(1.8rem, 3.5vw, 3rem);">Different spaces. One consistent answer:<br><span class="orange">yes, we can.</span></h2>
-        <p class="bridge-text gs-reveal" style="max-width: 700px; margin: 0 auto 50px;">
+      <div class="content-left">
+        <h2 class="section-title gs-reveal" style="font-size: clamp(1.8rem, 3.5vw, 3rem); white-space: nowrap;">Different spaces. One consistent answer: <span class="orange">yes, we can.</span></h2>
+        <p class="bridge-text gs-reveal" style="max-width: 700px; margin-bottom: 50px;">
           Just a break or a full celebration — <span class="orange">RePlay</span> fits right in.
         </p>
       </div>
@@ -381,8 +439,8 @@
         </div>
       </div>
 
-      <div class="content-center text-center gs-reveal" style="margin-top: -20px;">
-        <p class="bridge-text" style="text-align: center; line-height: 1.6;">
+      <div class="content-left gs-reveal" style="margin-top: -20px;">
+        <p class="bridge-text" style="line-height: 1.6;">
           If there's a reason to gather, there's a reason to <span class="orange">RePlay</span>.<br>
           You just say where. We handle everything else.
         </p>
@@ -391,9 +449,9 @@
 
     <!-- 5. PACKAGES -->
     <section id="s-packages" class="cinematic-section" data-bg="env-school">
-      <div class="content-center">
+      <div class="content-left">
         <h5 class="orange gs-reveal" style="text-transform: uppercase; letter-spacing: 6px; font-weight: bold; margin-bottom: 15px; text-align: left;">&mdash;&nbsp;&nbsp;EXPERIENCES</h5>
-        <h2 class="section-title gs-reveal">Pick your RePlay.<br><span class="orange">We'll handle the rest.</span></h2>
+        <h2 class="section-title gs-reveal" style="text-align: left;">Pick your RePlay.<br><span class="orange">We'll handle the rest.</span></h2>
         
         <div class="pkg-grid">
           <!-- REPLAY MINI -->
@@ -401,7 +459,7 @@
             <h3>RePlay Mini</h3>
             <p class="pkg-sub">STARTER</p>
             <div style="margin: 15px 0;">
-              <span style="font-size: 1.8rem; font-weight: bold; color: var(--orange);">₹4,999</span>
+              <span style="font-size: 1.8rem; font-weight: bold; color: var(--orange);">₹4,999</span><span style="font-size: 1rem; color: var(--text-dim); margin-left: 5px;">+GST</span>
               <div style="font-size: 0.85rem; color: var(--text-dim);">(Introductory price)</div>
             </div>
             <p style="font-size: 1.1rem; color: #fff; margin-bottom: 20px; font-weight: 500;">Simple. Fun. Addictive.</p>
@@ -415,7 +473,7 @@
               </ul>
             </div>
             
-            <p style="font-size: 0.9rem; color: var(--text-dim); font-style: italic; margin-top: 25px; text-align: center;">“Quick breaks, small hangouts, trying something different”</p>
+            <p style="font-size: 0.9rem; color: var(--text-dim); font-style: italic; margin-top: 25px; text-align: left;">“Quick breaks, small hangouts, trying something different”</p>
             
             <a href="#s-contact" class="btn-pkg btn-pkg-solid mt-4" style="white-space: nowrap;">Book Mini &rarr;</a>
           </div>
@@ -426,7 +484,7 @@
             <h3>RePlay Classic</h3>
             <p class="pkg-sub">MOST LOVED • MOST BOOKED</p>
             <div style="margin: 15px 0;">
-              <span style="font-size: 1.8rem; font-weight: bold; color: var(--orange);">₹7,999</span>
+              <span style="font-size: 1.8rem; font-weight: bold; color: var(--orange);">₹7,999</span><span style="font-size: 1rem; color: var(--text-dim); margin-left: 5px;">+GST</span>
               <div style="font-size: 0.85rem; color: var(--text-dim);">(fills fast - Limited slots)</div>
             </div>
             <p style="font-size: 1.1rem; color: #fff; margin-bottom: 20px; font-weight: 500;">More action. More competition. More chaos.</p>
@@ -441,7 +499,7 @@
               </ul>
             </div>
             
-            <p style="font-size: 0.9rem; color: var(--text-dim); font-style: italic; margin-top: 25px; text-align: center;">“The setup people can't stop talking about.”</p>
+            <p style="font-size: 0.9rem; color: var(--text-dim); font-style: italic; margin-top: 25px; text-align: left;">“The setup people can't stop talking about.”</p>
             
             <a href="#s-contact" class="btn-pkg btn-pkg-solid mt-4" style="white-space: nowrap;">Book Classic &rarr;</a>
           </div>
@@ -466,7 +524,7 @@
               </ul>
             </div>
             
-            <p style="font-size: 0.9rem; color: var(--text-dim); font-style: italic; margin-top: 25px; text-align: center;">“The kind of energy that fills the whole space.”</p>
+            <p style="font-size: 0.9rem; color: var(--text-dim); font-style: italic; margin-top: 25px; text-align: left;">“The kind of energy that fills the whole space.”</p>
             
             <a href="#s-contact" class="btn-pkg btn-pkg-solid mt-4" style="white-space: nowrap;">Get a quote &rarr;</a>
           </div>
@@ -496,21 +554,21 @@
     <!-- 6. WAYS TO REPLAY -->
     <section id="s-ways" class="cinematic-section stack-section">
       <div class="stack-container">
-        <div style="text-align: center; margin-bottom: 40px; padding: 0 20px;">
+        <div class="content-left" style="margin-bottom: 40px;">
           <h5 class="orange gs-reveal" style="text-transform: uppercase; letter-spacing: 6px; font-weight: bold; margin-bottom: 15px; text-align: left;">&mdash;&nbsp;&nbsp;WAYS TO REPLAY</h5>
-          <h2 class="stack-title" style="margin-bottom: 15px;">Pick your format.</h2>
-          <p class="bridge-text gs-reveal" style="font-size: 1.2rem; color: #bbb; max-width: 800px; margin: 0 auto; text-align: center; font-style: normal; font-family: var(--f-body);">
+          <h2 class="stack-title" style="margin-bottom: 15px; text-align: left;">Pick your format.</h2>
+          <p class="bridge-text gs-reveal" style="font-size: 1.2rem; color: #bbb; max-width: 800px; text-align: left; font-style: normal; font-family: var(--f-body);">
             Indoor or outdoor. Half-day or full-day. Small groups or full-scale events.<br>
             Same RePlay energy &mdash; adapted to your space.
           </p>
         </div>
         
         <div class="marquee-wrap gs-reveal" style="padding: 10px 0; border: none; background: #000; margin-bottom: 40px; margin-top: -10px;">
-          <div class="marquee-track mq-right" style="color: var(--orange);">
-            <span>Crawl <span style="font-size: 0.8em; margin: 0 15px;">◆</span> Climb <span style="font-size: 0.8em; margin: 0 15px;">◆</span> Play <span style="font-size: 0.8em; margin: 0 15px;">◆</span> RePlay</span>
-            <span><span style="font-size: 0.8em; margin: 0 15px;">◆</span> Crawl <span style="font-size: 0.8em; margin: 0 15px;">◆</span> Climb <span style="font-size: 0.8em; margin: 0 15px;">◆</span> Play <span style="font-size: 0.8em; margin: 0 15px;">◆</span> RePlay</span>
-            <span><span style="font-size: 0.8em; margin: 0 15px;">◆</span> Crawl <span style="font-size: 0.8em; margin: 0 15px;">◆</span> Climb <span style="font-size: 0.8em; margin: 0 15px;">◆</span> Play <span style="font-size: 0.8em; margin: 0 15px;">◆</span> RePlay</span>
-            <span><span style="font-size: 0.8em; margin: 0 15px;">◆</span> Crawl <span style="font-size: 0.8em; margin: 0 15px;">◆</span> Climb <span style="font-size: 0.8em; margin: 0 15px;">◆</span> Play <span style="font-size: 0.8em; margin: 0 15px;">◆</span> RePlay</span>
+          <div class="marquee-track mq-right" style="color: var(--orange); white-space: nowrap;">
+            <span style="display: inline-block; margin-right: 25vw;"><span style="font-size: 0.8em; margin: 0 15px;">◆</span> Crawl <span style="font-size: 0.8em; margin: 0 15px;">◆</span> Climb <span style="font-size: 0.8em; margin: 0 15px;">◆</span> Play <span style="font-size: 0.8em; margin: 0 15px;">◆</span> RePlay <span style="font-size: 0.8em; margin: 0 15px;">◆</span></span>
+            <span style="display: inline-block; margin-right: 25vw;"><span style="font-size: 0.8em; margin: 0 15px;">◆</span> Crawl <span style="font-size: 0.8em; margin: 0 15px;">◆</span> Climb <span style="font-size: 0.8em; margin: 0 15px;">◆</span> Play <span style="font-size: 0.8em; margin: 0 15px;">◆</span> RePlay <span style="font-size: 0.8em; margin: 0 15px;">◆</span></span>
+            <span style="display: inline-block; margin-right: 25vw;"><span style="font-size: 0.8em; margin: 0 15px;">◆</span> Crawl <span style="font-size: 0.8em; margin: 0 15px;">◆</span> Climb <span style="font-size: 0.8em; margin: 0 15px;">◆</span> Play <span style="font-size: 0.8em; margin: 0 15px;">◆</span> RePlay <span style="font-size: 0.8em; margin: 0 15px;">◆</span></span>
+            <span style="display: inline-block; margin-right: 25vw;"><span style="font-size: 0.8em; margin: 0 15px;">◆</span> Crawl <span style="font-size: 0.8em; margin: 0 15px;">◆</span> Climb <span style="font-size: 0.8em; margin: 0 15px;">◆</span> Play <span style="font-size: 0.8em; margin: 0 15px;">◆</span> RePlay <span style="font-size: 0.8em; margin: 0 15px;">◆</span></span>
           </div>
         </div>
 
@@ -551,17 +609,6 @@
       </div>
     </section>
 
-    <!-- 6.5 MID-PAGE CTA BREAK -->
-    <section id="s-mid-cta" class="cinematic-section" style="padding: 120px 20px; background: linear-gradient(180deg, #000 0%, #050505 50%, #000 100%); position: relative; text-align: center; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.03);">
-      <!-- Subtle orange glow in the center -->
-      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(255,107,26,0.06) 0%, transparent 60%); pointer-events: none;"></div>
-      
-      <div class="content-center gs-reveal" style="position: relative; z-index: 2;">
-        <h2 class="section-title" style="font-size: 3.5rem; margin-bottom: 20px;">Ready to Build Something <span class="orange">Powerful?</span></h2>
-        <p class="bridge-text" style="max-width: 650px; margin: 0 auto 40px; color: #aaa; font-size: 1.25rem; line-height: 1.6;">We handle the design, development, and technical details. You bring the vision &mdash; together we create a digital experience that grows your brand.</p>
-        <a href="https://wa.me/919987412025" class="btn-primary" style="display: inline-block; padding: 18px 45px; font-size: 1.1rem; letter-spacing: 1px; font-weight: 600; text-transform: uppercase; border-radius: 50px; box-shadow: 0 0 30px rgba(255,107,26,0.2); transition: all 0.4s ease;" onmouseover="this.style.boxShadow='0 0 50px rgba(255,107,26,0.5)'; this.style.transform='translateY(-3px)';" onmouseout="this.style.boxShadow='0 0 30px rgba(255,107,26,0.2)'; this.style.transform='translateY(0)';">Start Your Project</a>
-      </div>
-    </section>
 
     <!-- 7. EDITORIAL TESTIMONIALS -->
     <section id="s-wall" class="editorial-testimonials" style="position: relative;">
@@ -807,31 +854,6 @@
       </div>
     </section>
 
-    <!-- 8.5 FAQ SECTION -->
-    <section id="s-faq" class="cinematic-section" data-bg="env-resort" style="min-height: auto; padding-top: 60px; padding-bottom: 60px;">
-      <div class="content-left">
-        <div class="faq-accordion mt-5">
-          <h5 class="orange" style="text-transform: uppercase; letter-spacing: 2px; font-weight: bold; margin-bottom: 5px;">FAQ</h5>
-          <h3 class="mb-3 text-white">Questions we get a lot</h3>
-          <details class="faq-det"><summary>How much space do you need?</summary><p>RePlay setups work in compact spaces too — terraces, living rooms, office corners, lawns, clubhouses, and more. Share your space with us and we'll suggest what fits best.</p></details>
-          <details class="faq-det"><summary>How long does setup take?</summary><p>Most RePlay setups are ready in around 30 minutes.</p></details>
-          <details class="faq-det"><summary>Is this only for kids?</summary><p>Not even close. Kids start fast, but adults usually end up staying longer.</p></details>
-          
-          <button id="faq-toggle-btn" class="btn-primary mt-3">Learn More</button>
-          <div id="faq-list-container" style="display: none; margin-top: 20px;">
-            <details class="faq-det"><summary>Do you only do racing?</summary><p>Not at all. RePlay is built around obstacle courses, crawler challenges, interactive games, and hands-on RC experiences. Racing is just one format.</p></details>
-            <details class="faq-det"><summary>Can this work indoors?</summary><p>Yes. We do both indoor and outdoor setups depending on the space and experience format.</p></details>
-            <details class="faq-det"><summary>Do we need to arrange any equipment?</summary><p>Nope. We bring everything needed for the RePlay setup.</p></details>
-            <details class="faq-det"><summary>Is someone there to manage the experience?</summary><p>Yes. Every setup includes RePlay hosts who handle setup, gameplay flow, and coordination throughout the session.</p></details>
-            <details class="faq-det"><summary>Can you do corporate or brand events?</summary><p>Yes — from team days and office breaks to launches, activations, and community events.</p></details>
-            <details class="faq-det"><summary>How much does it cost?</summary><p>RePlay experiences start from ₹4,999. Pricing depends on the setup, duration, crowd size, and experience format. Corporate and bulk event pricing available — message us for a custom quote.</p></details>
-            <details class="faq-det"><summary>How do we book?</summary><p>Just message us on WhatsApp — your space, date, and how many people. We'll suggest the right setup and share a quote. Usually takes minutes.</p></details>
-            <details class="faq-det"><summary>Do you come to the venue or do we come to you?</summary><p>We come to you — fully equipped. You don't need to arrange anything. Just tell us the address and we come and set up.</p></details>
-          </div>
-        </div>
-      </div>
-    </section>
-
 
     <!-- 11. CONTACT & BOOKING -->
     <section id="s-booking" class="editorial-booking cinematic-section" data-bg="env-hero">
@@ -919,6 +941,31 @@
             </form>
           </div>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- 8.5 FAQ SECTION -->
+    <section id="s-faq" class="cinematic-section" data-bg="env-resort" style="min-height: auto; padding-top: 60px; padding-bottom: 60px;">
+      <div class="content-left">
+        <div class="faq-accordion mt-5">
+          <h5 class="orange" style="text-transform: uppercase; letter-spacing: 2px; font-weight: bold; margin-bottom: 5px;">FAQ</h5>
+          <h3 class="mb-3 text-white">Questions we get a lot</h3>
+          <details class="faq-det"><summary>How much space do you need?</summary><p>RePlay setups work in compact spaces too — terraces, living rooms, office corners, lawns, clubhouses, and more. Share your space with us and we'll suggest what fits best.</p></details>
+          <details class="faq-det"><summary>How long does setup take?</summary><p>Most RePlay setups are ready in around 30 minutes.</p></details>
+          <details class="faq-det"><summary>Is this only for kids?</summary><p>Not even close. Kids start fast, but adults usually end up staying longer.</p></details>
+          
+          <button id="faq-toggle-btn" class="btn-primary mt-3">Learn More</button>
+          <div id="faq-list-container" style="display: none; margin-top: 20px;">
+            <details class="faq-det"><summary>Do you only do racing?</summary><p>Not at all. RePlay is built around obstacle courses, crawler challenges, interactive games, and hands-on RC experiences. Racing is just one format.</p></details>
+            <details class="faq-det"><summary>Can this work indoors?</summary><p>Yes. We do both indoor and outdoor setups depending on the space and experience format.</p></details>
+            <details class="faq-det"><summary>Do we need to arrange any equipment?</summary><p>Nope. We bring everything needed for the RePlay setup.</p></details>
+            <details class="faq-det"><summary>Is someone there to manage the experience?</summary><p>Yes. Every setup includes RePlay hosts who handle setup, gameplay flow, and coordination throughout the session.</p></details>
+            <details class="faq-det"><summary>Can you do corporate or brand events?</summary><p>Yes — from team days and office breaks to launches, activations, and community events.</p></details>
+            <details class="faq-det"><summary>How much does it cost?</summary><p>RePlay experiences start from ₹4,999. Pricing depends on the setup, duration, crowd size, and experience format. Corporate and bulk event pricing available — message us for a custom quote.</p></details>
+            <details class="faq-det"><summary>How do we book?</summary><p>Just message us on WhatsApp — your space, date, and how many people. We'll suggest the right setup and share a quote. Usually takes minutes.</p></details>
+            <details class="faq-det"><summary>Do you come to the venue or do we come to you?</summary><p>We come to you — fully equipped. You don't need to arrange anything. Just tell us the address and we come and set up.</p></details>
+          </div>
         </div>
       </div>
     </section>

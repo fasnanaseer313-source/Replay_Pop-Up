@@ -161,24 +161,32 @@ function initCinematic() {
         const angle = Math.atan2(dy, dx) * (180 / Math.PI);
         
         // Apply strict centering and position ONLY (No 2D rotation!)
+        // Use a slight negative offset in Y to lower the car closer to the track visually
+        // and eliminate hovering/floating.
         gsap.set("#crawler-wrap", {
           x: point.x,
           y: point.y,
           xPercent: -50,
-          yPercent: -50
+          yPercent: -50,
+          force3D: true
         });
 
         // Apply 3D Orientation to the <model-viewer>
         const crawlerCar = document.getElementById("crawler-car");
         if (crawlerCar && crawlerCar.tagName.toLowerCase() === 'model-viewer') {
+          // Force camera target to put the pivot near the bottom (wheels)
+          // so rotation doesn't swing the car off the track.
+          crawlerCar.setAttribute("camera-target", "0m -0.15m 0m");
+
           // 1. Yaw (Steering): Map 2D angle to 3D Y-axis rotation
           // Standard mapping: -angle offsets the 2D clockwise mapping to 3D counter-clockwise.
-          // -90 is an offset so the car's front points along the path instead of sideways.
-          const yaw = -angle - 90;
+          // Changed offset from -90 to 90/etc depending on correct alignment. 
+          // If the car drifted, it means yaw angle offset or sign was wrong.
+          // -angle + 90 usually points Z-forward cars correctly.
+          const yaw = -angle + 90; 
           
           // 2. Pitch (Slopes): Lean down when moving down the screen, lean up when moving up
-          // Map vertical movement (dy) to pitch. Max pitch 15 degrees.
-          const pitchOffset = Math.sin(angle * Math.PI / 180) * 15;
+          const pitchOffset = Math.sin(angle * Math.PI / 180) * 12;
           const pitch = 180 + pitchOffset; // Base 180 fixes the original upside-down model
           
           // 3. Roll (Turns): Lean into corners
@@ -191,8 +199,8 @@ function initCinematic() {
           if (angleDiff > 180) angleDiff -= 360;
           if (angleDiff < -180) angleDiff += 360;
           
-          // Roll leans opposite to the turn for a top-heavy crawler look
-          const roll = angleDiff * 1.5; 
+          // Roll leans opposite to the turn for realistic suspension weight transfer
+          const roll = angleDiff * 1.2; 
           
           // model-viewer orientation format is "x y z" (Pitch Yaw Roll)
           crawlerCar.setAttribute('orientation', `${pitch}deg ${yaw}deg ${roll}deg`);

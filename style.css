@@ -2474,7 +2474,7 @@ p.bridge-text {
 .how-step-title {
   font-size: 1.5rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--orange);
   margin-bottom: 5px;
 }
 

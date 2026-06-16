@@ -135,9 +135,7 @@ function initCinematic() {
       x: initPoint.x, 
       y: initPoint.y, 
       xPercent: -50, 
-      yPercent: -50, 
-      rotation: 90,
-      transformOrigin: "center center"
+      yPercent: -50
     });
 
     // 5. Crawler Motion (Native SVG getPointAtLength for guaranteed movement)
@@ -162,14 +160,43 @@ function initCinematic() {
         const dy = nextPoint.y - point.y;
         const angle = Math.atan2(dy, dx) * (180 / Math.PI);
         
-        // Apply strict centering, position, and rotation
+        // Apply strict centering and position ONLY (No 2D rotation!)
         gsap.set("#crawler-wrap", {
           x: point.x,
           y: point.y,
           xPercent: -50,
-          yPercent: -50,
-          rotation: angle + 90 // Face forward correctly
+          yPercent: -50
         });
+
+        // Apply 3D Orientation to the <model-viewer>
+        const crawlerCar = document.getElementById("crawler-car");
+        if (crawlerCar && crawlerCar.tagName.toLowerCase() === 'model-viewer') {
+          // 1. Yaw (Steering): Map 2D angle to 3D Y-axis rotation
+          // Standard mapping: -angle offsets the 2D clockwise mapping to 3D counter-clockwise.
+          // -90 is an offset so the car's front points along the path instead of sideways.
+          const yaw = -angle - 90;
+          
+          // 2. Pitch (Slopes): Lean down when moving down the screen, lean up when moving up
+          // Map vertical movement (dy) to pitch. Max pitch 15 degrees.
+          const pitchOffset = Math.sin(angle * Math.PI / 180) * 15;
+          const pitch = 180 + pitchOffset; // Base 180 fixes the original upside-down model
+          
+          // 3. Roll (Turns): Lean into corners
+          let furtherLength = currentLength + 20;
+          if (furtherLength > globalPathLength) furtherLength = globalPathLength;
+          const furtherPoint = baseTrack.getPointAtLength(furtherLength);
+          const furtherAngle = Math.atan2(furtherPoint.y - point.y, furtherPoint.x - point.x) * (180 / Math.PI);
+          
+          let angleDiff = furtherAngle - angle;
+          if (angleDiff > 180) angleDiff -= 360;
+          if (angleDiff < -180) angleDiff += 360;
+          
+          // Roll leans opposite to the turn for a top-heavy crawler look
+          const roll = angleDiff * 1.5; 
+          
+          // model-viewer orientation format is "x y z" (Pitch Yaw Roll)
+          crawlerCar.setAttribute('orientation', `${pitch}deg ${yaw}deg ${roll}deg`);
+        }
       }
     });
 
@@ -424,7 +451,7 @@ function initFaqToggle() {
   }
 }
 
-// â•â•â•â•â•â•â•â• HERO VIDEO INTERACTION â•â•â•â•â•â•â•â•
+// ---------------- HERO VIDEO INTERACTION ----------------
 function initHeroVideo() {
     const card = document.getElementById('heroVideoCard');
     const video = document.getElementById('heroVideo');
@@ -434,30 +461,47 @@ function initHeroVideo() {
     if (!card || !video || !backdrop) return;
 
     let isExpanded = false;
+    let isAnimating = false;
+    let originalRect = null;
+    let spacer = null;
+
+    // Handle Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isExpanded && !isAnimating) {
+            shrinkVideo();
+        }
+    });
 
     card.addEventListener('click', () => {
-        if (isExpanded) return;
+        if (isExpanded || isAnimating) return;
         
-        // Expand
         isExpanded = true;
+        isAnimating = true;
+        
+        // Kill existing animations on the card to prevent conflicts
+        gsap.killTweensOf(card);
         
         // FLIP Animation: Get current position
-        const rect = card.getBoundingClientRect();
+        originalRect = card.getBoundingClientRect();
         
         // Create a spacer so the layout doesn't collapse
-        const spacer = document.createElement('div');
-        spacer.id = 'heroVideoSpacer';
-        spacer.style.width = rect.width + 'px';
-        spacer.style.height = rect.height + 'px';
-        card.parentNode.insertBefore(spacer, card);
+        if (!document.getElementById('heroVideoSpacer')) {
+            spacer = document.createElement('div');
+            spacer.id = 'heroVideoSpacer';
+            spacer.style.width = originalRect.width + 'px';
+            spacer.style.height = originalRect.height + 'px';
+            card.parentNode.insertBefore(spacer, card);
+        } else {
+            spacer = document.getElementById('heroVideoSpacer');
+        }
         
         // Set card to fixed at exactly its current layout position
         gsap.set(card, {
             position: 'fixed',
-            top: rect.top,
-            left: rect.left,
-            width: rect.width,
-            height: rect.height,
+            top: originalRect.top,
+            left: originalRect.left,
+            width: originalRect.width,
+            height: originalRect.height,
             margin: 0,
             zIndex: 1000
         });
@@ -471,7 +515,10 @@ function initHeroVideo() {
             width: "80vw",
             height: "80vh",
             duration: 0.6,
-            ease: "power3.inOut"
+            ease: "power3.inOut",
+            onComplete: () => {
+                isAnimating = false;
+            }
         });
 
         // Add classes for expanded state
@@ -487,48 +534,52 @@ function initHeroVideo() {
     if (closeBtn) {
         closeBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            if (isExpanded) shrinkVideo();
+            if (isExpanded && !isAnimating) shrinkVideo();
         });
     }
 
     // Shrink when video ends
     video.addEventListener('ended', () => {
-        if (!isExpanded) return;
-        shrinkVideo();
+        if (isExpanded && !isAnimating) shrinkVideo();
     });
 
     // Also shrink if backdrop is clicked
     backdrop.addEventListener('click', () => {
-        if (isExpanded) shrinkVideo();
+        if (isExpanded && !isAnimating) shrinkVideo();
     });
 
     function shrinkVideo() {
-        if (!isExpanded) return;
+        if (!isExpanded || isAnimating) return;
         isExpanded = false;
+        isAnimating = true;
         
-        const spacer = document.getElementById('heroVideoSpacer');
-        const rect = spacer ? spacer.getBoundingClientRect() : { top: 0, left: 0, width: 300, height: 200 };
+        gsap.killTweensOf(card);
+        
+        const targetRect = spacer ? spacer.getBoundingClientRect() : (originalRect || { top: 0, left: 0, width: 300, height: 200 });
         
         card.classList.remove('is-expanded');
         backdrop.classList.remove('active');
+        video.pause();
         
         // Animate back to original position
         gsap.to(card, {
-            top: rect.top,
-            left: rect.left,
+            top: targetRect.top,
+            left: targetRect.left,
             xPercent: 0,
             yPercent: 0,
-            width: rect.width,
-            height: rect.height,
+            width: targetRect.width,
+            height: targetRect.height,
             duration: 0.6,
             ease: "power3.inOut",
             onComplete: () => {
                 gsap.set(card, { clearProps: "position,top,left,width,height,margin,zIndex,transform" });
-                if (spacer) spacer.remove();
+                if (spacer) {
+                    spacer.remove();
+                    spacer = null;
+                }
+                isAnimating = false;
             }
         });
-        
-        video.pause();
     }
 }
 

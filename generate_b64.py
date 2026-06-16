@@ -1,6 +1,6 @@
 import base64
 
-with open(r'assets\tripo_rc_car.glb', 'rb') as f:
+with open(r'assets\car.glb', 'rb') as f:
     data = f.read()
 
 b64 = base64.b64encode(data).decode('utf-8')

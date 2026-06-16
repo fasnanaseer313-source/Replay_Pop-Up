@@ -127,7 +127,6 @@
     #crawler-car {
       width: 100%;
       height: 100%;
-      animation: float3D 4s ease-in-out infinite;
       cursor: grab;
       outline: none;
     }
@@ -136,7 +135,7 @@
     }
   </style>
   <div id="crawler-wrap" style="width: 250px; height: 250px; display: flex; justify-content: center; align-items: center; pointer-events: auto;">
-    <img id="crawler-car" src="assets/user_car.jpeg" alt="RC Car" style="transform: none; width: 100%; height: auto; object-fit: contain; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.8)); border-radius: 10px;">
+    <model-viewer id="crawler-car" src="" alt="RC Car 3D Model" camera-controls shadow-intensity="1" exposure="1.5" environment-image="neutral" orientation="180deg 0deg 0deg" camera-orbit="45deg 65deg auto" bounds="tight"></model-viewer>
   </div>
 
   <!-- â•â•â•â•â•â•â•â• TOP NAVIGATION â•â•â•â•â•â•â•â• -->
@@ -410,9 +409,7 @@
           — WHERE WE SHOW UP
         </div>
         <h2 class="section-title" style="font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 50px; line-height: 1.1;">
-          Different spaces.<br>
-          One consistent answer:<br>
-          <span class="orange" style="font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic; font-weight: normal; text-transform: lowercase;">yes, we can.</span>
+          Different spaces. One consistent answer: <span class="orange" style="font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic; font-weight: normal; text-transform: lowercase;">yes, we can.</span>
         </h2>
       </div>
 
@@ -1152,6 +1149,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
   <script src="script.js"></script>
+  <script src="assets/model_data.js"></script>
 </body>
 </html>
 

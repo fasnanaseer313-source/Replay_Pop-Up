@@ -537,7 +537,7 @@ p.bridge-text {
 .pkg-card {
   background: rgba(20,20,20,0.6);
   border: 1px solid rgba(255,255,255,0.1);
-  padding: 40px 30px;
+  padding: 25px 30px;
   border-radius: 12px;
   backdrop-filter: blur(10px);
   text-align: left;
@@ -2316,7 +2316,41 @@ p.bridge-text {
   display: flex;
   flex-direction: column;
   gap: 60px;
-  margin-bottom: 100px;
+  margin-bottom: 60px;
+}
+
+.how-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 60px;
+}
+.how-benefit-item {
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+.how-benefit-icon {
+  margin-bottom: 15px;
+  color: var(--orange);
+}
+.how-benefit-item h4 {
+  color: var(--orange);
+  font-family: var(--f-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.how-benefit-item p {
+  color: #ccc;
+  font-family: var(--f-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
+}
+@media (max-width: 768px) {
+  .how-benefits-grid { grid-template-columns: 1fr; }
 }
 
 .how-step {
@@ -2592,9 +2626,19 @@ p.bridge-text {
 
 /* Form Styles */
 .booking-form {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
+}
+
+.booking-form .full-width {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 768px) {
+  .booking-form {
+    grid-template-columns: 1fr;
+  }
 }
 
 .form-group input,
@@ -3081,16 +3125,16 @@ p.bridge-text {
 
 .fun-card {
   flex: 1;
-  aspect-ratio: 1 / 1;
   background: rgba(20, 20, 20, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
-  padding: 20px;
+  padding: 15px;
   backdrop-filter: blur(10px);
   transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 5px;
 }
 
 .fun-card:hover {
@@ -3106,7 +3150,7 @@ p.bridge-text {
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--orange);
-  margin-bottom: 15px;
+  margin-bottom: 0;
 }
 
 .fun-card-title {
@@ -3114,7 +3158,7 @@ p.bridge-text {
   font-size: 1.3rem;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 15px;
+  margin-bottom: 0;
   line-height: 1.2;
 }
 
@@ -3123,7 +3167,6 @@ p.bridge-text {
   font-size: 0.95rem;
   color: #aaa;
   line-height: 1.5;
-  margin-top: auto;
 }
 
 @media (max-width: 1024px) {
@@ -3415,7 +3458,7 @@ p.bridge-text {
 
 .bento-quote {
   font-family: var(--f-body);
-  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
   font-weight: 400;
   color: #fff;
   line-height: 1.4;
@@ -3428,7 +3471,7 @@ p.bridge-text {
 }
 
 .bento-large .bento-quote {
-  font-size: clamp(1.15rem, 1.5vw, 1.35rem);
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
   -webkit-line-clamp: 4;
 }
 

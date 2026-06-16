@@ -3137,3 +3137,168 @@ p.bridge-text {
   }
 }
 
+
+/* ==========================================================================
+   NEW SPACES SECTION (WHERE WE SHOW UP)
+   ========================================================================== */
+
+.new-spaces-section {
+  position: relative;
+  overflow: hidden;
+  padding: 100px 5% 80px;
+  background: var(--c-deep, #04040a);
+}
+
+.spaces-header {
+  margin-bottom: 50px;
+  max-width: 800px;
+}
+
+.spaces-grid-wrap {
+  position: relative;
+  width: 100%;
+  padding: 40px 0;
+  /* Allow horizontal scroll on mobile, flex row on desktop */
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(232, 98, 26, 0.5) rgba(0,0,0,0.2);
+}
+
+.spaces-grid-wrap::-webkit-scrollbar {
+  height: 6px;
+}
+.spaces-grid-wrap::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.2);
+  border-radius: 4px;
+}
+.spaces-grid-wrap::-webkit-scrollbar-thumb {
+  background: rgba(232, 98, 26, 0.5);
+  border-radius: 4px;
+}
+
+/* The horizontal grid */
+.spaces-grid {
+  display: flex;
+  gap: 25px;
+  padding-bottom: 20px; /* Space for shadow/glow */
+  min-width: max-content; /* Force children into single row */
+}
+
+/* Individual Space Card */
+.space-card {
+  width: 320px;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.4s ease;
+}
+
+.space-card:hover {
+  transform: translateY(-8px);
+}
+
+.space-card-header {
+  margin-bottom: 15px;
+}
+
+.space-icon {
+  margin-bottom: 12px;
+  opacity: 0.8;
+}
+
+.space-title {
+  font-family: var(--f-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.space-subtitle {
+  font-family: var(--f-body);
+  font-size: 0.85rem;
+  color: #888;
+  line-height: 1.4;
+}
+
+.space-card-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.space-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease, filter 0.4s ease;
+  filter: brightness(0.8);
+}
+
+.space-card:hover .space-card-img-wrap {
+  box-shadow: 0 15px 30px rgba(232, 98, 26, 0.15);
+  border-color: rgba(232, 98, 26, 0.3);
+}
+
+.space-card:hover .space-card-img {
+  transform: scale(1.05);
+  filter: brightness(1);
+}
+
+.space-caption {
+  font-family: var(--f-serif, 'Instrument Serif', serif);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--orange);
+  line-height: 1.3;
+  padding: 0 5px;
+}
+
+/* Glowing Track SVG Overlay */
+.spaces-track-svg {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  min-width: 2000px;
+  height: 500px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.8;
+}
+
+.spaces-track-path {
+  stroke-dasharray: 4000;
+  stroke-dashoffset: 4000;
+  animation: drawTrack 8s ease-in-out infinite alternate;
+}
+
+@keyframes drawTrack {
+  0% { stroke-dashoffset: 4000; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@media (max-width: 768px) {
+  .spaces-grid {
+    gap: 15px;
+  }
+  .space-card {
+    width: 280px;
+  }
+  .spaces-footer h3 {
+    font-size: 1.6rem !important;
+  }
+}

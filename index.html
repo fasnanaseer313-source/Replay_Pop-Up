@@ -169,7 +169,7 @@
     <section id="s-hero" class="cinematic-section" data-bg="env-hero">
       <div class="content-left">
         <h1 class="hero-title gs-reveal" style="margin-bottom: 5px;">
-          We bring the <span class="orange">RC Experience</span> to you.
+          We bring the<br><span class="orange" style="white-space: nowrap;">RC Experience</span> to you.
         </h1>
         <h2 class="hero-secondary gs-reveal" style="font-size: 2rem; font-weight: 600; margin-bottom: 20px; color: #ddd; font-family: var(--f-heading);">
           A course that fits your space.
@@ -241,21 +241,85 @@
       <div class="content-left">
         <h2 class="section-title gs-reveal">Remember when something actually<br><span class="orange">pulled the whole room in?</span></h2>
         <style>
-          .idea-point-list { list-style: none; padding: 0; margin: 0 auto; max-width: 550px; text-align: left; }
-          .idea-point-list li { position: relative; padding: 15px 0 15px 30px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 1.1rem; font-weight: 400; color: #bbb; }
-          .idea-point-list li:first-child { border-top: 1px solid rgba(255,255,255,0.1); }
-          .idea-point-list li::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background-color: var(--orange, #e8621a); border-radius: 50%; }
+          .idea-timeline {
+            position: relative;
+            margin: 30px 0;
+            padding: 0;
+            list-style: none;
+            text-align: left;
+            max-width: 550px;
+          }
+          .idea-timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 15px;
+            bottom: 20px;
+            width: 1px;
+            border-left: 1px dashed rgba(232, 98, 26, 0.5);
+            z-index: 0;
+          }
+          .idea-timeline-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            z-index: 1;
+          }
+          .idea-timeline-item:last-child {
+            margin-bottom: 0;
+          }
+          .idea-icon-wrap {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(232, 98, 26, 0.3);
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+            color: var(--orange, #e8621a);
+          }
+          .idea-text {
+            font-size: 1.1rem;
+            color: #ddd;
+            line-height: 1.4;
+          }
         </style>
-        <div class="idea-text-block gs-reveal">
-          <p style="text-align: center; margin-bottom: 20px; font-size: 1.1rem; color: #aaa;">That moment when &mdash;</p>
-          <ul class="idea-point-list">
-            <li>People stopped scrolling.</li>
-            <li>Everyone gathered around.</li>
-            <li>Strangers started competing.</li>
-            <li>"One more round" kept happening.</li>
+        <div class="idea-text-block gs-reveal" style="text-align: left; margin-left: 0;">
+          <p style="margin-bottom: 20px; font-size: 1.1rem; color: #aaa;">That moment when &mdash;</p>
+          <ul class="idea-timeline">
+            <li class="idea-timeline-item">
+              <div class="idea-icon-wrap">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+              </div>
+              <div class="idea-text">People stopped scrolling.</div>
+            </li>
+            <li class="idea-timeline-item">
+              <div class="idea-icon-wrap">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              </div>
+              <div class="idea-text">Everyone gathered around.</div>
+            </li>
+            <li class="idea-timeline-item">
+              <div class="idea-icon-wrap">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 21h8m-4-4v4m-5-4h10m-1-8a5 5 0 01-10 0V3h10v6z"></path></svg>
+              </div>
+              <div class="idea-text">Strangers started competing.</div>
+            </li>
+            <li class="idea-timeline-item">
+              <div class="idea-icon-wrap">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"></polyline><polyline points="23 20 23 14 17 14"></polyline><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path></svg>
+              </div>
+              <div class="idea-text">"One more round" kept happening.</div>
+            </li>
           </ul>
         </div>
-        <p class="bridge-text gs-reveal">That's the energy <span class="orange">RePlay</span> brings — to your space, your crowd, your occasion.</p>
+        
+        <div style="border-top: 1px solid rgba(255,255,255,0.1); margin: 30px 0; max-width: 450px;"></div>
+        <p class="bridge-text gs-reveal" style="text-align: left; margin-left: 0; font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic; font-size: 1.6rem; color: #ddd; max-width: 500px; line-height: 1.2;">That's the energy <span class="orange" style="font-style: normal;">RePlay</span> brings &mdash;<br>to your space, your crowd, your occasion.</p>
         
         <div class="r-track-card gs-reveal" style="margin: 60px 0 0;">
           <!-- Background Images for Crossfading -->
@@ -340,110 +404,146 @@
     </section>
 
     <!-- 4. WHERE WE SHOW UP -->
-    <section id="s-where" class="cinematic-section" data-bg="env-office" style="position: relative;">
-      <div class="section-label-top-left gs-reveal" style="position: absolute; top: 80px; left: 5%; font-size: 0.85rem; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; color: var(--orange); z-index: 10;">
-        — WHERE WE SHOW UP
-      </div>
-      <div class="content-left">
-        <h2 class="section-title gs-reveal" style="font-size: clamp(1.8rem, 3.5vw, 3rem); white-space: nowrap;">Different spaces. One consistent answer: <span class="orange">yes, we can.</span></h2>
-        <p class="bridge-text gs-reveal" style="max-width: 700px; margin-bottom: 50px;">
-          Just a break or a full celebration — <span class="orange">RePlay</span> fits right in.
-        </p>
+    <section id="s-where" class="cinematic-section new-spaces-section" data-bg="env-office">
+      <div class="spaces-header gs-reveal">
+        <div class="section-label-top-left" style="position: relative; top: 0; left: 0; font-size: 0.85rem; font-weight: 800; letter-spacing: 4px; text-transform: uppercase; color: var(--orange); margin-bottom: 20px;">
+          — WHERE WE SHOW UP
+        </div>
+        <h2 class="section-title" style="font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 50px; line-height: 1.1;">
+          Different spaces.<br>
+          One consistent answer:<br>
+          <span class="orange" style="font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic; font-weight: normal; text-transform: lowercase;">yes, we can.</span>
+        </h2>
       </div>
 
-      <div class="venue-carousel-wrap gs-reveal">
-        <div class="venue-track-glow"></div>
-        <div class="venue-carousel">
-          <div class="venue-track" id="vTrack">
-            <!-- 1. CafÃ©s & Restaurants -->
-            <div class="venue-card">
-              
-              <div class="venue-overlay">
-                <h3 class="venue-title">CafÃ©s &amp; Restaurants</h3>
-                <p class="venue-desc">Add a unique interactive edge to your cafÃ© that keeps customers staying longer.</p>
-              </div>
+      <div class="spaces-grid-wrap gs-reveal">
+        <!-- SVG glowing track overlay -->
+        <svg class="spaces-track-svg" viewBox="0 0 2000 500" preserveAspectRatio="none">
+          <defs>
+            <filter id="track-glow-spaces" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="5" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <linearGradient id="track-grad-spaces" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="rgba(255, 107, 26, 0.2)" />
+              <stop offset="20%" stop-color="#ff6b1a" />
+              <stop offset="80%" stop-color="#ff6b1a" />
+              <stop offset="100%" stop-color="#ff6b1a" />
+            </linearGradient>
+          </defs>
+          <path class="spaces-track-path" d="M 0 250 Q 300 250 400 350 T 800 150 T 1200 350 T 1600 150 T 1950 250" fill="none" stroke="url(#track-grad-spaces)" stroke-width="4" filter="url(#track-glow-spaces)" />
+          <circle cx="1950" cy="250" r="8" fill="#ff6b1a" filter="url(#track-glow-spaces)" />
+        </svg>
+
+        <div class="spaces-grid">
+          <!-- Card 1 -->
+          <div class="space-card">
+            <div class="space-card-header">
+              <svg class="space-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+              <h3 class="space-title">HOMES & COMMUNITIES</h3>
+              <p class="space-subtitle">Apartments &middot; Clubhouses &middot; Terraces &middot; Living Rooms &middot; Rooftops &middot; House Parties</p>
             </div>
-            <!-- 2. Brand Activations -->
-            <div class="venue-card">
-              
-              <div class="venue-overlay">
-                <h3 class="venue-title">Brand Activations</h3>
-                <p class="venue-desc">Draw massive crowds and create unforgettable brand moments with our RC setups.</p>
-              </div>
+            <div class="space-card-img-wrap">
+              <img src="assets/house_party_poster.png" alt="Homes & Communities" class="space-card-img">
             </div>
-            <!-- 3. Weekend Markets -->
-            <div class="venue-card">
-              
-              <div class="venue-overlay">
-                <h3 class="venue-title">Weekend Markets</h3>
-                <p class="venue-desc">The perfect high-energy attraction to make your weekend market stand out.</p>
-              </div>
-            </div>
-            <!-- 4. Offices -->
-            <div class="venue-card">
-              
-              <div class="venue-overlay">
-                <h3 class="venue-title">Offices</h3>
-                <p class="venue-desc">The break that actually feels like one.</p>
-              </div>
-            </div>
-            <!-- 5. Schools & Campuses -->
-            <div class="venue-card">
-              
-              <div class="venue-overlay">
-                <h3 class="venue-title">Schools &amp; Campuses</h3>
-                <p class="venue-desc">Learning that feels nothing like learning.</p>
-              </div>
-            </div>
-            <!-- 6. Apartments & Societies -->
-            <div class="venue-card">
-              
-              <div class="venue-overlay">
-                <h3 class="venue-title">Apartments &amp; Societies</h3>
-                <p class="venue-desc">The activity the whole building talks about.</p>
-              </div>
-            </div>
-            <!-- 7. Resorts & Hotels -->
-            <div class="venue-card">
-              
-              <div class="venue-overlay">
-                <h3 class="venue-title">Resorts &amp; Hotels</h3>
-                <p class="venue-desc">An activity your guests will actually talk about.</p>
-              </div>
-            </div>
-            <!-- 8. Private Venues -->
-            <div class="venue-card">
-              
-              <div class="venue-overlay">
-                <h3 class="venue-title">Private Venues</h3>
-                <p class="venue-desc">Transform your private gathering into an adrenaline-fueled experience.</p>
-              </div>
-            </div>
-            <!-- 9. Homes & Terraces -->
-            <div class="venue-card">
-              
-              <div class="venue-overlay">
-                <h3 class="venue-title">Homes &amp; Terraces</h3>
-                <p class="venue-desc">The activity everyone's still talking about after.</p>
-              </div>
-            </div>
-            <!-- 10. Sangeets, Mehendis & Festivals -->
-            <div class="venue-card">
-              
-              <div class="venue-overlay">
-                <h3 class="venue-title">Sangeets, Mehendis &amp; Festivals</h3>
-                <p class="venue-desc">Add a totally unexpected, wildly fun element to your celebrations.</p>
-              </div>
+            <div class="space-caption">
+              &ldquo;Turns everyday spaces into play spaces.&rdquo;
             </div>
           </div>
+
+          <!-- Card 2 -->
+          <div class="space-card">
+            <div class="space-card-header">
+              <svg class="space-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+              <h3 class="space-title">OFFICES & CORPORATE EVENTS</h3>
+              <p class="space-subtitle">Team Days &middot; Break Activities &middot; Offsites &middot; Launches</p>
+            </div>
+            <div class="space-card-img-wrap">
+              <img src="assets/intro_office.png" alt="Offices & Corporate" class="space-card-img">
+            </div>
+            <div class="space-caption">
+              &ldquo;Team building that doesn't feel like team building.&rdquo;
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="space-card">
+            <div class="space-card-header">
+              <svg class="space-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+              <h3 class="space-title">SCHOOLS & CAMPUSES</h3>
+              <p class="space-subtitle">Schools &middot; Colleges &middot; STEM Days &middot; Fests &middot; Inter-house Events</p>
+            </div>
+            <div class="space-card-img-wrap">
+              <img src="assets/intro_school.png" alt="Schools & Campuses" class="space-card-img">
+            </div>
+            <div class="space-caption">
+              &ldquo;The only time 'one more round' sounds educational.&rdquo;
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="space-card">
+            <div class="space-card-header">
+              <svg class="space-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+              <h3 class="space-title">HOSPITALITY & LEISURE</h3>
+              <p class="space-subtitle">Resorts &middot; Hotels &middot; Caf&eacute;s &middot; Restaurants</p>
+            </div>
+            <div class="space-card-img-wrap">
+              <img src="assets/intro_resort.png" alt="Hospitality & Leisure" class="space-card-img">
+            </div>
+            <div class="space-caption">
+              &ldquo;The experience people didn't expect &mdash; and didn't want to leave.&rdquo;
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="space-card">
+            <div class="space-card-header">
+              <svg class="space-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
+              <h3 class="space-title">WEDDINGS & CELEBRATIONS</h3>
+              <p class="space-subtitle">Sangeets &middot; Mehendis &middot; Receptions &middot; Private Parties</p>
+            </div>
+            <div class="space-card-img-wrap">
+              <img src="assets/hero.png" alt="Weddings & Celebrations" class="space-card-img">
+            </div>
+            <div class="space-caption">
+              &ldquo;Nobody sat this one out.&rdquo;
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="space-card">
+            <div class="space-card-header">
+              <svg class="space-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <h3 class="space-title">ACTIVATIONS & PUBLIC EVENTS</h3>
+              <p class="space-subtitle">Mall Pop-Ups &middot; Festival Booths &middot; Flea Markets &middot; Community Events</p>
+            </div>
+            <div class="space-card-img-wrap">
+              <img src="assets/Images/Images/poster_generic2_1775801940934.png" alt="Activations & Events" class="space-card-img">
+            </div>
+            <div class="space-caption">
+              &ldquo;The setup people keep coming back to.&rdquo;
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <div class="content-left gs-reveal" style="margin-top: -20px;">
-        <p class="bridge-text" style="line-height: 1.6;">
-          If there's a reason to gather, there's a reason to <span class="orange">RePlay</span>.<br>
-          You just say where. We handle everything else.
-        </p>
+      <div class="spaces-footer gs-reveal" style="margin-top: 60px; max-width: 800px;">
+        <div style="display: flex; gap: 20px; align-items: flex-start;">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; opacity: 0.8;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <div>
+            <h3 style="font-size: 2rem; font-weight: normal; font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic; color: #ddd; margin-bottom: 5px;">
+              If there's a reason to gather,<br>there's a reason to <span class="orange" style="font-style: italic; font-weight: bold;">RePlay</span>.
+            </h3>
+            <p style="font-size: 1.1rem; color: #888;">
+              You pick the space. We bring the experience.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -532,9 +632,7 @@
 
         <div class="content-center text-center gs-reveal" style="margin-top: 60px; max-width: 800px; margin-left: auto; margin-right: auto; padding: 0 20px;">
           <h3 style="font-size: 1.8rem; margin-bottom: 15px;">&lsquo;Not sure what fits?&rsquo;</h3>
-          <p style="font-size: 1.1rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 15px;">
-            Terrace, office floor, clubhouse lawn, caf&eacute;, school corridor &mdash; RePlay adapts to your space and crowd surprisingly well.
-          </p>
+
           <p style="font-size: 1.1rem; color: var(--text-dim); line-height: 1.6;">
             Tell us your space, crowd, and occasion &mdash; we&rsquo;ll suggest what fits best and share a quote.
           </p>

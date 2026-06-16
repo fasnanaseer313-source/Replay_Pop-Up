@@ -795,20 +795,7 @@ function initHowItWorks() {
       );
     }
 
-    // Number counter animation
-    const numEl = step.querySelector('.how-step-num');
-    if (numEl) {
-      const finalNum = parseInt(numEl.innerText, 10);
-      const counter = { val: 0 };
-      tl.to(counter, {
-        val: finalNum,
-        duration: 1,
-        ease: "power2.out",
-        onUpdate: () => {
-          numEl.innerText = counter.val < 10 ? '0' + Math.round(counter.val) : Math.round(counter.val);
-        }
-      }, "-=0.6");
-    }
+
 
     // Highlight bar expansion
     const highlight = step.querySelector('.how-highlight-bg');

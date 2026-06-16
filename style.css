@@ -29,7 +29,18 @@ html, body {
   background-color: var(--bg);
   color: var(--text-main);
   font-family: var(--f-body);
+  font-size: clamp(16px, 1.2vw, 21px);
+  font-weight: 300;
+  line-height: 1.58;
   overflow: hidden; /* Prevent window scroll */
+}
+
+p {
+  max-width: 75ch;
+}
+
+.text-secondary {
+  font-size: clamp(14px, 1vw, 15px);
 }
 
 .orange { color: var(--orange); }
@@ -270,24 +281,40 @@ html.lenis { height: auto; }
 /* Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
    TYPOGRAPHY & UI
 Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â */
-h1.hero-title {
+h1, h2, h3, .hero-title, .section-title {
   font-family: var(--f-heading);
-  font-size: clamp(3rem, 6vw, 6rem);
-  font-weight: 500;
-  line-height: 1.1;
+  font-weight: 600;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1.hero-title, h1 {
+  font-size: clamp(44px, 7vw, 128px);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
   text-transform: none;
   margin-bottom: 1.5rem;
-  letter-spacing: 0.02em;
   text-shadow: 0 0 40px rgba(255, 107, 26, 0.3);
 }
 
-h2.section-title {
-  font-family: var(--f-heading);
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  font-weight: 700;
-  line-height: 1.1;
+h2.section-title, h2 {
+  font-size: clamp(30px, 4vw, 64px);
+  line-height: 1;
+  letter-spacing: -0.035em;
   margin-bottom: 1.5rem;
-  letter-spacing: 0.01em;
+  max-width: 75%;
+}
+
+.h2-display {
+  font-size: clamp(64px, 6vw, 86px) !important;
+}
+
+h3 {
+  font-size: clamp(26px, 3vw, 58px);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
 }
 
 .orange {
@@ -295,10 +322,12 @@ h2.section-title {
   text-shadow: 0 0 20px var(--orange-glow);
 }
 
-h1 .orange, h2 .orange, .glimpses-title .orange, .final-logo .orange {
+h1 .orange, h2 .orange, h3 .orange, .glimpses-title .orange, .final-logo .orange {
   font-family: var(--f-accent);
   font-style: italic;
   font-weight: 400;
+  font-size: inherit;
+  line-height: 1.12;
   text-transform: none;
 }
 
@@ -327,13 +356,30 @@ p.bridge-text {
   justify-content: center;
   padding: 14px 28px;
   font-family: var(--f-body);
-  font-weight: 500;
-  font-size: 0.95rem;
+  font-weight: 600;
+  font-size: 16px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0;
   text-decoration: none;
   border-radius: 4px;
   transition: all 0.3s ease;
+}
+
+.btn-header {
+  font-size: 13px;
+}
+
+.btn-fab {
+  font-size: 14px;
+}
+
+.label-text, .caption-text, .small-text, .rtc-badge-label, .pkg-sub, .section-label-top-left, .badge {
+  font-family: var(--f-mono);
+  font-size: clamp(10.5px, 1vw, 12px);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.38em;
+  line-height: 1.8;
 }
 
 .btn-primary {
@@ -3500,3 +3546,44 @@ p.bridge-text {
     grid-column: span 1;
   }
 }
+
+/* ---------------------------------------------------------------
+   GLOBAL MOBILE OVERRIDES
+--------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Ensure full-width containers don't hit the screen edge */
+  .ed-container, 
+  .booking-container, 
+  .quick-cta-container,
+  .how-closing {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* Reduce massive margins and paddings */
+  .cinematic-section {
+    padding-top: 60px !important;
+    padding-bottom: 60px !important;
+  }
+  
+  .ed-intro {
+    margin: 30px 0 40px !important;
+  }
+
+  .booking-info-block {
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .booking-left .booking-title {
+    margin-bottom: 20px !important;
+  }
+
+  .how-steps-list {
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+}
+

@@ -760,61 +760,65 @@ function initHowItWorks() {
     });
   }
 
-  // Fade in elements
-  gsap.utils.toArray('.gs-how-reveal').forEach(el => {
-    gsap.fromTo(el, 
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, scroller: "#main-wrapper", start: "top 85%" }}
-    );
-  });
-
-  // Steps staggering and highlight animation
+  // Cinematic Timeline Animation
+  const stepsList = howWrap.querySelector('.how-steps-list');
+  const progressLine = howWrap.querySelector('.how-timeline-progress');
+  const pulse = howWrap.querySelector('.how-timeline-pulse');
   const steps = gsap.utils.toArray('.gs-how-step');
-  steps.forEach((step, index) => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: step,
-        scroller: "#main-wrapper",
-        start: "top 85%"
-      }
-    });
+  
+  if (!stepsList || !progressLine || !pulse || steps.length === 0) return;
 
-    // Fade and slide step
-    tl.fromTo(step, 
-      { opacity: 0, y: 50 },
-      { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
-    );
-
-    // Draw line
-    const line = step.querySelector('.how-step-line');
-    if (line) {
-      tl.fromTo(line, 
-        { scaleX: 0 },
-        { scaleX: 1, duration: 0.8, ease: "expo.out" },
-        "-=0.4"
-      );
-    }
-
-
-
-    // Highlight bar expansion
-    const highlight = step.querySelector('.how-highlight-bg');
-    if (highlight) {
-      tl.fromTo(highlight,
-        { scaleX: 0 },
-        { scaleX: 1, duration: 0.8, ease: "expo.out" },
-        "-=0.6"
-      );
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: stepsList,
+      scroller: "#main-wrapper",
+      start: "top 75%", // Triggers when ~25% visible
+      once: true // Play only once
     }
   });
 
+  // Reveal pulse
+  tl.to(pulse, { opacity: 1, duration: 0.2, ease: "power2.out" });
 
-
-  // Gentle Parallax effect
-  gsap.fromTo(howWrap.querySelector('.how-steps-list'),
-    { y: 50 },
-    { y: -50, ease: "none", scrollTrigger: { trigger: howWrap, scroller: "#main-wrapper", scrub: true, start: "top bottom", end: "bottom top" }}
-  );
+  // Animate the line and pulse across 5 steps (0% to 100%)
+  tl.fromTo(stepsList, 
+    { "--timeline-progress": "0%" },
+    {
+      "--timeline-progress": "100%",
+      duration: 2.8,
+      ease: "power1.inOut",
+      onUpdate: function() {
+        const val = this.progress() * 100;
+        
+        steps.forEach((step, i) => {
+          const threshold = i * 25;
+          if (val >= threshold && !step.classList.contains('icon-active') && !step.classList.contains('icon-completed') && !step.classList.contains('icon-final')) {
+            // Pulse arrived at this step
+            step.classList.add('icon-active');
+            step.classList.add('ripple-active');
+            step.classList.add('content-revealed');
+            
+            // Mark previous steps as completed
+            for (let j = 0; j < i; j++) {
+              steps[j].classList.remove('icon-active');
+              steps[j].classList.add('icon-completed');
+            }
+          }
+        });
+      },
+    onComplete: function() {
+      // Final Celebration State
+      const lastStep = steps[steps.length - 1];
+      lastStep.classList.remove('icon-active');
+      lastStep.classList.add('icon-final');
+      
+      // Shimmer across full timeline
+      stepsList.classList.add('shimmer-active');
+      
+      // Fade out pulse orb gracefully
+      gsap.to(pulse, { opacity: 0, duration: 0.5, delay: 0.5 });
+    }
+  });
 }
 
 function initBookingSection() {

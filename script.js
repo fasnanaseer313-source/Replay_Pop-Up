@@ -1109,3 +1109,89 @@ window.addEventListener('resize', () => {
   resizeTimer = setTimeout(generateMasterTrack, 200);
 });
 
+
+
+// ==========================================
+// INSTAGRAM PULL ANIMATIONS
+// ==========================================
+function initInstagramSection() {
+  const section = document.querySelector('.instagram-pull-section');
+  if (!section) return;
+
+  // Reveal Timeline
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: section,
+      scroller: '#main-wrapper',
+      start: 'top 70%',
+    }
+  });
+
+  // Reveal Emojis
+  tl.fromTo('.insta-emoji', 
+    { y: 50, opacity: 0, scale: 0.5 },
+    { y: 0, opacity: 1, scale: 1, rotation: () => gsap.utils.random(-20, 20), duration: 0.8, stagger: 0.1, ease: 'back.out(1.5)' }
+  )
+  // Reveal QR Card
+  .fromTo('.insta-qr-container',
+    { scale: 0.8, opacity: 0, y: 30 },
+    { scale: 1, opacity: 1, y: 0, duration: 0.8, ease: 'back.out(1.2)' },
+    '-=0.5'
+  )
+  // Reveal Header and CTA
+  .fromTo('.gs-insta-reveal',
+    { opacity: 0, y: 20 },
+    { opacity: 1, y: 0, duration: 0.6, stagger: 0.2, ease: 'power2.out' },
+    '-=0.4'
+  );
+
+  // Continuous Floating Emojis
+  gsap.utils.toArray('.insta-emoji').forEach((emoji) => {
+    gsap.to(emoji, {
+      y: '+=15',
+      x: () => gsap.utils.random(-10, 10),
+      rotation: () => gsap.utils.random(-10, 10),
+      duration: gsap.utils.random(2, 4),
+      yoyo: true,
+      repeat: -1,
+      ease: 'sine.inOut'
+    });
+  });
+
+  // Parallax / Tilt Effect
+  const qrCard = document.querySelector('.insta-qr-card');
+  section.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 20; // max 20deg tilt
+    const y = (e.clientY / window.innerHeight - 0.5) * -20;
+    
+    gsap.to(qrCard, {
+      rotateX: y,
+      rotateY: x,
+      duration: 0.5,
+      ease: 'power1.out'
+    });
+
+    gsap.to('.insta-emoji', {
+      x: (i, target) => {
+        const depth = parseFloat(target.style.fontSize || 3) * 5; // deeper = moves more
+        return x * depth * 0.1;
+      },
+      y: (i, target) => {
+         const depth = parseFloat(target.style.fontSize || 3) * 5;
+         return -y * depth * 0.1;
+      },
+      duration: 1,
+      ease: 'power1.out'
+    });
+  });
+
+  section.addEventListener('mouseleave', () => {
+    gsap.to(qrCard, { rotateX: 0, rotateY: 0, duration: 0.8, ease: 'back.out(1.2)' });
+    gsap.to('.insta-emoji', { x: 0, y: 0, duration: 0.8, ease: 'power1.out' });
+  });
+}
+
+// Ensure it runs after DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  initInstagramSection();
+});

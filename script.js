@@ -44,28 +44,30 @@ window.addEventListener("load", () => {
 
 function initCinematic() {
   try {
-    // Initialize Lenis for buttery smooth trackpad & mouse scrolling within the explicit container
+    const isMobile = window.innerWidth <= 768;
     const scrollWrapper = document.getElementById('main-wrapper');
     const scrollContent = document.getElementById('scroll-content');
     
-    const lenis = new Lenis({
-      wrapper: scrollWrapper,
-      content: scrollContent,
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      smooth: true,
-      smoothTouch: false,
-      touchMultiplier: 2,
-    });
+    if (!isMobile) {
+      const lenis = new Lenis({
+        wrapper: scrollWrapper,
+        content: scrollContent,
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        smooth: true,
+        smoothTouch: false,
+        touchMultiplier: 2,
+      });
 
-    lenis.on('scroll', ScrollTrigger.update);
+      lenis.on('scroll', ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
 
-    gsap.ticker.lagSmoothing(0);
+      gsap.ticker.lagSmoothing(0);
+    }
 
     // Register GSAP Plugins
     gsap.registerPlugin(ScrollTrigger);
@@ -90,8 +92,8 @@ function initCinematic() {
       onEnter: batch => gsap.to(batch, {
         opacity: 1,
         y: 0,
-        duration: 1.4,
-        stagger: 0.15,
+        duration: isMobile ? 0.6 : 1.4,
+        stagger: isMobile ? 0.05 : 0.15,
         ease: "expo.out",
         overwrite: true
       }),
@@ -170,6 +172,8 @@ function initCinematic() {
           yPercent: -50,
           force3D: true
         });
+
+        if (isMobile) return; // Skip heavy orientation calculation for <model-viewer> on mobile
 
         // Apply 3D Orientation to the <model-viewer>
         const crawlerCar = document.getElementById("crawler-car");
@@ -594,6 +598,17 @@ function initHeroVideo() {
 // Attach to DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
     initHeroVideo();
+    
+    // Load heavy 3D model data only on desktop
+    if (window.innerWidth > 768) {
+      const script = document.createElement('script');
+      script.src = 'assets/model_data.js';
+      document.body.appendChild(script);
+    } else {
+      // Hide 3D car on mobile to save performance
+      const crawlerCar = document.getElementById("crawler-car");
+      if (crawlerCar) crawlerCar.style.display = 'none';
+    }
 });
 
 // -------- WAYS TO REPLAY: CARD STACK --------

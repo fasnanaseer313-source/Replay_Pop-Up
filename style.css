@@ -4266,3 +4266,22 @@ p.bridge-text {
     z-index: 100 !important;
   }
 }
+
+/* Mobile Performance Optimizations */
+@media (max-width: 768px) {
+  * {
+    /* Disable heavy blurs and multiple complex box shadows on mobile */
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  
+  /* Selectively tone down expensive box-shadows on mobile */
+  .hero-video-card, .bento-testimonial-card, .r-track-card, .space-card, .process-card {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5) !important;
+  }
+
+  /* GPU Acceleration for Reveal Animations */
+  .gs-reveal {
+    will-change: transform, opacity;
+  }
+}

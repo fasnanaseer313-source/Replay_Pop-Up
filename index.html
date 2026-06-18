@@ -155,8 +155,25 @@
     </div>
     <div class="nav-right">
       <a href="#s-booking" class="nav-book-btn">Book a pop-up &rarr;</a>
+      <button class="hamburger" id="mobile-menu-btn" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </nav>
+
+  <!-- MOBILE MENU OVERLAY -->
+  <div id="mobile-menu-overlay" class="mobile-menu-overlay">
+    <div class="mobile-menu-content">
+      <a href="#s-idea" class="mobile-nav-link">The Idea</a>
+      <a href="#s-where" class="mobile-nav-link">Where</a>
+      <a href="#s-packages" class="mobile-nav-link">Experiences</a>
+      <a href="#s-how-it-works" class="mobile-nav-link">How it works</a>
+      <a href="#s-faq" class="mobile-nav-link">FAQ</a>
+      <a href="#s-booking" class="btn-primary mobile-nav-link mobile-nav-btn">Book a pop-up &rarr;</a>
+    </div>
+  </div>
 
   <!-- â•â•â•â•â•â•â•â• MAIN SCROLL CONTENT â•â•â•â•â•â•â•â• -->
   <main id="scroll-content">
@@ -1187,6 +1204,29 @@
   <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
   <script src="script.js"></script>
   <script src="assets/model_data.js"></script>
+
+  <!-- Mobile Menu Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.getElementById('mobile-menu-btn');
+      const mobileOverlay = document.getElementById('mobile-menu-overlay');
+      const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+      if (hamburger && mobileOverlay) {
+        hamburger.addEventListener('click', () => {
+          hamburger.classList.toggle('is-active');
+          mobileOverlay.classList.toggle('is-active');
+        });
+
+        mobileLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            hamburger.classList.remove('is-active');
+            mobileOverlay.classList.remove('is-active');
+          });
+        });
+      }
+    });
+  </script>
 </body>
 </html>
 

@@ -668,7 +668,7 @@ p.bridge-text {
 .pkg-sub { color: var(--orange); font-family: var(--f-mono); font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; letter-spacing: 1px; }
 .pkg-card ul { list-style: none; }
 .pkg-card li { margin-bottom: 10px; font-size: 0.95rem; color: var(--text-dim); }
-.badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--orange); color: #000; font-family: var(--f-mono); font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; white-space: nowrap; }
+.badge { position: relative; margin: 0 auto 15px auto; display: inline-block; background: var(--orange); color: #000; font-family: var(--f-mono); font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; white-space: normal; width: max-content; max-width: 100%; text-align: center; line-height: 1.2; box-sizing: border-box; }
 
 /* Premium Catalog Additions */
 .pkg-section { margin-top: 25px; }
@@ -1970,6 +1970,8 @@ p.bridge-text {
   width: 70%;
   height: 280px;
   perspective: 1500px;
+  overflow: hidden;
+  border-radius: 24px;
 }
 
 .challenge-card {
@@ -2005,7 +2007,7 @@ p.bridge-text {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, rgba(5, 5, 5, 0.9) 0%, rgba(5, 5, 5, 0.6) 50%, rgba(5, 5, 5, 0.2) 100%);
+  background: linear-gradient(to right, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.3) 35%, rgba(5, 5, 5, 0) 60%);
   z-index: 2;
   transition: opacity 0.4s ease;
 }
@@ -3396,7 +3398,10 @@ p.bridge-text {
 }
 @media (max-width: 768px) {
   .fun-card {
-    flex: 0 0 calc(80%);
+    flex: 0 0 180px;
+    height: 110px;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
 }
 
@@ -3466,6 +3471,7 @@ p.bridge-text {
 
 .space-card-header {
   margin-bottom: 15px;
+  min-height: 140px; /* Forces all headers to be same height, aligning images below */
 }
 
 .space-icon {
@@ -4285,3 +4291,124 @@ p.bridge-text {
     will-change: transform, opacity;
   }
 }
+
+/* Custom Date Picker */
+.custom-datepicker {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  min-width: 280px;
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  margin-top: 10px;
+  z-index: 100;
+  
+  /* Animations */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+}
+
+.custom-datepicker.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.cdp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  color: #fff;
+  font-family: var(--f-sans, sans-serif);
+  font-weight: 600;
+}
+
+.cdp-header button {
+  background: none;
+  border: none;
+  color: var(--orange);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0 10px;
+  transition: color 0.2s;
+}
+
+.cdp-header button:hover {
+  color: #fff;
+}
+
+.cdp-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+}
+
+.cdp-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.cdp-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.2s, color 0.2s;
+}
+
+.cdp-day:hover:not(.disabled) {
+  background: rgba(255, 107, 26, 0.2);
+}
+
+.cdp-day.disabled {
+  color: #444;
+  cursor: not-allowed;
+}
+
+.cdp-day.selected {
+  background: var(--orange);
+  color: #000;
+  font-weight: bold;
+}
+
+/* Mobile-Only Carousel Scrolling */
+@media (max-width: 768px) {
+  .spaces-grid-wrap, .fun-cards-wrapper {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    overflow-x: scroll; /* ensure scrolling is enabled to be hijacked by JS/Touch */
+  }
+  .spaces-grid-wrap::-webkit-scrollbar, .fun-cards-wrapper::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+  
+  /* Make the intro subheading larger and more elegant on mobile */
+  .intro-subheading {
+    font-size: clamp(1.4rem, 6vw, 2.2rem) !important;
+    line-height: 1.4 !important;
+    margin-top: 15px !important;
+    letter-spacing: 0.02em !important;
+    white-space: normal !important;
+  }
+  
+  /* Force text to wrap neatly */
+  .right-where-text {
+    display: block;
+  }
+}
+

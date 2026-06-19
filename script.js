@@ -598,6 +598,8 @@ function initHeroVideo() {
 // Attach to DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
     initHeroVideo();
+    initMobileSpacesCarousel();
+    initMobileFunCardsCarousel();
     
     // Load heavy 3D model data only on desktop
     if (window.innerWidth > 768) {
@@ -614,52 +616,67 @@ document.addEventListener('DOMContentLoaded', () => {
 // -------- WAYS TO REPLAY: CARD STACK --------
 function initCardStack() {
   const cards = gsap.utils.toArray('.challenge-card');
-  if (cards.length === 0) return;
+  if (cards.length <= 1) return;
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".stack-section",
-      scroller: "#main-wrapper",
-      start: "top top",
-      end: "+=3000",
-      pin: true,
-      scrub: 1,
-      anticipatePin: 1
-    }
-  });
+  let currentIndex = 0;
+  let isAnimating = false;
 
-  // Initial state: first card visible, others offset and hidden
+  // Initial state: hide all cards to the right, except the first one
   gsap.set(cards, { 
-    transformOrigin: "bottom center",
-    zIndex: (i) => i
+    transformOrigin: "center center",
+    xPercent: 100, 
+    scale: 1, 
+    opacity: 0, // Keep parked cards invisible so they don't stack up on the right
+    zIndex: 0 
   });
   
-  gsap.set(cards.slice(1), { 
-    yPercent: 100, 
-    scale: 0.92, 
-    opacity: 0 
+  // Set the first card to be visible immediately
+  gsap.set(cards[0], { 
+    xPercent: 0, 
+    opacity: 1,
+    zIndex: 1 
   });
 
-  // Animate each card in
-  cards.forEach((card, index) => {
-    if (index === 0) return; // First card is already visible
-    
-    tl.to(card, {
-      yPercent: 0,
-      scale: 1,
-      opacity: 1,
-      duration: 1,
-      ease: "power2.out"
-    }, index - 0.5); // Stagger timing slightly
-    
-    // Slight zoom out of the previous card to create depth
-    tl.to(cards[index - 1], {
-      scale: 0.92,
-      opacity: 1 - ((cards.length - index) * 0.3),
-      duration: 1,
-      ease: "power2.out"
-    }, index - 0.5);
-  });
+  function nextCard() {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    const current = cards[currentIndex];
+    const nextIndex = (currentIndex + 1) % cards.length;
+    const next = cards[nextIndex];
+
+    // Prepare next card to slide in from the right, on top of the current one
+    gsap.set(next, { xPercent: 100, scale: 1, opacity: 1, zIndex: 2 });
+    gsap.set(current, { zIndex: 1 }); // Ensure current stays below next
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        isAnimating = false;
+        currentIndex = nextIndex;
+        // Reset the old card's z-index and hide it completely
+        gsap.set(current, { zIndex: 0, opacity: 0 });
+      }
+    });
+
+    // Slide next card in
+    tl.to(next, {
+      xPercent: 0,
+      duration: 0.4,
+      ease: "power2.inOut"
+    }, 0);
+
+    // Zoom out, push left, and fade current card
+    tl.to(current, {
+      scale: 0.85,
+      xPercent: -20,
+      opacity: 0,
+      duration: 0.4,
+      ease: "power2.inOut"
+    }, 0);
+  }
+
+  // Start the infinite automatic loop
+  setInterval(nextCard, 3500);
 }
 
 function initEditorialTestimonials() {
@@ -1210,3 +1227,250 @@ function initInstagramSection() {
 document.addEventListener('DOMContentLoaded', () => {
   initInstagramSection();
 });
+
+// Custom Datepicker Logic
+document.addEventListener('DOMContentLoaded', () => {
+  const dateInput = document.getElementById('b-date');
+  const datepicker = document.getElementById('custom-datepicker');
+  if(!dateInput || !datepicker) return;
+
+  const monthYearDisplay = datepicker.querySelector('.cdp-month-year');
+  const daysContainer = datepicker.querySelector('.cdp-days');
+  const prevBtn = datepicker.querySelector('.cdp-prev');
+  const nextBtn = datepicker.querySelector('.cdp-next');
+
+  let currentDate = new Date();
+  let currentMonth = currentDate.getMonth();
+  let currentYear = currentDate.getFullYear();
+  let selectedDate = null;
+
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  function renderCalendar(month, year) {
+    daysContainer.innerHTML = '';
+    monthYearDisplay.textContent = monthNames[month] + ' ' + year;
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const today = new Date();
+    today.setHours(0,0,0,0);
+
+    for (let i = 0; i < firstDay; i++) {
+      const emptyCell = document.createElement('div');
+      daysContainer.appendChild(emptyCell);
+    }
+
+    for (let i = 1; i <= daysInMonth; i++) {
+      const dayCell = document.createElement('div');
+      dayCell.classList.add('cdp-day');
+      dayCell.textContent = i;
+
+      const cellDate = new Date(year, month, i);
+      
+      if (cellDate < today) {
+        dayCell.classList.add('disabled');
+      } else {
+        dayCell.addEventListener('click', () => {
+          selectedDate = cellDate;
+          dateInput.value = i.toString().padStart(2, '0') + ' ' + monthNames[month] + ' ' + year;
+          datepicker.classList.remove('active');
+          renderCalendar(currentMonth, currentYear); // Re-render to show selection
+        });
+      }
+
+      if (selectedDate && cellDate.getTime() === selectedDate.getTime()) {
+        dayCell.classList.add('selected');
+      }
+
+      daysContainer.appendChild(dayCell);
+    }
+  }
+
+  dateInput.addEventListener('click', (e) => {
+    e.stopPropagation();
+    datepicker.classList.toggle('active');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!datepicker.contains(e.target) && e.target !== dateInput) {
+      datepicker.classList.remove('active');
+    }
+  });
+
+  prevBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    currentMonth--;
+    if (currentMonth < 0) {
+      currentMonth = 11;
+      currentYear--;
+    }
+    renderCalendar(currentMonth, currentYear);
+  });
+
+  nextBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    currentMonth++;
+    if (currentMonth > 11) {
+      currentMonth = 0;
+      currentYear++;
+    }
+    renderCalendar(currentMonth, currentYear);
+  });
+
+  renderCalendar(currentMonth, currentYear);
+});
+
+// ==========================================================================
+//    MOBILE INFINITE SPACES CAROUSEL
+// ==========================================================================
+function initMobileSpacesCarousel() {
+  if (window.innerWidth >= 768) return; // Mobile only
+
+  const gridWrap = document.querySelector('.spaces-grid-wrap');
+  const grid = document.querySelector('.spaces-grid');
+  if (!gridWrap || !grid) return;
+
+  const originalCards = Array.from(grid.querySelectorAll('.space-card'));
+  if (originalCards.length === 0) return;
+
+  // Duplicate cards for infinite effect
+  originalCards.forEach(card => {
+    const clone = card.cloneNode(true);
+    grid.appendChild(clone);
+  });
+
+  // Also duplicate again to be super safe if the screen is wide on mobile
+  originalCards.forEach(card => {
+    const clone = card.cloneNode(true);
+    grid.appendChild(clone);
+  });
+
+  let isAutoScrolling = true;
+  let rafId = null;
+  let scrollSpeed = 0.8; // px per frame
+  let resumeTimeout = null;
+
+  // Calculate the scroll width of exactly one original set
+  const calculateOriginalWidth = () => {
+    const cardWidth = originalCards[0].offsetWidth;
+    const gap = 15; // gap: 15px on mobile
+    return (cardWidth + gap) * originalCards.length;
+  };
+
+  const autoScroll = () => {
+    if (isAutoScrolling) {
+      gridWrap.scrollLeft += scrollSpeed;
+      
+      const singleSetWidth = calculateOriginalWidth();
+      if (gridWrap.scrollLeft >= singleSetWidth) {
+        // Seamless jump back
+        gridWrap.scrollLeft -= singleSetWidth;
+      }
+    }
+    rafId = requestAnimationFrame(autoScroll);
+  };
+
+  const pauseAutoScroll = () => {
+    isAutoScrolling = false;
+    clearTimeout(resumeTimeout);
+    
+    resumeTimeout = setTimeout(() => {
+      isAutoScrolling = true;
+    }, 2500); // 2.5s resume delay
+  };
+
+  // Listeners for interaction
+  gridWrap.addEventListener('touchstart', pauseAutoScroll, { passive: true });
+  gridWrap.addEventListener('touchmove', pauseAutoScroll, { passive: true });
+  gridWrap.addEventListener('scroll', () => {
+    if (!isAutoScrolling) pauseAutoScroll(); // keep delaying if manually scrolling
+    
+    // Handle manual loop jump
+    const singleSetWidth = calculateOriginalWidth();
+    if (gridWrap.scrollLeft >= singleSetWidth * 2) {
+      gridWrap.scrollLeft -= singleSetWidth;
+    } else if (gridWrap.scrollLeft <= 0) {
+      gridWrap.scrollLeft += singleSetWidth;
+    }
+  }, { passive: true });
+
+  // Start the engine
+  rafId = requestAnimationFrame(autoScroll);
+}
+
+// ==========================================================================
+//    MOBILE INFINITE FUN CARDS MARQUEE
+// ==========================================================================
+function initMobileFunCardsCarousel() {
+  if (window.innerWidth >= 768) return; // Mobile only
+
+  const gridWrap = document.querySelector('.fun-cards-wrapper');
+  if (!gridWrap) return;
+
+  const originalCards = Array.from(gridWrap.querySelectorAll('.fun-card'));
+  if (originalCards.length === 0) return;
+
+  // Duplicate cards for infinite effect
+  originalCards.forEach(card => {
+    const clone = card.cloneNode(true);
+    gridWrap.appendChild(clone);
+  });
+
+  // Also duplicate again to be super safe
+  originalCards.forEach(card => {
+    const clone = card.cloneNode(true);
+    gridWrap.appendChild(clone);
+  });
+
+  let isAutoScrolling = true;
+  let rafId = null;
+  let scrollSpeed = 0.6; // px per frame
+  let resumeTimeout = null;
+
+  // Calculate the scroll width of exactly one original set
+  const calculateOriginalWidth = () => {
+    const cardWidth = originalCards[0].offsetWidth;
+    const gap = 20; // gap on mobile is 20px
+    return (cardWidth + gap) * originalCards.length;
+  };
+
+  const autoScroll = () => {
+    if (isAutoScrolling) {
+      gridWrap.scrollLeft += scrollSpeed;
+      
+      const singleSetWidth = calculateOriginalWidth();
+      if (gridWrap.scrollLeft >= singleSetWidth) {
+        // Seamless jump back
+        gridWrap.scrollLeft -= singleSetWidth;
+      }
+    }
+    rafId = requestAnimationFrame(autoScroll);
+  };
+
+  const pauseAutoScroll = () => {
+    isAutoScrolling = false;
+    clearTimeout(resumeTimeout);
+    
+    resumeTimeout = setTimeout(() => {
+      isAutoScrolling = true;
+    }, 2500); // 2.5s resume delay
+  };
+
+  // Listeners for interaction
+  gridWrap.addEventListener('touchstart', pauseAutoScroll, { passive: true });
+  gridWrap.addEventListener('touchmove', pauseAutoScroll, { passive: true });
+  gridWrap.addEventListener('scroll', () => {
+    if (!isAutoScrolling) pauseAutoScroll(); // keep delaying if manually scrolling
+    
+    // Handle manual loop jump
+    const singleSetWidth = calculateOriginalWidth();
+    if (gridWrap.scrollLeft >= singleSetWidth * 2) {
+      gridWrap.scrollLeft -= singleSetWidth;
+    } else if (gridWrap.scrollLeft <= 0) {
+      gridWrap.scrollLeft += singleSetWidth;
+    }
+  }, { passive: true });
+
+  // Start the engine
+  rafId = requestAnimationFrame(autoScroll);
+}

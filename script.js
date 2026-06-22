@@ -1080,19 +1080,31 @@ let masterTrackScrollTrigger = null;
 function generateMasterTrack() {
   const scrollEl = document.getElementById("scroll-content");
   if (!scrollEl) return;
-  const h = scrollEl.offsetHeight || 5000;
+  const full_h = scrollEl.offsetHeight || 5000;
   const w = window.innerWidth;
+  
+  let term_h = full_h;
+  const closingSection = document.querySelector('.how-closing');
+  if (closingSection) {
+    const rect = closingSection.getBoundingClientRect();
+    const scrollRect = scrollEl.getBoundingClientRect();
+    term_h = rect.top - scrollRect.top - 20; // Terminate just above the section
+  }
   
   const svg = document.getElementById("master-track-svg");
   if (!svg) return;
-  svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+  svg.setAttribute("viewBox", "0 0 " + w + " " + term_h);
   svg.style.width = w + "px";
-  svg.style.height = h + "px";
+  svg.style.height = term_h + "px";
   svg.removeAttribute("preserveAspectRatio");
+  
+  // Premium fade-out effect at the termination point
+  svg.style.WebkitMaskImage = "linear-gradient(to bottom, black 0%, black calc(100% - 150px), transparent 100%)";
+  svg.style.maskImage = "linear-gradient(to bottom, black 0%, black calc(100% - 150px), transparent 100%)";
   
   let d = "M " + (w * 0.85) + " 0 ";
   const segments = 8;
-  const stepY = h / segments;
+  const stepY = full_h / segments;
   
   for(let i=1; i<=segments; i++) {
     let curY = i * stepY;

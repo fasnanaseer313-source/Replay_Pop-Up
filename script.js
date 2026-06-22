@@ -24,7 +24,7 @@ window.addEventListener("load", () => {
         onComplete: () => {
           introOverlay.style.display = "none";
           // Reveal main wrapper and enable interactions
-          gsap.set(mainWrapper, { clearProps: "pointerEvents,height,overflow" });
+          gsap.set(mainWrapper, { clearProps: "pointerEvents" });
           gsap.to(mainWrapper, { opacity: 1, duration: 0.8, ease: "power2.inOut" });
           
           // Now that main wrapper is visible and height is auto, initialize the cinematic experience
@@ -47,6 +47,12 @@ function initCinematic() {
     const isMobile = window.innerWidth <= 768;
     const scrollWrapper = document.getElementById('main-wrapper');
     const scrollContent = document.getElementById('scroll-content');
+    
+    // CRITICAL FIX: Make main-wrapper natively scrollable so ScrollTrigger can read its scrollTop.
+    // Lenis (if enabled) will smooth this native scroll.
+    scrollWrapper.style.overflowY = 'auto';
+    scrollWrapper.style.overflowX = 'hidden';
+    scrollWrapper.style.height = '100vh';
     
     if (!isMobile) {
       const lenis = new Lenis({

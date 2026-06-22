@@ -166,6 +166,7 @@ html.lenis { height: auto; }
   z-index: 5;
   width: 100%;
   /* Padding top to push hero down, padding bottom for final spacing */
+  padding-top: 120px;
   padding-bottom: 60px;
 }
 
@@ -1521,7 +1522,7 @@ p.bridge-text {
 .intro-heading {
   font-family: var(--f-accent, 'Instrument Serif', serif);
   font-style: italic;
-  font-size: clamp(3rem, 5vw, 6rem);
+  font-size: clamp(3rem, 5vw, 5rem);
   font-weight: 400;
   line-height: 1.1;
   margin-bottom: 30px;
@@ -1536,7 +1537,7 @@ p.bridge-text {
 
 .intro-subheading {
   font-family: var(--f-serif, 'Instrument Serif', serif);
-  font-size: clamp(3rem, 5vw, 5rem);
+  font-size: clamp(3rem, 5vw, 6rem);
   font-style: italic;
   color: var(--c-silver, #a8aab8);
   letter-spacing: 0.02em;
@@ -2281,7 +2282,7 @@ p.bridge-text {
 }
 
 .intro-heading {
-  font-size: 5rem;
+  font-size: 2.5rem;
   line-height: 1;
   margin-bottom: 20px;
   color: #fff;
@@ -2289,8 +2290,12 @@ p.bridge-text {
 
 .intro-subheading {
   font-family: var(--f-body);
-  font-size: 2.5rem;
+  font-size: 5rem;
   color: var(--text-dim);
+}
+
+.right-where-text {
+  white-space: nowrap;
 }
 
 .intro-cta {
@@ -2881,6 +2886,14 @@ p.bridge-text {
   color: #666;
 }
 
+.form-group select:invalid {
+  color: #666;
+}
+
+.form-group select option {
+  color: #fff;
+}
+
 .form-group input:focus,
 .form-group select:focus {
   border-color: var(--orange);
@@ -3425,7 +3438,7 @@ p.bridge-text {
 .spaces-grid-wrap {
   position: relative;
   width: 100%;
-  padding: 40px 0;
+  padding: 0 0 40px;
   /* Allow horizontal scroll on mobile, flex row on desktop */
   overflow-x: auto;
   overflow-y: hidden;
@@ -4398,17 +4411,156 @@ p.bridge-text {
   }
   
   /* Make the intro subheading larger and more elegant on mobile */
-  .intro-subheading {
+  .intro-heading {
     font-size: clamp(1.4rem, 6vw, 2.2rem) !important;
     line-height: 1.4 !important;
-    margin-top: 15px !important;
+    margin-bottom: 15px !important;
     letter-spacing: 0.02em !important;
-    white-space: normal !important;
   }
-  
-  /* Force text to wrap neatly */
+
+  .intro-subheading {
+    font-size: clamp(2.5rem, 8vw, 3.5rem) !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Keep text on a single line on mobile too */
   .right-where-text {
-    display: block;
+    white-space: nowrap !important;
   }
 }
 
+
+/* VS List Styles */
+.vs-list {
+  font-family: var(--f-sans, sans-serif);
+}
+
+.vs-row {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(90deg, #111 50%, #1a0f05 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  margin-bottom: 12px;
+}
+
+.vs-row::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.vs-side {
+  flex: 1;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+.usual-side {
+  color: #888;
+  font-size: 0.95rem;
+  padding-right: 40px;
+}
+
+.replay-side {
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding-left: 40px;
+}
+
+.vs-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.03);
+  flex-shrink: 0;
+}
+
+.usual-side .vs-icon-wrap {
+  color: #666;
+}
+
+.replay-side .vs-icon-wrap {
+  color: var(--orange);
+  background: rgba(232, 98, 26, 0.1);
+}
+
+.vs-badge-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  background: #000;
+  border-radius: 50%;
+  padding: 4px;
+}
+
+.vs-badge {
+  background: #1a1a1a;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #888;
+  font-size: 0.7rem;
+  font-weight: 700;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-red {
+  color: #ff4d4d;
+}
+
+.text-green {
+  color: #4caf50;
+}
+
+@media (max-width: 768px) {
+  .vs-row {
+    flex-direction: column;
+    background: #111;
+  }
+  
+  .vs-row::before {
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    width: 100%;
+    transform: translateY(-50%);
+  }
+  
+  .vs-side {
+    width: 100%;
+    padding: 16px 20px;
+  }
+  
+  .usual-side {
+    padding-bottom: 24px;
+  }
+  
+  .replay-side {
+    padding-top: 24px;
+    background: linear-gradient(180deg, transparent 0%, #1a0f05 100%);
+  }
+}

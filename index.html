@@ -51,7 +51,7 @@
     <div class="intro-left">
       <div class="intro-text-wrap gs-intro-reveal">
         <h1 class="intro-heading"><span style="white-space: nowrap;"><span class="serif-italic">Not a</span> <span class="orange bold-sans">toy</span></span><br><span style="white-space: nowrap;"><span class="serif-italic">Not a</span> <span class="orange bold-sans">game</span></span></h1>
-        <p class="intro-subheading"><span class="serif-italic">An</span> <span class="orange serif-italic">RC experience</span> <span class="serif-italic right-where-text">— right where you are.</span></p>
+        <p class="intro-subheading" style="line-height: 1.1;"><span class="serif-italic">An</span> <span class="orange serif-italic">RC experience</span> <br><span class="serif-italic right-where-text">— right where you are.</span></p>
       </div>
     </div>
     <div class="intro-right" style="display: flex; justify-content: center; align-items: center;">
@@ -360,7 +360,7 @@
         </div>
         
         <div style="border-top: 1px solid rgba(255,255,255,0.1); margin: 30px 0; max-width: 450px;"></div>
-        <p class="bridge-text gs-reveal" style="text-align: left; margin-left: 0; font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic; font-size: clamp(2rem, 6vw, 2.5rem); color: #ddd; max-width: 500px; line-height: 1.2;">That's the energy <span class="orange" style="font-style: normal;">RePlay</span> brings &mdash;<br><span style="white-space: nowrap;">to your space, your crowd, your occasion.</span></p>
+        <h2 class="section-title gs-reveal" style="text-align: left; margin-left: 0; font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic; color: #ddd; max-width: 500px; line-height: 1.2;">That's the energy <span class="orange" style="font-style: normal;">RePlay</span> brings &mdash;<br><span>to your space, your crowd, your occasion.</span></h2>
         
         <div class="r-track-card gs-reveal" style="margin: 30px 0 0;">
           <!-- Background Images for Crossfading -->
@@ -793,19 +793,19 @@
       <div class="content-center" style="width: 90%; max-width: 1200px; margin: 0 auto; text-align: left;">
         <div class="eyebrow gs-reveal" style="margin-bottom: 20px; justify-content: flex-start;">BEFORE YOU ASK...</div>
         
-        <h2 class="section-title gs-reveal" style="text-align: left; margin-bottom: 20px; line-height: 1.2; font-size: clamp(3rem, 6vw, 5rem) !important;">
+        <h2 class="section-title gs-reveal" style="text-align: left; margin-bottom: 20px; line-height: 1.2; font-size: clamp(2rem, 4vw, 3.5rem) !important;">
           Will it work for my <span class="orange mobile-block">small space?</span><br>
           Do you actually <span class="orange mobile-block">come to me?</span><br>
           Do you handle <span class="orange mobile-block">setup and cleanup?</span>
         </h2>
         
-        <p class="gs-reveal" style="text-align: left; font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic; color: var(--orange); font-size: clamp(5.5rem, 10vw, 8.5rem) !important; margin-bottom: 80px; line-height: 1.1;">
+        <p class="gs-reveal" style="text-align: left; font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic; color: var(--orange); font-size: clamp(2.5rem, 5vw, 4.5rem) !important; margin-bottom: 80px; line-height: 1.1;">
           Yes. Yes. And yes.
         </p>
 
         <div class="highlighted-statement gs-reveal" style="text-align: center; margin: 100px 0 60px;">
           <h3 style="font-size: clamp(2rem, 5vw, 4rem); line-height: 1.1; margin: 0; color: #fff;">
-            The experience travels. <span class="orange" style="font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic; font-weight: normal; text-shadow: 0 0 20px rgba(232,98,26,0.3);">You don't have to.</span>
+            The experience travels.<br><span class="orange" style="font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic; font-weight: normal; text-shadow: 0 0 20px rgba(232,98,26,0.3);">You don't have to.</span>
           </h3>
         </div>
 
@@ -919,29 +919,42 @@
             
             @media (max-width: 768px) {
               .vs-row {
-                flex-direction: column;
-                border-radius: 12px;
+                border-radius: 8px;
               }
               .vs-left {
-                border-right: none;
-                border-bottom: 1px solid rgba(255,255,255,0.05);
-                border-bottom-left-radius: 0;
-                border-top-right-radius: 12px;
-                border-top-left-radius: 12px;
+                border-top-left-radius: 8px;
+                border-bottom-left-radius: 8px;
               }
               .vs-right {
-                border-top-right-radius: 0;
-                border-bottom-left-radius: 12px;
-                border-bottom-right-radius: 12px;
+                border-top-right-radius: 8px;
+                border-bottom-right-radius: 8px;
               }
               .vs-left, .vs-right {
-                padding: 15px 20px;
+                padding: 10px 8px;
+                gap: 6px;
+                flex: 1;
               }
               .vs-text {
-                font-size: 0.95rem;
+                font-size: 0.7rem;
+                line-height: 1.2;
+              }
+              .vs-icon {
+                width: 20px;
+                height: 20px;
+                border-radius: 4px;
+              }
+              .vs-icon svg {
+                width: 12px;
+                height: 12px;
+              }
+              .vs-badge {
+                width: 20px;
+                height: 20px;
+                font-size: 0.5rem;
               }
               .comp-header-row {
-                padding: 0 10px;
+                padding: 0 5px;
+                font-size: 0.65rem;
               }
             }
           </style>
@@ -1123,7 +1136,8 @@
     <section id="s-packages" class="cinematic-section" data-bg="env-school">
       <div class="content-center" style="width: 90%; max-width: 1200px;">
         <div class="eyebrow gs-reveal" style="margin-bottom: 15px; justify-content: center;">EXPERIENCES</div>
-        <h2 class="section-title gs-reveal" style="text-align: center; margin-left: auto; margin-right: auto;">Pick your RePlay.<br><span class="orange">We'll handle the rest.</span></h2>
+        <h2 class="section-title gs-reveal" style="text-align: center; margin-left: auto; margin-right: auto;">Pick your RePlay.<br><span class="orange" style="font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic; font-weight: normal; text-shadow: 0 0 20px rgba(232,98,26,0.3);">We'll handle the rest.</span></h2>
+        <p class="gs-reveal" style="text-align: center; font-size: 1.3rem; color: #888; margin: 15px auto 40px auto; font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic;">Pick a starting point. We'll take it from there.<br>Indoors or outdoors. Quick sessions or full-day experiences.</p>
         
         <div class="pkg-grid">
           <!-- REPLAY MINI -->
@@ -1525,19 +1539,20 @@
           background: transparent;
           border: 1px solid var(--orange);
           color: var(--orange);
-          padding: 15px 30px;
+          padding: 15px clamp(15px, 4vw, 30px);
           border-radius: 50px;
-          font-size: 1.1rem;
+          font-size: clamp(0.95rem, 4vw, 1.1rem);
           font-weight: 600;
           font-family: var(--f-body);
           text-decoration: none;
           display: inline-flex;
           align-items: center;
-          gap: 10px;
+          gap: 8px;
           transition: all 0.3s ease;
           box-shadow: 0 0 20px rgba(232, 98, 26, 0.1);
           width: 100%;
           justify-content: center;
+          white-space: nowrap;
         }
         .btn-google:hover {
           background: var(--orange);
@@ -1560,7 +1575,7 @@
           mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
           -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
         }
-        .marquee-track {
+        .marquee-wrapper .marquee-track {
           display: flex;
           width: max-content;
           animation: scroll-left 40s linear infinite;
@@ -1622,13 +1637,13 @@
         <div class="gr-grid">
           <!-- LEFT -->
           <div class="gr-left gs-reveal">
-            <h2><span class="orange" style="font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic; font-weight: normal;">Loved The</span> Experience?</h2>
-            <p class="subheading">Share your RC racing experience and help others discover unforgettable events.</p>
+            <h2>See What Others Are <span class="orange" style="font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic; font-weight: normal;">Saying</span></h2>
+            <p class="subheading">Read real reviews from people who brought RePlay to their homes, offices, and events.</p>
             
             <div class="gr-rating-display">
               <span class="rating-text">4.9/5</span>
               <span class="stars">★★★★★</span>
-              <span class="review-count">Based on 250+ Reviews</span>
+              <span class="review-count">Based on Reviews</span>
             </div>
 
             <ul class="trust-indicators">
@@ -1662,8 +1677,8 @@
                   <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
                 </svg>
               </div>
-              <h4>Rate Your Experience</h4>
-              <p>Scan the code or click the button to leave us a quick review on Google. It only takes a minute!</p>
+              <h4>Loved Your RePlay Experience?</h4>
+              <p>Help others discover RePlay by sharing your experience with a quick Google review.<br><br>Scan the QR code or click below to leave a review. It only takes a minute and means a lot to us.</p>
               
               <div class="qr-placeholder">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://g.page/r/" alt="Google Review QR Code">
@@ -1676,7 +1691,7 @@
                   <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="currentColor"/>
                   <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="currentColor"/>
                 </svg>
-                Review Us On Google
+                Leave a Google Review &rarr;
               </a>
             </div>
           </div>
@@ -2123,7 +2138,6 @@
               <li><a href="#s-packages" class="footer-link">Pick Your RePlay</a></li>
               <li><a href="#s-how-it-works" class="footer-link">How It Works</a></li>
               <li><a href="#s-faq" class="footer-link">FAQs</a></li>
-              <li><a href="https://instagram.com/replaypopup" class="footer-link">Instagram &rarr; @replaypopup</a></li>
             </ul>
           </div>
 

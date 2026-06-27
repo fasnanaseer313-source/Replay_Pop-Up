@@ -669,7 +669,7 @@ p.bridge-text {
 .pkg-sub { color: var(--orange); font-family: var(--f-mono); font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; letter-spacing: 1px; }
 .pkg-card ul { list-style: none; }
 .pkg-card li { margin-bottom: 10px; font-size: 0.95rem; color: var(--text-dim); }
-.badge { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); margin: 0; display: inline-block; background: var(--orange); color: #000; font-family: var(--f-mono); font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; white-space: normal; width: max-content; max-width: 100%; text-align: center; line-height: 1.2; box-sizing: border-box; }
+.badge { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); margin: 0; display: inline-block; background: var(--orange); color: #000; font-family: var(--f-mono); font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; white-space: nowrap; width: max-content; max-width: 100%; text-align: center; line-height: 1.2; box-sizing: border-box; }
 
 /* Premium Catalog Additions */
 .pkg-section { margin-top: 25px; }
@@ -4536,3 +4536,13 @@ p.bridge-text {
 }
 
 /* Mobile VS layout removed to match desktop */
+
+@media (max-width: 768px) {
+  .usual-side { padding-right: 45px !important; }
+  .replay-side { padding-left: 45px !important; }
+  .badge { 
+    font-size: 0.55rem !important; 
+    padding: 3px 8px !important; 
+    letter-spacing: 0.5px;
+  }
+}

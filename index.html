@@ -360,7 +360,7 @@
         </div>
         
         <div style="border-top: 1px solid rgba(255,255,255,0.1); margin: 30px 0; max-width: 450px;"></div>
-        <h2 class="section-title gs-reveal" style="text-align: left; margin-left: 0; font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic; color: #ddd; max-width: 500px; line-height: 1.2;">That's the energy <span class="orange" style="font-style: normal;">RePlay</span> brings &mdash; <span>to your space, your crowd, your occasion.</span></h2>
+        <h2 class="section-title gs-reveal" style="text-align: left; margin-left: 0; font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic; color: #ddd; max-width: 500px; line-height: 1.2; font-weight: 400;">That's the energy <span class="orange" style="font-style: normal; font-weight: 400;">RePlay</span> brings &mdash; <span style="font-weight: 400;">to your space, your crowd, your occasion.</span></h2>
         
         <div class="r-track-card gs-reveal" style="margin: 30px 0 0;">
           <!-- Background Images for Crossfading -->
@@ -929,8 +929,13 @@
                 border-top-right-radius: 8px;
                 border-bottom-right-radius: 8px;
               }
-              .vs-left, .vs-right {
-                padding: 10px 8px;
+              .vs-left {
+                padding: 10px 24px 10px 12px;
+                gap: 6px;
+                flex: 1;
+              }
+              .vs-right {
+                padding: 10px 12px 10px 24px;
                 gap: 6px;
                 flex: 1;
               }
@@ -1115,18 +1120,45 @@
 
         <div class="cta-banner gs-reveal">
           <div class="cta-banner-glow"></div>
-          <div style="position: relative; z-index: 1;">
-            <p style="font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic; color: #888; font-size: 1.3rem; margin-bottom: 5px;">Think your space is too small?</p>
-            <div class="eyebrow" style="margin-bottom: 30px; justify-content: center; opacity: 0.5; text-transform: none; letter-spacing: 2px;">We've heard that before.</div>
+          <style>
+            @media (max-width: 768px) {
+              .cta-banner-content {
+                flex-direction: column !important;
+                text-align: center !important;
+                gap: 20px !important;
+              }
+              .cta-text-content .eyebrow {
+                justify-content: center !important;
+              }
+            }
+          </style>
+          <div class="cta-banner-content" style="position: relative; z-index: 1; display: flex; align-items: center; gap: 30px; text-align: left; width: 100%;">
             
-            <h3 style="font-size: 1.3rem; line-height: 1.3; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto; font-weight: normal;">
-              <span style="font-weight: 700;">Send us a photo.</span> <span class="orange" style="font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic; font-weight: normal;">We'll show you exactly what RePlay could look like in your space.</span>
-            </h3>
+            <!-- Left: Icon -->
+            <div class="cta-icon-box" style="flex-shrink: 0; width: 70px; height: 70px; border: 1px solid var(--orange); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--orange);">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+              </svg>
+            </div>
             
-            <a href="#s-contact" class="btn-whatsapp">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-              <span>Message us on WhatsApp</span>
-            </a>
+            <!-- Middle: Text -->
+            <div class="cta-text-content" style="flex-grow: 1;">
+              <p style="font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic; color: #888; font-size: 1.3rem; margin-bottom: 5px;">Think your space is too small?</p>
+              <div class="eyebrow" style="margin-bottom: 8px; justify-content: flex-start; opacity: 0.5; text-transform: uppercase; letter-spacing: 2px;">We've heard that before</div>
+              <h3 style="font-size: 1.2rem; line-height: 1.3; margin-bottom: 0; font-weight: normal;">
+                <span style="font-weight: 700;">Send us a photo.</span> <span class="orange" style="font-family: var(--f-serif, 'Instrument Serif', serif); font-style: italic; font-weight: normal;">We'll show you exactly what RePlay could look like in your space.</span>
+              </h3>
+            </div>
+            
+            <!-- Right: Button -->
+            <div class="cta-action" style="flex-shrink: 0;">
+              <a href="#s-contact" class="btn-whatsapp" style="padding: 12px 25px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span>WhatsApp</span>
+              </a>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -1967,7 +1999,7 @@
           <!-- Left Column -->
           <div class="booking-left gs-booking-slide-left">
             <div class="eyebrow" style="margin-bottom: 20px;">LET'S TALK</div>
-            <h2 class="booking-title" style="margin-bottom: 30px; font-size: clamp(2.2rem, 5vw, 3.5rem);"><span style="white-space: nowrap;">Let's bring <span class="orange">RePlay</span></span><br>to your space.</h2>
+            <h2 class="booking-title" style="margin-bottom: 15px; font-size: clamp(2.2rem, 5vw, 3.5rem);"><span style="white-space: nowrap;">Let's bring <span class="orange">RePlay</span></span><br>to your space.</h2>
             <p class="booking-subtext" style="max-width: 90%;">Tell us what you're planning &mdash; we'll suggest the best setup for your space, crowd, and vibe.</p>
             
             <style>
@@ -1990,7 +2022,7 @@
                 color: var(--orange);
               }
             </style>
-            <div class="booking-info-block" style="margin-top: 40px; margin-bottom: 30px; position: relative; z-index: 50; pointer-events: auto;">
+            <div class="booking-info-block" style="margin-top: 25px; margin-bottom: 20px; position: relative; z-index: 50; pointer-events: auto;">
               <a href="mailto:hello@replaypopup.in" class="contact-action-link">hello@replaypopup.in</a>
               <a href="tel:+919987412025" class="contact-action-link">+91 9987412025</a>
             </div>

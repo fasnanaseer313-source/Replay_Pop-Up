@@ -669,7 +669,7 @@ p.bridge-text {
 .pkg-sub { color: var(--orange); font-family: var(--f-mono); font-size: 0.85rem; text-transform: uppercase; margin-bottom: 20px; letter-spacing: 1px; }
 .pkg-card ul { list-style: none; }
 .pkg-card li { margin-bottom: 10px; font-size: 0.95rem; color: var(--text-dim); }
-.badge { position: relative; margin: 0 auto 15px auto; display: inline-block; background: var(--orange); color: #000; font-family: var(--f-mono); font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; white-space: normal; width: max-content; max-width: 100%; text-align: center; line-height: 1.2; box-sizing: border-box; }
+.badge { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); margin: 0; display: inline-block; background: var(--orange); color: #000; font-family: var(--f-mono); font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; white-space: normal; width: max-content; max-width: 100%; text-align: center; line-height: 1.2; box-sizing: border-box; }
 
 /* Premium Catalog Additions */
 .pkg-section { margin-top: 25px; }
@@ -4535,32 +4535,4 @@ p.bridge-text {
   color: #4caf50;
 }
 
-@media (max-width: 768px) {
-  .vs-row {
-    flex-direction: column;
-    background: #111;
-  }
-  
-  .vs-row::before {
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    width: 100%;
-    transform: translateY(-50%);
-  }
-  
-  .vs-side {
-    width: 100%;
-    padding: 16px 20px;
-  }
-  
-  .usual-side {
-    padding-bottom: 24px;
-  }
-  
-  .replay-side {
-    padding-top: 24px;
-    background: linear-gradient(180deg, transparent 0%, #1a0f05 100%);
-  }
-}
+/* Mobile VS layout removed to match desktop */

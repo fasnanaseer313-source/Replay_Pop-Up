@@ -5,17 +5,59 @@ window.addEventListener("load", () => {
   const introOverlay = document.getElementById("intro-overlay");
   const mainWrapper = document.getElementById("main-wrapper");
   const btnExplore = document.getElementById("btn-explore");
+  const startupVideo = document.getElementById("startup-video");
+  const startupPlayBtn = document.getElementById("startup-play-btn");
+  const startupVideoContainer = document.getElementById("startup-video-container");
 
   if (introOverlay && mainWrapper && btnExplore) {
-    // Fade in intro text
-    gsap.to(".gs-intro-reveal", {
-      opacity: 1,
-      y: 0,
-      duration: 1.2,
-      stagger: 0.2,
-      ease: "power3.out",
-      delay: 0.2
-    });
+    const playIntroTextAnimation = () => {
+      // Fade in intro text
+      gsap.to(".gs-intro-reveal", {
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        stagger: 0.2,
+        ease: "power3.out",
+        delay: 0.2
+      });
+    };
+
+    if (startupVideo && startupVideoContainer) {
+      // Ensure intro text is hidden initially
+      gsap.set(".gs-intro-reveal", { opacity: 0, y: 20 });
+      
+      const onVideoEnd = () => {
+        gsap.to(startupVideoContainer, {
+          opacity: 0,
+          duration: 1,
+          onComplete: () => {
+            startupVideoContainer.style.display = "none";
+            playIntroTextAnimation();
+          }
+        });
+      };
+
+      startupVideo.addEventListener("ended", onVideoEnd);
+
+      // Attempt autoplay with sound
+      const playPromise = startupVideo.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          // Autoplay was blocked
+          if (startupPlayBtn) {
+            startupPlayBtn.style.display = "block";
+            startupPlayBtn.addEventListener("click", () => {
+              startupPlayBtn.style.display = "none";
+              startupVideo.play();
+            });
+          } else {
+            onVideoEnd();
+          }
+        });
+      }
+    } else {
+      playIntroTextAnimation();
+    }
 
     // Handle CTA Click
     btnExplore.addEventListener("click", () => {

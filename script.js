@@ -39,20 +39,22 @@ window.addEventListener("load", () => {
 
       startupVideo.addEventListener("ended", onVideoEnd);
 
-      // Attempt autoplay with sound
+      // Autoplay requires the video to be muted in most modern browsers
+      startupVideo.muted = true;
+      
+      // Unmute on first user interaction anywhere on the page
+      const unmuteVideo = () => {
+        startupVideo.muted = false;
+        document.removeEventListener("click", unmuteVideo);
+        document.removeEventListener("touchstart", unmuteVideo);
+      };
+      document.addEventListener("click", unmuteVideo);
+      document.addEventListener("touchstart", unmuteVideo);
+
       const playPromise = startupVideo.play();
       if (playPromise !== undefined) {
         playPromise.catch(error => {
-          // Autoplay was blocked
-          if (startupPlayBtn) {
-            startupPlayBtn.style.display = "block";
-            startupPlayBtn.addEventListener("click", () => {
-              startupPlayBtn.style.display = "none";
-              startupVideo.play();
-            });
-          } else {
-            onVideoEnd();
-          }
+          console.warn("Autoplay may have been blocked or interrupted:", error);
         });
       }
     } else {

@@ -15,30 +15,123 @@
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
     <style>
-      /* Mobile Carousel Styles */
+      /* WHAT IT ACTUALLY LOOKS LIKE - Desktop & Mobile Styles */
+      .looks-like-container {
+        width: 100%;
+        position: relative;
+      }
+      .looks-like-track {
+        display: block;
+        width: 100%;
+      }
+      .looks-like-group {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        width: 100%;
+      }
+      .looks-like-group.looks-like-clone {
+        display: none !important;
+      }
+      .ll-card {
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+        aspect-ratio: 4/5;
+        cursor: pointer;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: #111;
+      }
+      .ll-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+        display: block;
+      }
+      .ll-card:hover img {
+        transform: scale(1.05);
+      }
+      .ll-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.3) 35%, transparent 65%);
+        display: flex;
+        align-items: flex-end;
+        padding: 20px;
+        pointer-events: none;
+      }
+      .ll-overlay span {
+        color: #fff;
+        font-size: 0.95rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+      }
+
+      /* Mobile Continuous Smooth GPU Marquee (Right-to-Left) */
       @media (max-width: 768px) {
-        .looks-like-grid {
-          display: flex !important;
-          flex-wrap: nowrap !important;
-          gap: 15px !important;
-          overflow: visible !important;
-          width: max-content !important;
-          transform: translate3d(0, 0, 0);
-          will-change: transform;
-        }
         .looks-like-section {
-          overflow-x: hidden !important;
+          overflow: visible !important;
+        }
+        .looks-like-container {
           width: 100vw !important;
           max-width: 100vw !important;
-          margin-left: calc(-50vw + 50%) !important; /* breakout of container */
-          padding-left: 20px; /* initial offset */
-          padding-right: 20px;
-          box-sizing: border-box;
-          position: relative;
+          margin-left: calc(-50vw + 50%) !important;
+          overflow: hidden !important;
+          padding: 10px 0 !important;
+          mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+          -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+        }
+        .looks-like-track {
+          display: flex !important;
+          width: max-content !important;
+          animation: looksLikeContinuousScroll 22s linear infinite !important;
+          will-change: transform;
+          transform: translate3d(0, 0, 0);
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+          -webkit-perspective: 1000px;
+          perspective: 1000px;
+        }
+        .looks-like-track:hover,
+        .looks-like-track:active {
+          animation-play-state: paused;
+        }
+        .looks-like-group {
+          display: flex !important;
+          flex-direction: row !important;
+          flex-wrap: nowrap !important;
+          gap: 15px !important;
+          padding-right: 15px !important; /* Exact match with gap for seamless subpixel loop */
+          flex-shrink: 0 !important;
+        }
+        .looks-like-group.looks-like-clone {
+          display: flex !important;
         }
         .ll-card {
-          flex: 0 0 280px !important; /* fixed width for mobile cards */
+          flex: 0 0 280px !important;
           width: 280px !important;
+          aspect-ratio: 4/5 !important;
+          border-radius: 16px !important;
+          background: #141414 !important;
+          border: 1px solid rgba(255, 255, 255, 0.08) !important;
+          touch-action: pan-y;
+        }
+        .ll-card img {
+          width: 100% !important;
+          height: 100% !important;
+          object-fit: cover !important;
+          pointer-events: none !important;
+          -webkit-user-drag: none !important;
+        }
+        @keyframes looksLikeContinuousScroll {
+          0% {
+            transform: translate3d(0, 0, 0);
+          }
+          100% {
+            transform: translate3d(-50%, 0, 0);
+          }
         }
       }
     </style>
@@ -650,41 +743,7 @@
         opacity: 1;
         color: var(--orange);
       }
-      .looks-like-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 15px;
-      }
-      .ll-card {
-        position: relative;
-        border-radius: 12px;
-        overflow: hidden;
-        aspect-ratio: 4/5;
-        cursor: pointer;
-        border: 1px solid rgba(255,255,255,0.05);
-      }
-      .ll-card img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s ease;
-      }
-      .ll-card:hover img {
-        transform: scale(1.05);
-      }
-      .ll-overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 50%);
-        display: flex;
-        align-items: flex-end;
-        padding: 20px;
-      }
-      .ll-overlay span {
-        color: #fff;
-        font-size: 0.9rem;
-        font-weight: 600;
-      }
+
       .doubts-grid {
         display: grid;
         grid-template-columns: 1fr;
@@ -1048,35 +1107,74 @@
 
         <div class="looks-like-section gs-reveal" style="margin-bottom: 100px;">
           <div class="eyebrow" style="margin-bottom: 30px; justify-content: flex-start;">WHAT IT ACTUALLY LOOKS LIKE</div>
-          <div class="looks-like-grid">
-            <div class="ll-card">
-              <img src="assets/dining_table_setup.png" alt="Dining table setup">
-              <div class="ll-overlay">
-                <span>Dining table setup</span>
+          <div class="looks-like-container">
+            <div class="looks-like-track">
+              <!-- Set 1 -->
+              <div class="looks-like-group">
+                <div class="ll-card">
+                  <img src="assets/dining_table_setup.png" alt="Dining table setup" loading="lazy">
+                  <div class="ll-overlay">
+                    <span>Dining table setup</span>
+                  </div>
+                </div>
+                <div class="ll-card">
+                  <img src="assets/living_room_setup.png" alt="Living room setup" loading="lazy">
+                  <div class="ll-overlay">
+                    <span>Living room setup</span>
+                  </div>
+                </div>
+                <div class="ll-card">
+                  <img src="assets/terrace_setup.png" alt="Terrace setup" loading="lazy">
+                  <div class="ll-overlay">
+                    <span>Terrace setup</span>
+                  </div>
+                </div>
+                <div class="ll-card">
+                  <img src="assets/apartment_lawn_setup.png" alt="Apartment lawn setup" loading="lazy">
+                  <div class="ll-overlay">
+                    <span>Apartment lawn setup</span>
+                  </div>
+                </div>
+                <div class="ll-card">
+                  <img src="assets/office_breakout_setup.png" alt="Office breakout setup" loading="lazy">
+                  <div class="ll-overlay">
+                    <span>Office breakout setup</span>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="ll-card">
-              <img src="assets/living_room_setup.png" alt="Living room setup">
-              <div class="ll-overlay">
-                <span>Living room setup</span>
-              </div>
-            </div>
-            <div class="ll-card">
-              <img src="assets/terrace_setup.png" alt="Terrace setup">
-              <div class="ll-overlay">
-                <span>Terrace setup</span>
-              </div>
-            </div>
-            <div class="ll-card">
-              <img src="assets/apartment_lawn_setup.png" alt="Apartment lawn setup">
-              <div class="ll-overlay">
-                <span>Apartment lawn setup</span>
-              </div>
-            </div>
-            <div class="ll-card">
-              <img src="assets/office_breakout_setup.png" alt="Office breakout setup">
-              <div class="ll-overlay">
-                <span>Office breakout setup</span>
+
+              <!-- Set 2 (for seamless continuous infinite loop on mobile) -->
+              <div class="looks-like-group looks-like-clone" aria-hidden="true">
+                <div class="ll-card">
+                  <img src="assets/dining_table_setup.png" alt="Dining table setup" loading="lazy">
+                  <div class="ll-overlay">
+                    <span>Dining table setup</span>
+                  </div>
+                </div>
+                <div class="ll-card">
+                  <img src="assets/living_room_setup.png" alt="Living room setup" loading="lazy">
+                  <div class="ll-overlay">
+                    <span>Living room setup</span>
+                  </div>
+                </div>
+                <div class="ll-card">
+                  <img src="assets/terrace_setup.png" alt="Terrace setup" loading="lazy">
+                  <div class="ll-overlay">
+                    <span>Terrace setup</span>
+                  </div>
+                </div>
+                <div class="ll-card">
+                  <img src="assets/apartment_lawn_setup.png" alt="Apartment lawn setup" loading="lazy">
+                  <div class="ll-overlay">
+                    <span>Apartment lawn setup</span>
+                  </div>
+                </div>
+                <div class="ll-card">
+                  <img src="assets/office_breakout_setup.png" alt="Office breakout setup" loading="lazy">
+                  <div class="ll-overlay">
+                    <span>Office breakout setup</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -2374,118 +2472,7 @@
     });
   </script>
 
-    <script>
-      // Mobile Continuous Carousel Animation
-      document.addEventListener('DOMContentLoaded', () => {
-        if (window.innerWidth > 768) return; // Only execute on mobile
-        
-        const grid = document.querySelector('.looks-like-grid');
-        if (!grid) return;
-        
-        const cards = Array.from(grid.querySelectorAll('.ll-card'));
-        if (cards.length === 0) return;
-        
-        // 1. Clone cards for infinite loop
-        cards.forEach(card => {
-          const clone = card.cloneNode(true);
-          clone.classList.add('carousel-clone');
-          grid.appendChild(clone);
-        });
-        
-        // 2. Setup Variables
-        let currentX = 0;
-        let isDragging = false;
-        let startX = 0;
-        let dragCurrentX = 0;
-        let velocity = 0;
-        let lastTime = 0;
-        let lastDragX = 0;
-        let animationFrameId;
-        let resumeTimeoutId;
-        const speed = -1.5; // pixels per frame (right to left)
-        
-        // Card width + gap
-        const cardWidth = cards[0].offsetWidth;
-        const gap = 15; // match CSS gap
-        const totalOriginalWidth = (cardWidth + gap) * cards.length;
-        
-        // 3. Animation Loop
-        function animate() {
-          if (!isDragging) {
-            // Apply momentum if velocity exists, else constant auto-scroll
-            if (Math.abs(velocity) > 0.1) {
-              currentX += velocity;
-              velocity *= 0.95; // friction
-            } else {
-              currentX += speed;
-            }
-          }
-          
-          // Infinite loop bounds
-          if (currentX <= -totalOriginalWidth) {
-            currentX += totalOriginalWidth;
-          } else if (currentX > 0) {
-            currentX -= totalOriginalWidth;
-          }
-          
-          grid.style.transform = `translate3d(${currentX}px, 0, 0)`;
-          animationFrameId = requestAnimationFrame(animate);
-        }
-        
-        // Start animation
-        animationFrameId = requestAnimationFrame(animate);
-        
-        // 4. Touch Interactions
-        grid.addEventListener('touchstart', (e) => {
-          isDragging = true;
-          startX = e.touches[0].clientX;
-          lastDragX = startX;
-          dragCurrentX = currentX;
-          velocity = 0;
-          lastTime = performance.now();
-          clearTimeout(resumeTimeoutId);
-        }, { passive: true });
-        
-        grid.addEventListener('touchmove', (e) => {
-          if (!isDragging) return;
-          const currentTouchX = e.touches[0].clientX;
-          const deltaX = currentTouchX - startX;
-          currentX = dragCurrentX + deltaX;
-          
-          const currentTime = performance.now();
-          const dt = currentTime - lastTime;
-          if (dt > 0) {
-            velocity = (currentTouchX - lastDragX) / (dt / 16); // normalize to approx 60fps frame
-          }
-          
-          lastDragX = currentTouchX;
-          lastTime = currentTime;
-          
-          // Loop seamlessly while dragging
-          if (currentX <= -totalOriginalWidth) {
-            currentX += totalOriginalWidth;
-            dragCurrentX += totalOriginalWidth;
-          } else if (currentX > 0) {
-            currentX -= totalOriginalWidth;
-            dragCurrentX -= totalOriginalWidth;
-          }
-          
-          grid.style.transform = `translate3d(${currentX}px, 0, 0)`;
-        }, { passive: true });
-        
-        grid.addEventListener('touchend', () => {
-          isDragging = false;
-          
-          // Limit max momentum
-          velocity = Math.min(Math.max(velocity, -20), 20);
-          
-          resumeTimeoutId = setTimeout(() => {
-             // Velocity decays naturally via friction in the animate loop
-             // until it reaches < 0.1, then constant speed takes over again
-          }, 500);
-        });
-      });
-    </script>
+
 
   <!-- Video Modal -->
   <div id="videoModalOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9); z-index: 1000000; justify-content: center; align-items: center; flex-direction: column; backdrop-filter: blur(5px);">
